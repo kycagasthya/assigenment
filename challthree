@@ -1,0 +1,5 @@
+# gcloud compute instances start myinstance -y  #start instance
+# gcloud compute ssh kycagasthya@myinstance  #ssh into it
+# sudo curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/gcp" -H "Metadata-Flavor: Google"
+TOKEN=$(gcloud auth print-access-token)
+curl -X  GET -H "Authorization:Bearer ${TOKEN}" "https://compute.googleapis.com/compute/v1/projects/kpmgaa/zones/asia-southeast1-a/instances/myinstance"

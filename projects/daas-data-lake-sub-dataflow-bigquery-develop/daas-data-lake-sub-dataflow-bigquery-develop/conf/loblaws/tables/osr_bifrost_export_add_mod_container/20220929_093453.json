@@ -1,0 +1,356 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Action performed. ",
+    "mode": "REQUIRED",
+    "name": "action",
+    "type": "STRING"
+  },
+  {
+    "description": "Message attributes.",
+    "mode": "REQUIRED",
+    "name": "attributes",
+    "type": "STRING"
+  },
+  {
+    "description": "Event id.",
+    "mode": "REQUIRED",
+    "name": "id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Pub/Sub message id.",
+    "mode": "NULLABLE",
+    "name": "pubsub_message_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Timestamp when message was published to topic.",
+    "mode": "NULLABLE",
+    "name": "pubsub_publish_time",
+    "type": "STRING"
+  },
+  {
+    "description": "Type of record data.",
+    "mode": "REQUIRED",
+    "name": "recordid",
+    "type": "STRING"
+  },
+  {
+    "description": "Container records.",
+    "name": "records",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "fields": [
+      {
+        "description": "Type of that record, here \\\"CO\\\" for \\\"CONTAINER\\\".",
+        "name": "recordid",
+        "type": "STRING",
+        "mode": "REQUIRED"
+      },
+      {
+        "description": "Reference to EXP_WPO record.",
+        "name": "wpono",
+        "type": "STRING",
+        "mode": "REQUIRED"
+      },
+      {
+        "description": "Reference to EXP_CONTAINER(tote id).",
+        "name": "cntno",
+        "type": "INTEGER",
+        "mode": "REQUIRED"
+      },
+      {
+        "description": "Number of FP for this container (in current message).",
+        "name": "fp_cnt",
+        "type": "INTEGER",
+        "mode": "REQUIRED"
+      },
+      {
+        "description": "Status of the container. Possible status values: 10 - Transferred; 12 - Checked; 15 - Sorted; 19 - Not yet released for start; 20 - Released for (automatic) start; 22 - Released for (automatic) start; 22 - In order start pool; 23 - Starting; 25 - Engaged; 30 - Transport order married to physical container; 35 - Between 1st and last pick zone; 40 - All picks finished; 60 - In dispatch lane (only used, when further\\nprocessing is done in KiSoft WCS); 70 - Finished; 71 - Cancelled.",
+        "name": "status",
+        "type": "INTEGER",
+        "mode": "REQUIRED"
+      },
+      {
+        "description": "Error number.",
+        "name": "errorid",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Time/Date when the container was married.",
+        "name": "marriagetime",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Time/Date when the container finished",
+        "name": "endtime",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Unique key of the container represented by barcode.",
+        "name": "licenceplate",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Measured actual weight of the container.",
+        "name": "weight_act",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Last physical station, where the container has been processed.",
+        "name": "laststation",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Description.",
+        "name": "remark",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Function point records.",
+        "name": "records",
+        "type": "RECORD",
+        "mode": "REPEATED",
+        "fields": [
+          {
+            "description": "Type of that record, here \\\"FP\\\" for \\\"FP\\\".",
+            "name": "recordid",
+            "type": "STRING",
+            "mode": "REQUIRED"
+          },
+          {
+            "description": "Reference to EXP_WPO(order_id).",
+            "name": "wpono",
+            "type": "STRING",
+            "mode": "REQUIRED"
+          },
+          {
+            "description": "Reference to EXP_CONTAINER.",
+            "name": "cntno",
+            "type": "INTEGER",
+            "mode": "REQUIRED"
+          },
+          {
+            "description": "Name of the target.",
+            "name": "master_fp_name",
+            "type": "STRING",
+            "mode": "REQUIRED"
+          },
+          {
+            "description": "Number of working steps (in current message).",
+            "name": "ws_cnt",
+            "type": "INTEGER",
+            "mode": "REQUIRED"
+          },
+          {
+            "description": "tatus of FP. Possible status values: 10 - Transferred; 35 - Processing; 68 - Cancelled by the operator in the picking area; 70 - Finished; 71 - Cancelled.",
+            "name": "status",
+            "type": "INTEGER",
+            "mode": "REQUIRED"
+          },
+          {
+            "description": "Error number.",
+            "name": "errorid",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "description": "Description.",
+            "name": "remark",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "description": "Working step record",
+            "name": "records",
+            "type": "RECORD",
+            "mode": "REPEATED",
+            "fields": [
+              {
+                "description": "Type of that record, here \\\"WS\\\" for\\n\\\"WS\\\".",
+                "name": "recordid",
+                "type": "STRING",
+                "mode": "REQUIRED"
+              },
+              {
+                "description": "Reference to EXP_WPO.",
+                "name": "wpono",
+                "type": "STRING",
+                "mode": "REQUIRED"
+              },
+              {
+                "description": "Reference to EXP_CONTAINER.",
+                "name": "cntno",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+              },
+              {
+                "description": "Name of the target.",
+                "name": "master_fp_name",
+                "type": "STRING",
+                "mode": "REQUIRED"
+              },
+              {
+                "description": "Running unique number within FP.",
+                "name": "ws_no",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+              },
+              {
+                "description": "Status of WS. Possible status values: 10 - Transferred; 35 - New picking activity after encountering a picking error; 68 - Cancelled by the operator in the picking area; 69 - Quantity discrepancy; 70 - Finished; 71 - Cancelled.",
+                "name": "status",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+              },
+              {
+                "description": "Error number.",
+                "name": "errorid",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+              },
+              {
+                "description": "Type of that task.",
+                "name": "ws_type",
+                "type": "STRING",
+                "mode": "REQUIRED"
+              },
+              {
+                "description": "Actually commissioned quantity.",
+                "name": "actqty",
+                "type": "INTEGER",
+                "mode": "REQUIRED"
+              },
+              {
+                "description": "Description.",
+                "name": "remark",
+                "type": "STRING",
+                "mode": "NULLABLE"
+              },
+              {
+                "description": "Item number.",
+                "name": "itemno",
+                "type": "STRING",
+                "mode": "NULLABLE"
+              },
+              {
+                "description": "Operator identification.",
+                "name": "pin_code",
+                "type": "STRING",
+                "mode": "NULLABLE"
+              },
+              {
+                "description": "Actually used location number (in case of allowed alternative locations)\n\t\u2022Picking station (21 or 22; picking process)\n\t\u2022Target rack position (dispatch process)",
+                "name": "locno_act",
+                "type": "STRING",
+                "mode": "NULLABLE"
+              },
+              {
+                "description": "Expiry date (actually used expiry date)",
+                "name": "expiry_date",
+                "type": "STRING",
+                "mode": "NULLABLE"
+              },
+              {
+                "description": "Licenceplate of source container",
+                "name": "licenceplate",
+                "type": "STRING",
+                "mode": "NULLABLE"
+              },
+              {
+                "description": "Slot id of source container ",
+                "name": "metasector_id",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+              },
+              {
+                "description": "Slot id of source container (alternative)",
+                "name": "slot_id",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+              },
+              {
+                "description": "Lot number (actually used lot number)",
+                "name": "lot_number",
+                "type": "STRING",
+                "mode": "NULLABLE"
+              },
+              {
+                "description": "Actual weight in [g] of weighted article in this pick. In case of a shortpick the field remains empty.",
+                "name": "weight_act",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+              },
+              {
+                "description": "Item code scanned during picking",
+                "name": "item_code",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "description": "Subaction of the event.",
+    "mode": "REQUIRED",
+    "name": "subaction",
+    "type": "STRING"
+  },
+  {
+    "description": "Code to identify the sender, only used if there is more than one host communication with the KiSoft WCS.",
+    "mode": "REQUIRED",
+    "name": "systemid",
+    "type": "STRING"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "BigQuery ingestion timestamp"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "PubSub publish timestamp"
+  },
+  {
+    "name": "__pubsub_message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "ID of the message assigned by PubSub"
+  }
+]

@@ -1,0 +1,80 @@
+{
+  "schema_name": "isps_pick_work_order_type",
+  "schema_description": "Picking list work order type. Source: Postgres extract",
+  "schema_version": "v1",
+  "labels": {},
+  "fields": [
+    {
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "ID of Work Order Type",
+      "name": "pick_work_order_type_id",
+      "type": "INTEGER",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Short name of  Work Order Type",
+      "name": "pick_work_order_code_type",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Name of  Work Order Type",
+      "name": "pick_work_order_type_name",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Description of Work Order Type",
+      "name": "pick_work_order_type_desc",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Time when Work Order Type was created  (UTC)",
+      "name": "pick_work_order_created_at_type",
+      "type": "TIMESTAMP",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "User, created Work Order Type",
+      "name": "pick_work_order_created_by_type",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Time when Work Order Type was updated  (UTC)",
+      "name": "pick_work_order_last_modified_at_type",
+      "type": "TIMESTAMP",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "User, updated Work Order Type",
+      "name": "pick_work_order_last_modified_by_type",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    }
+  ]
+}

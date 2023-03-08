@@ -1,0 +1,344 @@
+# Smart processing of all PRs to `develop` branch.
+# Once succeded, the PR is ready to be merged.
+# Triggered on pull request:
+#   base: `develop` <- head: `any`
+# Workflow:
+#   - Create list of clients 
+#   - If conf/** changed:
+#       \_Generate JSON and Protobuf for each client
+#         Commit files to head branch
+#   - Validate Terraform in dev environment with e2e deployment/destruction
+#   - Approve the PR
+
+name: E2E testing in sandbox
+
+on:
+  pull_request:
+    branches:
+      - develop
+    paths-ignore:
+      # - .github/**
+      - historical/**
+
+jobs:
+  prepare:
+    name: Prerequisites
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: scripts
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      # Checkout the head commit in a detached head state.
+      - name: Checkout the latest commit
+        uses: actions/checkout@v3
+
+      - name: Get specific deleted files
+        id: table_schemas
+        uses: tj-actions/changed-files@v31.0.2
+        with:
+          files: |
+            conf/**/tables/**
+            conf/**/protobuf/**
+
+      - name: Validate table schemas
+        if: steps.table_schemas.outputs.any_deleted == 'true'
+        run: |
+          echo 'Table/Topic schemas cannot be deleted. Revert these changes before continuing.'
+          exit 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      # Iterate over conf/** to combine a list of clients.
+      - name: Generate a list of clients
+        id: looper
+        run: |
+          python iterate_config.py ../conf
+    outputs:
+      folders: ${{ steps.looper.outputs.folders }}
+
+  generate-schema:
+    name: Generate BigQuery and Pub/Sub schemas
+    runs-on: ubuntu-latest
+    needs: prepare
+
+    defaults:
+      run:
+        working-directory: scripts
+
+    # Define a matrix of different job configurations.
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        folder: ${{fromJson(needs.prepare.outputs.folders)}}
+
+    steps:
+      # Checkout the head commit in a detached head state.
+      - name: Checkout the latest commit
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Get specific changed files
+        id: conf_files
+        uses: tj-actions/changed-files@v31.0.2
+        with:
+          files: |
+            conf/**
+            scripts/utils/common.py
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        if: steps.conf_files.outputs.any_changed == 'true'
+        with:
+          python-version: 3.9
+          cache: pip
+
+      - name: Install Python dependencies
+        if: steps.conf_files.outputs.any_changed == 'true'
+        run: pip install -r requirements.txt
+
+      # Checkout the branch the PR is coming from.
+      - name: Checkout the head branch
+        uses: actions/checkout@v3
+        if: steps.conf_files.outputs.any_changed == 'true'
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Generate JSON and .proto files
+        if: steps.conf_files.outputs.any_changed == 'true'
+        run: |
+          python generate_schema.py -c ${{ matrix.folder }}
+
+      - name: Add source files to dataflow
+        if: github.event_name == 'pull_request' && steps.conf_files.outputs.any_changed == 'true'
+        run: |
+          cd ..
+          find conf -maxdepth 1 -mindepth 1 -type d | while IFS= read -r subdir; do
+            mkdir -p dataflow/template/takeoff/dl/ingest/sources/"$(basename $subdir)" &&
+            cp -r "$subdir"/sources dataflow/template/takeoff/dl/ingest/sources/"$(basename $subdir)"/ &&
+            touch dataflow/template/takeoff/dl/ingest/sources/"$(basename $subdir)"/__init__.py;
+          done
+          cd scripts
+
+      - name: Add and commit
+        uses: EndBug/add-and-commit@v9.1.0
+        if: steps.conf_files.outputs.any_changed == 'true'
+        with:
+          add: conf dataflow/template/takeoff/dl/ingest/sources
+          message: Client ${{ matrix.folder }} - commit from GitHub Actions (${{ github.workflow }}).
+          pull: --rebase --autostash
+
+
+  update-monitoring-config:
+    name: Updates configurations for monitoring services
+    runs-on: ubuntu-latest
+    needs: generate-schema
+
+    defaults:
+      run:
+        working-directory: monitoring
+
+    steps:
+      # Checkout the head commit in a detached head state.
+      - name: Checkout the latest commit
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Get specific changed files
+        id: conf_files
+        uses: tj-actions/changed-files@v31.0.2
+        with:
+          files: |
+            conf/**
+            monitoring/data_completeness_check/prepare_config.py
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        if: steps.conf_files.outputs.any_changed == 'true'
+        with:
+          python-version: 3.9
+          cache: pip
+
+      - name: Install Python dependencies
+        if: steps.conf_files.outputs.any_changed == 'true'
+        run: pip install -r requirements.txt
+
+      # Checkout the branch the PR is coming from.
+      - name: Checkout the head branch
+        uses: actions/checkout@v3
+        if: steps.conf_files.outputs.any_changed == 'true'
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Update config YAML for Data Completeness Check service
+        if: github.event_name == 'pull_request' && steps.conf_files.outputs.any_changed == 'true'
+        run: |
+          cd data_completeness_check
+          python3 prepare_config.py
+
+      - name: Add and commit
+        uses: EndBug/add-and-commit@v9.1.0
+        if: steps.conf_files.outputs.any_changed == 'true'
+        with:
+          add: monitoring
+          message: Update configurations for monitoring services - commit from GitHub Actions (${{ github.workflow }}).
+          pull: --rebase --autostash
+
+  validate:
+    name: Run TF e2e tests
+    runs-on: ubuntu-latest
+    needs: prepare
+    environment:
+      name: develop
+    env:
+      TF_PLAN_FILE: terraform.tfplan
+      TF_VAR_project: ${{ secrets.GOOGLE_PROJECT_ID }}
+      TF_VAR_env: staging
+      TF_VAR_github_private_access_token: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
+      TF_VAR_publisher_project_id: ${{ secrets.PUBLISHER_PROJECT_ID }}
+      TF_VAR_template_path: gs://${{ secrets.GOOGLE_PROJECT_ID }}-dataflow/templates/takeoff-dl-ingest-test.json
+      TF_VAR_slack: "{\"notification_channel\":\"${{ secrets.SLACK_CHANNEL }}\",\"auth_token\":\"${{ secrets.SLACK_AUTH_TOKEN }}\"}"
+      TF_VAR_opsgenie_token: ${{ secrets.OPSGENIE_TOKEN }}
+      TEMPLATE_IMAGE: gcr.io/${{ secrets.GOOGLE_PROJECT_ID }}/takeoff-dl-ingest:test
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout the latest commit
+        uses: actions/checkout@v3
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          token_format: access_token
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: ${{ secrets.GOOGLE_PROJECT_ID }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      # Create infrastructure resources.
+      - name: Infra - Format
+        run: terraform fmt -check
+        working-directory: terragenesis/stacks/infra
+
+      - name: Infra - Init
+        run: terraform init -backend-config=bucket=${{ secrets.GOOGLE_PROJECT_ID }}-state
+        working-directory: terragenesis/stacks/infra
+
+      - name: Infra - Validate
+        run: terraform validate
+        working-directory: terragenesis/stacks/infra
+
+      - name: Infra - Plan
+        run: terraform plan -out ${{ env.TF_PLAN_FILE }}
+        working-directory: terragenesis/stacks/infra
+
+      - name: Infra - Apply
+        run: terraform apply ${{ env.TF_PLAN_FILE }}
+        working-directory: terragenesis/stacks/infra
+
+      # Build Dataflow image and template.
+      - name: Build Dataflow image
+        run: gcloud builds submit --tag ${{ env.TEMPLATE_IMAGE }} .
+        working-directory: dataflow/template
+
+      - name: Create Dataflow template
+        run: |
+          gcloud dataflow flex-template build ${{ env.TF_VAR_template_path }} \
+            --image ${{ env.TEMPLATE_IMAGE }} \
+            --sdk-language PYTHON
+
+      # Configure Terraform to deploy ACME client only.
+      - name: Generate .tfvars from the client config
+        run: |
+          python ../../../scripts/prefly.py acme
+        working-directory: terragenesis/stacks/datalake
+
+      # Create datalake resources.
+      - name: Datalake - Format
+        run: terraform fmt -check
+        working-directory: terragenesis/stacks/datalake
+
+      - name: Datalake - Init
+        run: terraform init -backend-config=bucket=${{ secrets.GOOGLE_PROJECT_ID }}-state
+        working-directory: terragenesis/stacks/datalake
+
+      - name: Datalake - Validate
+        run: terraform validate
+        working-directory: terragenesis/stacks/datalake
+
+      - name: Datalake - Plan
+        run: rm -f dataflow.tf && terraform plan -out ${{ env.TF_PLAN_FILE }}
+        working-directory: terragenesis/stacks/datalake
+
+      - name: Datalake - Apply
+        run: terraform apply ${{ env.TF_PLAN_FILE }}
+        working-directory: terragenesis/stacks/datalake
+
+      # Create monitoring resources.
+      - name: Monitoring - Format
+        run: terraform fmt -check
+        working-directory: terragenesis/stacks/monitoring
+
+      - name: Monitoring - Init
+        run: terraform init -backend-config=bucket=${{ secrets.GOOGLE_PROJECT_ID }}-state
+        working-directory: terragenesis/stacks/monitoring
+
+      - name: Monitoring - Validate
+        run: terraform validate
+        working-directory: terragenesis/stacks/monitoring
+
+      - name: Monitoring - Plan
+        run: terraform plan -out ${{ env.TF_PLAN_FILE }}
+        working-directory: terragenesis/stacks/monitoring
+
+      - name: Monitoring - Apply
+        run: terraform apply ${{ env.TF_PLAN_FILE }}
+        working-directory: terragenesis/stacks/monitoring
+
+      # Destroy Terraform resources in reverse order.
+      - name: Monitoring - Destroy
+        run: terraform destroy -auto-approve
+        working-directory: terragenesis/stacks/monitoring
+
+      - name: Datalake - Destroy
+        run: terraform destroy -auto-approve
+        working-directory: terragenesis/stacks/datalake
+
+      - name: Infra - Destroy
+        run: terraform destroy -auto-approve
+        working-directory: terragenesis/stacks/infra
+
+  approve:
+    name: Provide PR approval
+    runs-on: ubuntu-latest
+    needs: [ validate, update-monitoring-config ]
+    steps:
+      - name: Approve pull request
+        uses: juliangruber/approve-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ github.event.pull_request.number }}

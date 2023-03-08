@@ -1,0 +1,347 @@
+{
+  "schema_name": "couchdb_orders",
+  "schema_description": "Holds post-processed order information (order data after split).",
+  "schema_version": "v1",
+  "labels": {
+    "owner": "outbound",
+    "primary_key": "_id"
+  },
+  "fields": [
+    {
+      "description": "Client name.",
+      "name": "__client_name",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Source name.",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Schema version.",
+      "name": "__schema_version",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Event timestamp.",
+      "name": "__source_name",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "CouchDb metadata.Document ID. ",
+      "name": "_id",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "CouchDb metadata. Revision MVCC token.",
+      "name": "_rev",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "CouchDb metadata. Deletion flag. Available if document was removed.",
+      "name": "_deleted",
+      "type": "BOOLEAN",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Id of batch orders. 30 minutes prior to cut-off time for each service window, TOM should automatically split the order into the two main environments (MFC and STORE). At this point TOM should send the BATCH order of ALL items not present in the MFC to be picked from the STORE in a BATCH.",
+      "name": "batch_order_id",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "An array of target totes ids.",
+      "name": "boxes",
+      "type": "STRING",
+      "mode": "REPEATED"
+    },
+    {
+      "name": "boxes_retrieved",
+      "type": "BOOLEAN",
+      "mode": "NULLABLE"
+    },
+    {
+      "name": "boxes_retrieved_time",
+      "type": "TIMESTAMP",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "User id of customer who requested order.",
+      "name": "client_id",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Timestamp of order creation in TOM system (after split).",
+      "name": "created",
+      "type": "TIMESTAMP",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "",
+      "name": "delivery_contract_id",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "name": "delivery_contract_params",
+      "type": "RECORD",
+      "mode": "NULLABLE",
+      "fields": [
+        {
+          "description": "",
+          "name": "contract_id",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Default price to consumer/user for delivery.",
+          "name": "delivery_price",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "One of the four option pickup-drivethru, pickup-walk, delivery-attended, delivery-unattended.",
+          "name": "delivery_type",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "When service window/slot ends within service day (counting from 0:00 in UTC).",
+          "name": "end_time",
+          "type": "TIMESTAMP",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "ID of location from which contract is served, i.e. where products are coming from. This location defines assortment and availability of products under this service contract.",
+          "name": "location_id",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Route ID for the first leg of logistics. In case of one-leg logistics this will be direct routes from MFC-stores to customer homes. In case of two-step logistics, this will routes from MFC-stores to pickup-stores or pickup-points. If blank, order is believed to be \"unrouted\". Can be updated up until order is loaded into truck. If \"Pickup\" this means order will be picked up in hub-store. Route-number can be changed only if it changes from \"UNROUTED\" to any other \"route-number\". Route-number cannot be changed if TO CO status is \"Picked\" or any other TO CO status which follows after \"Picked\".",
+          "name": "route_id",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "When service window/slot starts within service day (counting from 0:00 in UTC).",
+          "name": "start_time",
+          "type": "TIMESTAMP",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "",
+          "name": "timezone",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Geo zone (polygons on the map) where orders can be delivered in this service contract in case of delivery-attended and delivery-unattended.",
+          "name": "zone_id",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        }
+      ]
+    },
+    {
+      "name": "items",
+      "type": "RECORD",
+      "mode": "REPEATED",
+      "fields": [
+        {
+          "description": "Requested quantity of an item. Even for items that are sold by ea priced by lb, this is an int (count).",
+          "name": "amount",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Unit of measure for item weight.",
+          "name": "avg_weight_unit",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Average weight of the item.",
+          "name": "avg_weight_value",
+          "type": "FLOAT",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Comment from customer.",
+          "name": "comment",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Item id.",
+          "name": "id",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "",
+          "name": "is_alcoholic",
+          "type": "BOOLEAN",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "",
+          "name": "is_beer",
+          "type": "BOOLEAN",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Indicates if item is sold by weight.",
+          "name": "is_scalable",
+          "type": "BOOLEAN",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "",
+          "name": "is_weight_variable",
+          "type": "BOOLEAN",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Description of an item.",
+          "name": "name",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Old price of the item.",
+          "name": "old_price",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Price of the item.",
+          "name": "price",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Unit by which item is sold.",
+          "name": "unit",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Count of units.",
+          "name": "unit_count",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        }
+      ]
+    },
+    {
+      "description": "MFC location id.",
+      "name": "location_id",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Id of a user who packed the order.",
+      "name": "packer_id",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Id of a user who picked the order.",
+      "name": "picker_id",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "",
+      "name": "picking_method",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Route ID for the first leg of logistics. In case of one-leg logistics this will be direct routes from MFC-stores to customer homes. In case of two-step logistics, this will routes from MFC-stores to pickup-stores or pickup-points. If blank, order is believed to be \"unrouted\". Can be updated up until order is loaded into truck. If \"Pickup\" this means order will be picked up in hub-store. Route-number can be changed only if it changes from \"UNROUTED\" to any other \"route-number\". Route-number cannot be changed if TO CO status is \"Picked\" or any other TO CO status which follows after \"Picked\".",
+      "name": "route_number",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Order id.",
+      "name": "secret",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Indicated if order sent to queue.",
+      "name": "sent_to_queue",
+      "type": "BOOLEAN",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "The timestamp when orders was served.",
+      "name": "served",
+      "type": "TIMESTAMP",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "ID of a shift. Truck departure will be organized in shifts, therefore, MFC operations are revolving around these shifts. Should be sequential (growing monotonously) within a day (example valid: 55, 58, 61). Default: hour of the day.",
+      "name": "shift_number",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Date-time for when customer order should be staged. I.e. ready to be picked up by truck for the first leg. Stage-by-datetime is always in the interval of time between cut-off time and the beginning of the slot. Stage-by-datetime can be changed only before the cut-off time.",
+      "name": "stage_by_datetime",
+      "type": "TIMESTAMP",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "",
+      "name": "stage_location",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Current status of the order.",
+      "name": "status",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Number of stop within requested route. Stops are sequential, i.e. 1 2 3 4. With prefix zeroes aligned to three digits long. For \"Pickup\" orders this will be sequential \"Pickup\" order number within a day within a store (no relation to staging addresses). Can be changed after cut-off time. Stop-number can be changed only if it changes from \"UNROUTED\" to any other \"stop-number\". Stop-number cannot be changed if TO CO status is \"Picked\" or any other TO CO status which follows after \"Picked\".",
+      "name": "stop_number",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Amount of taxes applied.",
+      "name": "tax",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Indicates if totes were unstaged.",
+      "name": "totes_unstaged",
+      "type": "BOOLEAN",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Timestamp when totes were unstaged.",
+      "name": "totes_unstaged_time",
+      "type": "TIMESTAMP",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Error reason if totes unstaging failed.",
+      "name": "totes_unstaging_error_reason",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    }
+  ]
+}

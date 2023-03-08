@@ -1,0 +1,4 @@
+gcs_uri,actual_primary,pred_primary,primary_confidence,actual_h1,pred_h1,holder1_confidence,actual_h2,pred_h2,holder2_confidence
+one_signature_1.jpg,True,True,0.6,False,False,0.7,False,False,0.8
+two_signature_1.jpg,True,True,0.6,True,False,0.7,False,False,0.8
+three_signature_1.jpg,True,True,0.6,True,False,0.7,True,False,0.8

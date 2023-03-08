@@ -1,0 +1,18 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required int64 id = 5;
+  required int64 event_id = 6;
+  required int64 product_id = 7;
+  required int64 index = 8;
+  required string product = 9;
+  required int64 amount = 10;
+  optional string expiration_date = 11;
+  required string purchase_order = 12;
+  optional string last_modified = 13;
+  required string reason_code = 14;
+}

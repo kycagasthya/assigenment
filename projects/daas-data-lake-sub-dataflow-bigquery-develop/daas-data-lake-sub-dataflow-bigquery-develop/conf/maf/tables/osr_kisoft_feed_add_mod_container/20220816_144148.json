@@ -1,0 +1,145 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Message content.",
+    "mode": "REQUIRED",
+    "name": "csv",
+    "type": "STRING"
+  },
+  {
+    "description": "Action performed.",
+    "mode": "REQUIRED",
+    "name": "action",
+    "type": "STRING"
+  },
+  {
+    "description": "Subtype of the event.",
+    "mode": "REQUIRED",
+    "name": "sub_action",
+    "type": "STRING"
+  },
+  {
+    "description": "Code to identify the sender, only used if there is more than one host communication with the KiSoft WCS.",
+    "mode": "REQUIRED",
+    "name": "systemid",
+    "type": "STRING"
+  },
+  {
+    "description": "Type of that record, here \"WS\" for \"WS\"",
+    "mode": "NULLABLE",
+    "name": "record_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Event id.",
+    "mode": "REQUIRED",
+    "name": "event_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Reference to EXP_WPO(order_id).",
+    "mode": "REQUIRED",
+    "name": "wpono",
+    "type": "STRING"
+  },
+  {
+    "description": "Reference to EXP_CONTAINER.",
+    "mode": "REQUIRED",
+    "name": "cntno",
+    "type": "STRING"
+  },
+  {
+    "description": "Unique key of the container represented by barcode.",
+    "mode": "REQUIRED",
+    "name": "licenceplate",
+    "type": "STRING"
+  },
+  {
+    "description": "Time/Date when the container was married.",
+    "mode": "REQUIRED",
+    "name": "marriagetime",
+    "type": "STRING"
+  },
+  {
+    "description": "Status of working step.",
+    "mode": "REQUIRED",
+    "name": "status",
+    "type": "STRING"
+  },
+  {
+    "description": "Error number.",
+    "mode": "REQUIRED",
+    "name": "error_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "file",
+    "type": "RECORD",
+    "fields": [
+      {
+        "description": "Message content.",
+        "mode": "REQUIRED",
+        "name": "data",
+        "type": "STRING"
+      },
+      {
+        "description": "MFC location id.",
+        "mode": "REQUIRED",
+        "name": "location_id",
+        "type": "STRING"
+      },
+      {
+        "description": "File name.",
+        "mode": "REQUIRED",
+        "name": "name",
+        "type": "STRING"
+      }
+    ]
+  },
+  {
+    "description": "Event type.",
+    "mode": "NULLABLE",
+    "name": "type",
+    "type": "STRING"
+  },
+  {
+    "description": "Command type.",
+    "mode": "REQUIRED",
+    "name": "cmd",
+    "type": "STRING"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  }
+]

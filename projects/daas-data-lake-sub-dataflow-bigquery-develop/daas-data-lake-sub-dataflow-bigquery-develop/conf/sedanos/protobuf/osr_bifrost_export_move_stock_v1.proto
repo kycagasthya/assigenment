@@ -1,0 +1,33 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required string action = 5;
+  required string attributes = 6;
+  required int64 id = 7;
+  optional string pubsub_message_id = 8;
+  optional string pubsub_publish_time = 9;
+  required string recordid = 10;
+  repeated _records_record records = 11;
+  message _records_record {
+    required string recordid = 1;
+    required string master_fp_name = 2;
+    required string itemno = 3;
+    optional string expiry_date = 4;
+    required int64 qty = 5;
+    optional string reason = 6;
+    required string adjustment_type = 7;
+    optional string pin_code = 8;
+    optional string locno_act = 9;
+    optional string licenceplate = 10;
+    optional int64 metasector_id = 11;
+    optional int64 slot_id = 12;
+    optional string timestamp = 13;
+    optional string lot_number = 14;
+  }
+  optional string subaction = 12;
+  optional string systemid = 13;
+}

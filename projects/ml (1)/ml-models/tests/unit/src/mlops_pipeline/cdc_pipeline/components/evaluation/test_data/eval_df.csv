@@ -1,0 +1,126 @@
+gcs_uri,ground_truth
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/02acfd632340500d28a4f16337b9c2ae.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/0521_adhar.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/0d4c873ace54e82fb49c451a9bdc6d24.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/0eec471be7fd18b381d0525d908f19a4.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/14171f7e3e906f9bb9cbee0e44b183ab.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/1646976080275.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/171b8af9d540971732d80ed9d31b39b9.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/17e9553a7c821caadcffb63b4b5cdd01.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/1b26b406ad9485c98cd496bc371db57f.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/23006645 (1).jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/23006645.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/27_12_2020-adhar_card_21209724.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/2bfd2f150b31581bac34445b5c49dd26.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/2ee0a6e25f4d89c75bfbbcf3dd9aa37f.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/2ee53b1ca9d79203a2d4936ecc77770b.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/3564191365d6dd7bff705c3252860029.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/3ab1ec4dbab07e1399161828b68e902e.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/4320890a86afc70a155b2b6fa02b2513.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/447675edf75967ed3047d0ff28f280ac (1).jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/447675edf75967ed3047d0ff28f280ac.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/4ee7ccb677917354faafba80865d08cb.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/50690c9ea9c51b13ccc7960857120a9d.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/5d5ce606ffd0cedecc73ef33957492d7.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/60643f2e835245dfa9b0c9c988abb748.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Aadhar Card/6d1bdbd3200d612dca660aaa1b617f37.jpg,aadhaar_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/04-Fake-licences_l.webp,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/04daaf6588d499b7b9f7cced7bc55d06 (1).jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/08.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/1070303-driving-licence.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/10794262-1576159796956-1080.jpeg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/1646364620882326-0.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/201-permanent-licence-e0c0.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/2018-10-02.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/20181110_133255.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/275050196007201.png,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/29_05_2018-29hts603_18015200_121437.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/3ED9789300000578-4371668-image-a-14_1491080959190.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/55.png,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/5dff331327290d7b0b962389.w800.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/64a7070731d6d1fa08842880a8fd63ff.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/700fe937d04fd477f57a71ddd587676d.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/741d7f2335b0587c509ff4bafba89035.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/7e18cad53a552d5130cb9c7b7f3bffe2.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/897600288.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/Capture as.PNG,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/Capture.PNG,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/CaptureWB.PNG,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/CrrdMEZXEAAYNmy.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/DBLHjx5W0AkvVpU.jpg,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Driving Licenses Images/DL fake.PNG,driving_license
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/1de236b88ba549289a597e3382521116.jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/banner (1).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/banner (2).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/banner (3).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/banner.jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/dfs_5e5e248181e63.jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (1).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (10).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (11).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (12).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (13).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (14).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (15).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (16).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (17).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (2).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (3).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (4).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (5).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (6).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (7).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (8).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download (9).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/download.jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Pan Card/images (1).jpg,pan_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/0005b960d15ea2b35fef51f178447103.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/01b789a03858ac98c765e2b41541bec0.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/1038878919_3134b4e456_z.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/12ec8d35-7c23-4b4b-8572-1f4993841765.jfif,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/191030164328_1.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/191031162423_1.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/19b0168e-5843-4758-986d-27cd53afc6e6.jfif,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/1b59cd24-051e-4c1a-a529-b8db95222cd1.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/3703967a-3a77-46c7-baab-ea86469bd714.jfif,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/408657145-KulbhushanJadhav_6.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/4683002ce997fceaabe8d5e5a93e8d3f.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/4e8f428a-71e0-4821-a8f7-6ee015be6fe6.jfif,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/58.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/6-passport-back-page (1).jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/6-passport-back-page.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/60bf3668a504840bd61a75b8399d06104e609d31 (1).jpeg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/60bf3668a504840bd61a75b8399d06104e609d31.jpeg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/60bf3668a504840bd61a75b8399d06104e609d31_2_345x500.jpeg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/6301632841849.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/69d56756-400a-49d6-af4a-5ee7d045dcba.jfif,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/729e5009cc8bb3d9d644c4ae0e0a2db7.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/73205ae7f289811dbe86af72b75c0cee.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/7766830-a659696883.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/78e23f0ea7e35b8064608c27d71ff27d.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/Passport/7b974a34-ae0a-4fb7-a1cb-4eb6adfed5a7.jpg,passport
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/77.jpg,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Bz-m2lzCYAEjNHc.jpg,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Documents required for Voter ID Card registration correction online.jpg,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 115837.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 120748.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 120906.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 121533.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 121847.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 122120.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 122130.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 122440.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 122605.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 123249.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 123308.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 123348.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 123427.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 123453.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 123521.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 123551.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 123708.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 123852.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 123927.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 124020.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 124102.png,voter_card
+gs://ibank-development-transfer-bucket/ML/Data/data-buckets/tagger_internet_data_upload/voterid/Screenshot 2022-03-11 124617.png,voter_card

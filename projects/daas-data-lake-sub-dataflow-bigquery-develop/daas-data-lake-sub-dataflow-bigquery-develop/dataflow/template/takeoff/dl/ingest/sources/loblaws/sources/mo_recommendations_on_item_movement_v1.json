@@ -1,0 +1,122 @@
+{
+    "schema_name": "mo_recommendations_on_item_movement",
+    "schema_description": "Recommendations on item movement table",
+    "schema_version": "v1",
+    "labels": {},
+    "fields":[
+          {
+            "description": "Client name.",
+            "mode": "REQUIRED",
+            "name": "__client_name",
+            "type": "STRING"
+          },
+          {
+            "description": "Source name.",
+            "mode": "REQUIRED",
+            "name": "__source_name",
+            "type": "STRING"
+          },
+          {
+            "description": "Schema version.",
+            "mode": "REQUIRED",
+            "name": "__schema_version",
+            "type": "STRING"
+          },
+          {
+            "description": "Event timestamp.",
+            "mode": "REQUIRED",
+            "name": "__event_timestamp",
+            "type": "TIMESTAMP"
+          },
+          {
+            "description": "Publish timestamp.",
+            "mode": "NULLABLE",
+            "name": "__publish_timestamp",
+            "type": "TIMESTAMP"
+          },
+          {
+            "description": "Indicates where the product is recommended to be located.",
+            "mode": "NULLABLE",
+            "name": "destination",
+            "type": "STRING"
+          },
+          {
+            "description": "Product Ecommerce ID.",
+            "mode": "REQUIRED",
+            "name": "ecom_item_id",
+            "type": "STRING"
+          },
+          {
+            "description": "Timestamp when results were generated from SDIA. UTC time.",
+            "mode": "NULLABLE",
+            "name": "finish_ts",
+            "type": "TIMESTAMP"
+          },
+          {
+            "description": "A value that represents either the INCREASE or DECREASE in the percentage of lines during the forecasting horizon for an MFC area we aim to optimize.",
+            "mode": "NULLABLE",
+            "name": "lines_percentage",
+            "type": "FLOAT"
+          },
+          {
+            "description": "MFC ID",
+            "mode": "REQUIRED",
+            "name": "mfc_id",
+            "type": "STRING"
+          },
+          {
+            "description": "Human readable product name.",
+            "mode": "NULLABLE",
+            "name": "name",
+            "type": "STRING"
+          },
+          {
+            "description": "Indicates where the product is currently located (manual or in-store) based on the latest Inventory Snapshot.",
+            "mode": "NULLABLE",
+            "name": "original_location",
+            "type": "STRING"
+          },
+          {
+            "description": "The number of units in MFC derived from the latest Inventory Snapshot.",
+            "mode": "NULLABLE",
+            "name": "original_qty",
+            "type": "INTEGER"
+          },
+          {
+            "description": "TOM ID/IDs associated with considered ecom_item_id.",
+            "mode": "NULLABLE",
+            "name": "product_ids",
+            "type": "STRING"
+          },
+          {
+            "description": "Reflects the movement semantic, i.e what area we optimize and what actions need to be performed.",
+            "mode": "NULLABLE",
+            "name": "recommendation_type",
+            "type": "STRING"
+          },
+          {
+            "description": "Retailer alias.",
+            "mode": "NULLABLE",
+            "name": "retailer",
+            "type": "STRING"
+          },
+          {
+            "description": "Either Recommendation or Service.",
+            "mode": "NULLABLE",
+            "name": "table_type",
+            "type": "STRING"
+          },
+          {
+            "description": "The number of totes allocated for potential product inventory.",
+            "mode": "NULLABLE",
+            "name": "totes",
+            "type": "FLOAT"
+          },
+          {
+            "description": "The number of totes estimated for original_qty.",
+            "mode": "NULLABLE",
+            "name": "totes_for_current_stock",
+            "type": "FLOAT"
+          }
+        ]
+    }

@@ -1,0 +1,92 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "ID of Work Order Status",
+    "mode": "REQUIRED",
+    "name": "pick_work_order_status_id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Short name of Work Order Status",
+    "mode": "REQUIRED",
+    "name": "pick_work_order_status_code",
+    "type": "STRING"
+  },
+  {
+    "description": "Name of Work Order Status",
+    "mode": "REQUIRED",
+    "name": "pick_work_order_status_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Description of Work Order Status",
+    "mode": "NULLABLE",
+    "name": "pick_work_order_status_desc",
+    "type": "STRING"
+  },
+  {
+    "description": "Time when Work Order Status was created (UTC)",
+    "mode": "REQUIRED",
+    "name": "pick_work_order_status_created_at",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "User, created Work Order Status",
+    "mode": "REQUIRED",
+    "name": "pick_work_order_status_created_by",
+    "type": "STRING"
+  },
+  {
+    "description": "Time when Work Order Status was updated (UTC)",
+    "mode": "REQUIRED",
+    "name": "pick_work_order_status_last_modified_at",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "User, updated Work Order Status",
+    "mode": "REQUIRED",
+    "name": "pick_work_order_status_last_modified_by",
+    "type": "STRING"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "BigQuery ingestion timestamp"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "PubSub publish timestamp"
+  },
+  {
+    "name": "__pubsub_message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "ID of the message assigned by PubSub"
+  }
+]

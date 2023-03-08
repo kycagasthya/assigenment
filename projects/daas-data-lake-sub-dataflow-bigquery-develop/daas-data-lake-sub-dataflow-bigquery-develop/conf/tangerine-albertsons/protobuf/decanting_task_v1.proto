@@ -1,0 +1,20 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required int64 id = 5;
+  required string purchase_order = 6;
+  required string created = 7;
+  required int64 mfc = 8;
+  optional string last_modified = 9;
+  required string status = 10;
+  optional string date_expected = 11;
+  optional string rev = 12;
+  optional string supplier_id = 13;
+  optional string supplier_name = 14;
+  optional string supplier_type = 15;
+  optional string supplier_account = 16;
+}

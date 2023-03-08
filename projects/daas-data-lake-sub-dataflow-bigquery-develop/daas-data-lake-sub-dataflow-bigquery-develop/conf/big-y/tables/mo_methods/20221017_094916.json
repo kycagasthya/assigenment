@@ -1,0 +1,86 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Publish timestamp.",
+    "mode": "NULLABLE",
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Product ID. The primary key.",
+    "mode": "REQUIRED",
+    "name": "ecom_item_id",
+    "type": "STRING"
+  },
+  {
+    "description": "A JSON string with additional meta information that is consumed by Demand Forecaster, SDIA and AMT services.",
+    "mode": "NULLABLE",
+    "name": "metadata",
+    "type": "STRING"
+  },
+  {
+    "description": "Method name that will be used in Forecaster module to predict number of Lines for the considered Item.",
+    "mode": "NULLABLE",
+    "name": "method_lines",
+    "type": "STRING"
+  },
+  {
+    "description": "Method name that will be used in Forecaster module to predict Units Qty for the considered Item.",
+    "mode": "NULLABLE",
+    "name": "method_qty",
+    "type": "STRING"
+  },
+  {
+    "description": "The time when the Method Selection was performed.",
+    "mode": "NULLABLE",
+    "name": "method_selection_ts",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "MFC ID",
+    "mode": "REQUIRED",
+    "name": "mfc_id",
+    "type": "STRING"
+  },
+  {
+    "description": "(Optional)Forecast Period.",
+    "mode": "NULLABLE",
+    "name": "forecast_period",
+    "type": "STRING"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "BigQuery ingestion timestamp"
+  },
+  {
+    "name": "__pubsub_message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "ID of the message assigned by PubSub"
+  }
+]

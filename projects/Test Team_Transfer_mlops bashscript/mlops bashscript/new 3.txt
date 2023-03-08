@@ -1,0 +1,81 @@
+
+
+file_name="request.json"
+            create_file () {
+                {
+                    echo "{\"defaultProcessorVersion\":\"projects/$project_number/locations/$location/processors/$processor_id/processorVersions/$processor_Versions_ID\"}"
+                } >"${file_name}"
+            }
+            create_file "bbbb"
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------
+  "models": [
+    {
+      "displayName": "vertexai-sample",
+      "containerSpec": {
+        "imageUri": "us-docker.pkg.dev/vertex-ai/prediction/tf2-cpu.2-4:latest"
+      },
+
+      "artifactUri": "gs://asia-south1-docai-mlops-com-4dda2ed4-bucket/od-mlops/pipelineroot/20220503002045/bytes_model",
+      "versionId": "1",
+    }
+------------------------------------------------------
+"gs://asia-south1-docai-mlops-com-4dda2ed4-bucket/od-mlops/pipelineroot/20220503002045/bytes_model"file_name="modelupload.json"
+create_file (){
+{
+  "model": {
+    object (Model)
+  }
+}
+}
+
+            create_file () {
+                {
+                    echo "{
+                          "models": 
+                                {
+                                    "displayName": "vertexai-s",
+                                    "containerSpec": {
+                                    "imageUri": "us-docker.pkg.dev/vertex-ai/prediction/tf2-cpu.2-4:latest"
+                                }
+                            
+                                    "artifactUri": "gs://asia-south1-docai-mlops-com-4dda2ed4-bucket/od-mlops/pipelineroot/20220503002045/bytes_model",
+                                    "versionId": "1",
+                                } >"${file_name}"
+            }
+        }
+     
+            create_file "bbbb"
+#gcloud 
+
+
+{
+//     "model": {
+//         //"object": 
+//                 //{
+//                     //"name": "ttest_models",
+//                     "displayName": "string_model",
+//                     "description": "newmodel",
+//                     "trainingPipeline": "string",
+//                     "containerSpec": {
+//                         "imageUri": "us-docker.pkg.dev/vertex-ai/prediction/tf2-cpu.2-4:latest"},
+//                     "artifactUri": "gs://asia-south1-docai-mlops-com-4dda2ed4-bucket/od-mlops/pipelineroot/20220503002045/bytes_model",
+//                  //}  
+//             }   
+// }

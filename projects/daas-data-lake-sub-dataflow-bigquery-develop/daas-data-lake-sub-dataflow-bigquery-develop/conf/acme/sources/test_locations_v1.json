@@ -1,0 +1,148 @@
+{
+  "schema_name": "locations",
+  "schema_description": "Locations schema description",
+  "labels": {
+    "owner": "thanos",
+    "primary_key": "id"
+  },
+  "schema_version": "v1",
+  "fields": [{
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Publish timestamp.",
+      "mode": "NULLABLE",
+      "name": "__publish_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Ingestion timestamp.",
+      "mode": "NULLABLE",
+      "name": "__ingest_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "index",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Custom descr #1 for test.",
+      "mode": "NULLABLE",
+      "name": "is_enabled",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "Custom descr #1 for test.",
+      "mode": "REQUIRED",
+      "name": "location_city",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "location_code_gold",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "location_code_retailer",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "location_code_tom",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "location_contact_phone",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "location_id",
+      "type": "INTEGER"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "location_name",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "location_pickup_lat",
+      "type": "NUMERIC"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "location_pickup_lon",
+      "type": "NUMERIC"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "location_service_info_desctext",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "location_service_info_email",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "location_service_info_phone",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "location_street",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "location_type_id",
+      "type": "INTEGER"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "location_zip_code",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "mfc_ref_code",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "state_iso_code",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "timezone",
+      "type": "STRING"
+    }
+  ]
+}

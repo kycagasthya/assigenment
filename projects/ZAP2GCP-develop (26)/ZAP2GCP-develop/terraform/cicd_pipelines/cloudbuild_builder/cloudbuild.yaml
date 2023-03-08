@@ -1,0 +1,8 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'us-docker.pkg.dev/its-registry-it-kcl-p/zbr-zapdbx-dcr-repo/cicd-utilities:v0.1.0', './cicd_ops' ]
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'push', 'us-docker.pkg.dev/its-registry-it-kcl-p/zbr-zapdbx-dcr-repo/cicd-utilities:v0.1.0']
+
+logsBucket: 'gs://its-registry-it-kcl-p-log-bucket'

@@ -1,0 +1,31 @@
+name: Evaluation
+inputs:
+- {name: project_id, type: String}
+- {name: processor_id, type: String}
+- {name: location, type: String}
+- {name: gcs_uri, type: String}
+- {name: data_pipeline_root, type: String}
+- {name: check_status_after, type: String}
+- {name: retry_count, type: Integer}
+- {name: input_version_id, type: Artifact}
+outputs:
+- {name: overall_metrics, type: Metrics}
+- {name: class_metrics, type: Metrics}
+implementation:
+  container:
+    image: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cdc-pipeline/evaluation:latest
+    command: [python, /app/evaluate_cdc.py]
+    args: [
+      --executor_input, {executorInput: null},
+      --function_to_execute, evaluation,
+      --project-id, {inputValue: project_id},
+      --processor-id, {inputValue: processor_id},
+      --location, {inputValue: location},
+      --gcs-uri, {inputValue: gcs_uri},
+      --check-status-after, {inputValue: check_status_after},
+      --retry-count, {inputValue: retry_count},
+      --data-pipeline-root, {inputValue: data_pipeline_root},
+      --input-version-id, {inputPath: input_version_id},
+      --class-metrics, {outputPath: class_metrics},
+      --overall-metrics, {outputPath: overall_metrics}
+    ]

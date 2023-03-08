@@ -1,0 +1,74 @@
+working ---
+------------------------------------------------------------
+steps:
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - 'gsutil -m rsync -r -d ./sample-test gs://${_COMPOSER_BUCKET_DEV}/dags'
+    id:  in dev
+    entrypoint: bash
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - 'gsutil -m rsync -r -d ./sample-test gs://${_COMPOSER_BUCKET_UAT}/dags'
+    id: in uat
+    entrypoint: bash
+ - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - 'gsutil -m rsync -r -d ./sample-test gs://${_COMPOSER_BUCKET_PROD}/dags'
+    id: in uat
+    entrypoint: bash
+options:
+  logging: CLOUD_LOGGING_ONLY
+substitutions:
+  _COMPOSER_BUCKET_DEV: 
+  _COMPOSER_BUCKET_UAT:
+  _COMPOSER_BUCKET_PROD:
+
+
+  
+
+------------------------------------------------------
+
+steps:
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - >-
+		if[ "$BRANCH_NAME" == "master"]; then echo "$BRANCH_NAME" &&
+        gsutil -m rsync -r -d ./sample-test gs://${_COMPOSER_BUCKET_DEV}/dags; else echo
+        "Working on $BRANCH_NAME"; fi
+    id: Deploy in dev
+    entrypoint: bash
+options:
+  logging: CLOUD_LOGGING_ONLY
+substitutions:
+  _COMPOSER_BUCKET_DEV: icici_docai_batch_testing
+
+
+-----------------------------
+steps:
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - >-
+        if[ "$BRANCH_NAME" == "master"]; then echo "$BRANCH_NAME" && gsutil -m
+        rsync -d -r ./sample-test gs://${_COMPOSER_BUCKET_UAT}/dags; else echo
+        "Working on $BRANCH_NAME"; fi
+    id: Deploy in UAT
+    entrypoint: bash
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - >-
+        if[ "$BRANCH_NAME" == "master"]; then echo "$BRANCH_NAME" && gsutil -m
+        rsync -d -r ./sample-test gs://${_COMPOSER_BUCKET_DEV}/dags; else echo
+        "Working on $BRANCH_NAME"; fi
+    id: Deploy in dev
+    entrypoint: bash
+options:
+  logging: CLOUD_LOGGING_ONLY
+substitutions:
+  _COMPOSER_BUCKET_UAT: asia-south1-icici-docai-ia--f76c4c25-bucket
+  _COMPOSER_BUCKET_DEV: asia-south1-docai-mlops-com-e66f290f-bucket

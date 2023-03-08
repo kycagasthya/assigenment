@@ -1,0 +1,37 @@
+steps:
+  - name: 'google/cloud-sdk:latest'
+    env:
+      - 'user_input=${_USER_INPUT}'
+      - 'project_id=${_PROJECT_ID}'
+      - 'project_number=${_PROJECT_NUMBER}'
+      - 'model_name=${_MODEL_NAME}'
+      - 'endpoint_name=${_ENDPOINT_NAME}'
+      - 'endpoint_id=${_ENDPOINT_ID}'
+      - 'gs_path=${_GS_PATH}'
+      - 'location=${_LOCATIONS}'
+      - 'processor_Versions_ID=${_PROCESSOR_VERSION_ID}'
+      - 'project_number=${_PROJECT_NUMBER}'
+      - 'processor_id=${_PROCESSOR_ID}'
+    args:
+      - vertexai/final_bashscript.sh
+      - foo
+    entrypoint: bash
+options:
+  logging: CLOUD_LOGGING_ONLY
+  
+ curl -X GET -H "Authorization: Bearer ${TOKEN}"  https://us-documentai.googleapis.com/uiv1beta3/projects/828122618009/locations/us/processors/4fd83649b68e0f12
+ curl -X GET -H "Authorization: Bearer ${TOKEN}"  "$host/uiv1beta3/projects/$project_number/locations/$location/processors/$processor_id" | jq -r '.defaultProcessorVersion'
+ 
+ steps:
+  - name: 'google/cloud-sdk:latest'
+    args:
+      - '-c'
+      - >
+        gcloud secrets versions access 1 --secret="Vertex-AI-JSON" >> key.json
+        echo key.json gcloud auth activate-service-account --key-file=key.json
+        go get github.com/google/oauth2l go install github.com/google/oauth2l
+        TOKEN=$(oauth2l fetch --jwt --json ./key.json
+        https://www.googleapis.com/auth/cloud-platform) echo $$TOKEN
+    entrypoint: bash
+options:
+  logging: CLOUD_LOGGING_ONLY

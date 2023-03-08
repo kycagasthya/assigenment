@@ -1,0 +1,131 @@
+# Creating support infra for Datalake.
+# Once succeded, Terraform provides and handles the infrastructure (IaC).
+# Should be run once, before creating the Datalake.
+# Triggered manually:
+#   workflow_dispatch -> select branch
+# Workflow:
+#   - Set up environment and get short SHA 
+#   - Deploy GCP with Terraform
+#   - Bake Docker image and Dataflow template
+
+name: Manual - Create infrastructure with Terraform
+
+on:
+  workflow_dispatch:
+
+env:
+  TF_PLAN_FILE: terraform.tfplan
+
+defaults:
+  run:
+    working-directory: terraform/infra
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  prepare:
+    name: Prerequisites
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the head commit in a detached head state.
+      - name: Checkout the latest commit
+        uses: actions/checkout@v2
+
+      - name: Check branch and set environment
+        id: check_branch
+        run: |
+          echo "Running on branch ${{ github.ref }}"
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo '::set-output name=env_name::production'
+          elif [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
+            echo '::set-output name=env_name::develop'
+          fi
+
+      # Get commit short SHA.
+      - name: Get commit SHA
+        id: hash
+        run: echo "::set-output name=short_sha::$(git rev-parse --short HEAD)"
+
+    outputs:
+      env_name: ${{ steps.check_branch.outputs.env_name }}
+      short_sha: ${{ steps.hash.outputs.short_sha }}
+
+  deploy:
+    name: Deploy GCP with Terraform
+    runs-on: ubuntu-latest
+    needs: prepare
+    environment:
+      name: ${{ needs.prepare.outputs.env_name }}
+    env:
+      TF_VAR_project: ${{ secrets.GOOGLE_PROJECT_ID }}
+      TF_VAR_env: ${{ needs.prepare.outputs.env_name }}
+      TF_VAR_github_private_access_token: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
+      TF_VAR_publisher_project_id: ${{ secrets.PUBLISHER_PROJECT_ID }}
+
+    steps:
+      - name: Checkout the latest commit
+        uses: actions/checkout@v2
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          token_format: access_token
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform init
+        run: terraform init -backend-config=bucket=${{ secrets.GOOGLE_PROJECT_ID }}-state
+
+      - name: Terraform validate
+        run: terraform validate
+
+      - name: Terraform plan
+        run: terraform plan -out ${{ env.TF_PLAN_FILE }}
+
+      - name: Terraform apply
+        run: terraform apply ${{ env.TF_PLAN_FILE }}
+
+  bake:
+    name: Build the Dataflow template
+    runs-on: ubuntu-latest
+    needs: prepare
+    environment:
+      name: ${{ needs.prepare.outputs.env_name }}
+    env:
+      TEMPLATE_IMAGE: gcr.io/${{ secrets.GOOGLE_PROJECT_ID }}/takeoff-dl-ingest:${{ needs.prepare.outputs.short_sha }}
+      TEMPLATE_PATH: gs://${{ secrets.GOOGLE_PROJECT_ID }}-dataflow/templates/takeoff-dl-ingest-${{ needs.prepare.outputs.short_sha }}.json
+
+    defaults:
+      run:
+        working-directory: dataflow/template
+
+    steps:
+      - name: Checkout the latest commit
+        uses: actions/checkout@v2
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          token_format: access_token
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: ${{ secrets.GOOGLE_PROJECT_ID }}
+
+      - name: Build image
+        run: gcloud builds submit --tag ${{ env.TEMPLATE_IMAGE }} .
+
+      - name: Create a template
+        run: |
+          gcloud dataflow flex-template build ${{ env.TEMPLATE_PATH }} \
+            --image ${{ env.TEMPLATE_IMAGE }} \
+            --sdk-language PYTHON

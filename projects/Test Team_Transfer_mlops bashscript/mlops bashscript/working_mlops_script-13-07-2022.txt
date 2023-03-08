@@ -1,0 +1,286 @@
+#!/bin/sh
+echo "select DOCAI / VERTEX AI"
+read $user_input
+echo $user_input
+echo user_input
+case $user_input in
+    docai)
+        echo "you are inside ***DOCAI*** loop"
+        echo "Enter Project Number"
+        read $project_number
+        echo $project_number
+        echo "Enter Processor_id"
+        read $processor_id
+        echo $processor_id
+        echo "processor version id"
+        read $processor_Versions_ID
+        echo $processor_Versions_ID
+        echo "location"
+        read $location
+        echo $location
+        
+        if [ -z "$project_number" ] || [ -z "$processor_id" ] || [ -z "$processor_Versions_ID" ] || [ -z "$location" ];
+        then
+            echo "\One of your input is null"
+        else
+            #step-2  generating the gcloud auth token
+            #TOK=$(gcloud auth print-access-token | cut -c 1-173)
+            #echo $TOK
+            #TOKEN=`echo $TOK | sed 's/.\(.*\)/\0/' | sed 's/\(.*\)./\0/'`
+            TOKEN=$(gcloud auth print-access-token)
+            echo "display_TOKEN: $TOKEN"
+            endpoint="$location-documentai.googleapis.com"
+            host="https://$endpoint"
+            echo $host
+           #check for the default_id
+            $sudo apt-get update -y 
+            $sudo apt-get --yes install jq
+            sleep 1
+            echo "curl -X GET -H Authorization: Bearer ${TOKEN}  $host/uiv1beta3/projects/$project_number/locations/$location/processors/$processor_id"
+            output_default_id=$(curl -X GET -H "Authorization: Bearer ${TOKEN}"  "$host/uiv1beta3/projects/$project_number/locations/$location/processors/$processor_id" | jq -r '.defaultProcessorVersion')
+            read $output_default_id
+            #export $output_default_id
+            echo $output_default_id
+            echo "default_processor_id : $output_default_id"
+            a=$output_default_id
+            default_version="${a##*/}"
+            echo "current_default_version : $default_version"
+
+            if [ "${a##*/}" = $processor_Versions_ID ]; then
+                echo "String are equal"
+            else
+                #databasename='jq '.name' request.json'
+                url="$host/uiv1beta3/projects/$project_number/locations/us/processors/$processor_id/processorVersions/$processor_Versions_ID:deploy"
+                lro_name=$(curl -X POST $url -H "Authorization:Bearer ${TOKEN}"  | jq -r '.name') 
+                echo $lro_name
+                lro_url="$host/uiv1beta3/$lro_name"
+                state="RUNNING"
+                while  true;
+                do
+                    echo $lro_url
+                    curl -X GET -H "Authorization:Bearer ${TOKEN}"  $lro_url > output.json
+                    sleep 30
+                    state=$(grep -o '"state": "[^"]*' output.json | grep -o '[^"]*$')
+                    if [ "$state" = "SUCCEEDED" ];
+                    then
+                        echo $state
+                        echo "deployed the user processor version "            
+                        break
+                    elif [ "$state" = "FAILED" ];
+                    then
+                        echo "FAILED"
+                        break
+                    elif [ "$state" = "RUNNING" ];
+                    then
+                        continue
+                    fi
+                 done
+            fi
+            echo "making the version id as default"
+            #updating the bigquery table 
+            sleep 2
+            bq query --nouse_legacy_sql 'update icici_docai_bq.training_model_metrics' set  is_deployed=True where "processor_version_id='$processor_Versions_ID' and model_id='$processor_id'"
+            #make it as by default
+            sleep 2
+            file_name="request.json"
+            create_file () {
+                {
+                    echo "{\"defaultProcessorVersion\":\"projects/$project_number/locations/$location/processors/$processor_id/processorVersions/$processor_Versions_ID\"}"
+                } >"${file_name}"
+            }
+            create_file "bbbb"
+            sleep 5
+            curl -X POST -H "Authorization:Bearer ${TOKEN}" -H "Content-Type:application/json; charset=utf-8" -d @"${file_name}" "$host/uiv1beta3/projects/$project_number/locations/us/processors/$processor_id:setDefaultProcessorVersion"
+
+            #undeploying the previous version
+            echo "undeploying the previous version"
+            echo "previous_version : $default_version"
+            url="$host/uiv1beta3/projects/$project_number/locations/us/processors/$processor_id/processorVersions/$default_version:undeploy"
+                curl -X POST $url -H "Authorization:Bearer ${TOKEN}"
+            bq query --nouse_legacy_sql 'update icici_docai_bq.training_model_metrics' set  is_deployed=false where "processor_version_id='$default_version' and model_id='$processor_id'"
+            echo "\Inputs are not null"
+        fi
+        ;;
+
+    vertexai)
+        echo "you are inside ***VERTEX AI*** loop"
+        echo "Enter Model Name"
+        #read $model_name
+        echo $model_name
+        echo "Enter gcs path"
+        #read $gs_path
+        echo $gs_path
+        echo "Enter endpoint id"
+        #read $endpoint_id
+        echo $endpoint_id
+        echo "Enter endpoint name"
+        #read $endpoint_name
+        echo $endpoint_name
+        echo "Enter Project Number"
+        read $project_number
+        echo $project_number
+        echo "Enter Project ID"
+        read $project_id
+        echo $project_id
+        echo "Enter location"
+        read $location
+        echo $location
+        
+        if [ -z "$model_name" ] || [ -z "$gs_path" ] || [ -z "$project_number" ] || [ -z "$project_id" ] || [ -z "$location" ];
+        then
+            echo "\One of your input is null"
+        else
+            echo "\Inputs are not null"
+            TOKEN=$(gcloud auth print-access-token)
+            endpoint="$location-aiplatform.googleapis.com"
+            hostai="https://$endpoint"
+            # echo $project_number
+            #gcloud config set project $project_id
+            ##setp-1
+                #gcloud ai models upload  --project=$project_id  --region=$location  --display-name=$model_name --container-image-uri=us-docker.pkg.dev/vertex-ai/prediction/tf2-cpu.2-4:latest   --artifact-uri=$gs_path
+            file_name="modelupload.json"
+            create_file (){
+                {
+                    echo "{
+                            \"model\": {
+                                    \"displayName\": \"$model_name\",
+                                    \"containerSpec\": 
+                                    {
+                                        \"imageUri\": \"us-docker.pkg.dev/vertex-ai/prediction/tf2-cpu.2-4:latest\"
+                                    },
+                                    \"artifactUri\": \"$gs_path\"
+                                        }
+                        }"
+                }>"${file_name}"
+            }
+            create_file "modelupload"
+            cat modelupload.json
+            sleep 2
+            curl -X POST -H "Authorization: Bearer ${TOKEN}" -H "Content-Type:application/json; charset=utf-8" -d @modelupload.json  "$hostai/v1/projects/$project_number/locations/$location/models:upload"
+
+            ## step-2 
+                #gcloud ai models list --region=$location --filter=$model_name > modelid.txt
+                #model_id=$(sed -n 's/^MODEL_ID: \(.*\)/\1/p'< modelid.txt)
+                #echo $model_id
+            $sudo apt-get update -y 
+            $sudo apt-get --yes install jq
+            model=$(curl -X GET -H "Authorization: Bearer ${TOKEN}"  $hostai/v1/projects/$project_number/locations/$location/models?filter=displayName="$model_name" | jq -r '.models[0].name')
+            model_id="${model##*/}"
+            echo "modelid: $model_id"
+            export model_id=$model_id
+            # step -3 
+            state=$endpoint_name
+            if [ $state="$endpoint_name" ] && [ ! -z "$state" ];
+            #if [ -n "$state" ];
+            then
+                echo "PRINT STATE",$state
+                echo "print endpoint name",$endpoint_name
+                echo "endpoint_name loop"
+                #gcloud ai endpoints create   --region=$location   --display-name=$endpoint_name
+                #$sudo apt-get --yes install sed
+                endpoint=$(curl -X GET -H "Authorization: Bearer ${TOKEN}"  $hostai/v1/projects/$project_number/locations/$location/endpoints?filter=displayName="$endpoint_name" | jq -r '.endpoints[0].name')
+                new_endpoint_id="${endpoint##*/}"
+                echo "endpointid: $new_endpoint_id"
+                export new_endpoint_id=$new_endpoint_id
+                # gcloud ai endpoints list  --region=asia-south1   --filter=display_name=$endpoint_name > endpoint.txt
+                # new_endpoint_id=$(sed -n 's/^ENDPOINT_ID: \(.*\)/\1/p'< endpoint.txt)
+                # #new_endpoint_id=$(gcloud ai endpoints list --region=asia-south1 --filter="DISPLAY_NAME: $endpoint_name" | grep "ENDPOINT_ID" | cut -f2 -d: | sed 's/\s//')
+                # #new_endpoint_id=$(sed -n 's/^ENDPOINT_ID: \(.*\)/\1/p'< endpoint.txt)
+                # #echo "endpoint_id : $new_endpoint_id"
+                sleep 2
+        #deploy model 
+                    #gcloud ai endpoints deploy-model $new_endpoint_id --region=$location --model=$model_id --display-name=$model_name --machine-type=n1-standard-4   --min-replica-count=1   --max-replica-count=1   --traffic-split=0=100 
+                file_name="deploymodel.json"
+                create_file (){
+                    {
+                        echo "{
+                            \"deployedModel\": {
+                            \"model\": \"projects/$project_number/locations/$location/models/$model_id\",
+                            \"displayName\": \"$model_name\",
+                            \"dedicatedResources\": {
+                                \"machineSpec\": {
+                                \"machineType\": \"n1-standard-4\"
+                                                },
+                                \"minReplicaCount\": 1,
+                                \"maxReplicaCount\": 1
+                                                        }
+                                                },
+                            \"trafficSplit\": {
+                            \"0\": 100
+                            }
+                        }"
+                    }>"${file_name}"
+                
+                } 
+            create_file "deploymodel"
+            sleep 2
+            curl -X POST -H "Authorization: Bearer ${TOKEN}" -H "Content-Type:application/json; charset=utf-8" -d @deploymodel.json "$hostai/v1/projects/$project_number/locations/$location/endpoints/$new_endpoint_id:deployModel"
+            sleep 200
+            fi
+            state_id=$endpoint_id
+            if [ $state_id="$endpoint_id" ] && [ ! -z "$state_id" ];
+            then
+            #else
+                echo "state id",$state_id
+                echo "ENDPOINT ID IS",$endpoint_id
+                $sudo apt-get update -y 
+                $sudo apt-get --yes install jq
+                deployed_id=$(gcloud ai endpoints describe $endpoint_id --region=asia-south1 --format=json | jq -r '.deployedModels[0].id')  
+                echo $deployed_id
+                #export endpoint_id=$endpoint_id
+                echo $endpoint_id
+                #export location=$location
+                echo $location
+                #export model_name=$model_name
+                echo $model_name
+                echo $model_id
+                sleep 4
+                    #gcloud ai endpoints deploy-model $endpoint_id  --region=$location --model=$model_id  --deployed-model-id=$model_id --display-name=$model_name --machine-type=n1-standard-4 --min-replica-count=1 --max-replica-count=1 --traffic-split=0=100 
+                    #gcloud ai endpoints deploy-model 6404505698213822464  --region=asia-south1 --model=362399032514969600 --display-name=demo_model_16 --machine-type=n1-standard-4 --min-replica-count=1 --max-replica-count=1 --traffic-split=0=100
+                file_name="deploymodelcase.json"
+                create_file (){
+                    {
+                        echo "{
+                            \"deployedModel\": {
+                            \"model\": \"projects/$project_number/locations/$location/models/$model_id\",
+                            \"displayName\": \"$model_name\",
+                            \"dedicatedResources\": {
+                                \"machineSpec\": {
+                                \"machineType\": \"n1-standard-4\"
+                                                },
+                                \"minReplicaCount\": 1,
+                                \"maxReplicaCount\": 1
+                                                        }
+                                                },
+                            \"trafficSplit\": {
+                            \"0\": 100
+                            }
+                        }"
+                    }>"${file_name}"
+                
+                }
+                create_file "deploymodelcase"
+                cat deploymodelcase.json
+                sleep 2
+                curl -X POST -H "Authorization: Bearer ${TOKEN}" -H "Content-Type:application/json; charset=utf-8" -d @deploymodelcase.json   "$hostai/v1/projects/$project_number/locations/$location/endpoints/$endpoint_id:deployModel"
+                sleep 200
+                gcloud  ai endpoints undeploy-model $endpoint_id --region=$location --deployed-model-id=$deployed_id
+            fi
+            #sleep 4 
+            #bq query --nouse_legacy_sql 'update icici_docai_bq.training_model_metrics' set  is_deployed=True where "job_id='custom-od-train-pipeline-20220608100745'"
+        fi
+        ;;
+        
+              
+    *)
+        echo "User input invalid"
+        ;;
+esac
+
+        
+
+
+
+
+
+

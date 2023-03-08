@@ -1,0 +1,160 @@
+-- Flex template CI build instruction
+
+-- Build image
+export TEMPLATE_IMAGE="gcr.io/sandbox-20220126-r9ni9t/takeoff-dl-ingest:latest"
+gcloud builds submit --tag $TEMPLATE_IMAGE .
+
+
+-- Create flex template
+export TEMPLATE_PATH="gs://sb-takeoff-dl-dataflow-flex-templates/dataflow/templates/takeoff-dl-ingest.json"
+gcloud dataflow flex-template build $TEMPLATE_PATH \
+  --image "$TEMPLATE_IMAGE" \
+  --sdk-language "PYTHON"
+
+
+-- Trigger Dataflow job using Flex template
+export REGION="us-central1"
+export PROJECT="sandbox-20220126-r9ni9t"
+
+curl -X POST \
+  "https://dataflow.googleapis.com/v1b3/projects/$PROJECT/locations/$REGION/flexTemplates:launch" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+  -d '{
+    "launch_parameter": {
+      "jobName": "atb-flex-'$(date +%Y%m%d-%H%M%S)'",
+      "parameters": {
+        "clients_config": "{\"atb\": {\"dataset\": \"dl_atb\", \"sources\": {\"customer\": \"customer\", \"product\": \"product\"}}, \"silpo\": {\"dataset\": \"dl_silpo\", \"sources\": {\"customer\": \"customer\", \"product\": \"product\"}}}",
+        "subscriptions": "atb_customer-sub,atb_product-sub",
+        "backup_location": "gs://dl-backup-pubsub/atb"
+      },
+      "environment": {
+        "tempLocation": "gs://df-ingest-test-temp-bucket/",
+        "maxWorkers": 2,
+        "machineType": "n1-standard-2"
+      },
+      "containerSpecGcsPath": "'$TEMPLATE_PATH'"
+    }
+  }'
+
+
+------------------------------------------------------------------------------------------------
+-- clients_config
+{
+    "atb": {
+        "dataset": "dl_atb",
+        "sources": {
+            "customer": "customer",
+            "product": "product"
+        }
+    },
+    "silpo": {
+        "dataset": "dl_silpo",
+        "sources": {
+            "customer": "customer",
+            "product": "product"
+        }
+    }
+}
+
+
+------------------------------------------------------------------------------------------------
+-- BigQuery schema
+
+-- customer
+[
+    {"name": "__client_name", "type": "STRING", "mode": "REQUIRED"},
+    {"name": "__source_name", "type": "STRING", "mode": "REQUIRED"},
+    {"name": "__schema_version", "type": "STRING", "mode": "REQUIRED"},
+    {"name": "__event_timestamp", "type": "TIMESTAMP", "mode": "REQUIRED"},
+    {
+        "name": "payload",
+        "type": "RECORD",
+        "mode": "NULLABLE",
+        "fields": [
+            {"name": "first_name", "type": "STRING", "mode": "NULLABLE"},
+            {"name": "last_name", "type": "STRING", "mode": "NULLABLE"},
+            {
+                "name": "addresses",
+                "type": "RECORD",
+                "mode": "REPEATED",
+                "fields": [
+                    {"name": "city", "type": "STRING", "mode": "NULLABLE"},
+                    {"name": "zip", "type": "STRING", "mode": "NULLABLE"},
+                ],
+            },
+        ],
+    },
+]
+
+-- product
+[
+    {"name": "__client_name", "type": "STRING", "mode": "REQUIRED"},
+    {"name": "__source_name", "type": "STRING", "mode": "REQUIRED"},
+    {"name": "__schema_version", "type": "STRING", "mode": "REQUIRED"},
+    {"name": "__event_timestamp", "type": "TIMESTAMP", "mode": "REQUIRED"},
+    {
+        "name": "payload",
+        "type": "RECORD",
+        "mode": "NULLABLE",
+        "fields": [
+            {"name": "product_name", "type": "STRING", "mode": "NULLABLE"},
+            {"name": "category", "type": "STRING", "mode": "NULLABLE"},
+            {"name": "serial_num", "type": "STRING", "mode": "NULLABLE"},
+            {"name": "price", "type": "STRING", "mode": "NULLABLE"},
+            {
+                "name": "suppliers",
+                "type": "RECORD",
+                "mode": "REPEATED",
+                "fields": [
+                    {"name": "supplier_name", "type": "STRING", "mode": "NULLABLE"}
+                ]
+            }
+        ]
+    }
+]
+
+------------------------------------------------------------------------------------------------
+-- Pub/Sub
+
+-- customer schema
+syntax = "proto2";
+
+message MessageRecord {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  message PayloadRecord {
+    string first_name = 1;
+    required string last_name = 2;
+    message AddressRecord {
+      required string city = 1;
+      string zip = 2;
+    }
+    repeated AddressRecord addresses = 3;
+  }
+  required PayloadRecord payload = 5;
+}
+
+
+-- product schema
+syntax = "proto2";
+
+message MessageRecord {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  message PayloadRecord {
+    required string product_name = 1;
+    required string category = 2;
+    required string serial_num = 3;
+    required string price = 4;
+    message SupplierRecord {
+      required string supplier_name = 1;
+    }
+    repeated SupplierRecord suppliers = 5;
+  }
+  required PayloadRecord payload = 5;
+}

@@ -1,0 +1,183 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Type of the event",
+    "name": "action",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "Message attributes.",
+    "mode": "REQUIRED",
+    "name": "attributes",
+    "type": "STRING"
+  },
+  {
+    "description": "ID of the message",
+    "name": "id",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "Pub/Sub message id.",
+    "mode": "NULLABLE",
+    "name": "pubsub_message_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Timestamp when message was published to topic.",
+    "mode": "NULLABLE",
+    "name": "pubsub_publish_time",
+    "type": "STRING"
+  },
+  {
+    "description": "Type of the message",
+    "name": "recordid",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "records",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "fields": [
+      {
+        "description": "Type of that record",
+        "name": "recordid",
+        "type": "STRING",
+        "mode": "REQUIRED"
+      },
+      {
+        "description": "Name of the functional point",
+        "name": "master_fp_name",
+        "type": "STRING",
+        "mode": "REQUIRED"
+      },
+      {
+        "description": "Item number",
+        "name": "itemno",
+        "type": "STRING",
+        "mode": "REQUIRED"
+      },
+      {
+        "description": "Expiry date of the article",
+        "name": "expiry_date",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Stock information",
+        "name": "qty",
+        "type": "INTEGER",
+        "mode": "REQUIRED"
+      },
+      {
+        "description": "Reason codes for that message",
+        "name": "reason",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Stock correction: A for Add, S for Subtract",
+        "name": "adjustment_type",
+        "type": "STRING",
+        "mode": "REQUIRED"
+      },
+      {
+        "description": "Operator identification",
+        "name": "pin_code",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Actually used picking station",
+        "name": "locno_act",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Licenceplate of the container",
+        "name": "licenceplate",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Slot id of source container ",
+        "name": "metasector_id",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Slot id of source container (alternative)",
+        "name": "slot_id",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Time of data record creation (only sent for MOVE STOCK and MODSTOCK message; not for SUM STOCK message)",
+        "name": "timestamp",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Lot of the article",
+        "name": "lot_number",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  {
+    "description": "Subtype of the event",
+    "name": "subaction",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "Code to identify the sender, only used if there is more than one host communication with the KiSoft WCS. The default is 02",
+    "name": "systemid",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "BigQuery ingestion timestamp"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "PubSub publish timestamp"
+  },
+  {
+    "name": "__pubsub_message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "ID of the message assigned by PubSub"
+  }
+]

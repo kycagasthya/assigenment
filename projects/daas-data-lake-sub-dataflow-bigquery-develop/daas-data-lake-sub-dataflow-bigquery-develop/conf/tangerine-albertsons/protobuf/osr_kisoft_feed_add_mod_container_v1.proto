@@ -1,0 +1,28 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required string csv = 5;
+  required string action = 6;
+  required string sub_action = 7;
+  required string systemid = 8;
+  optional string record_id = 9;
+  required string event_id = 10;
+  required string wpono = 11;
+  required string cntno = 12;
+  required string licenceplate = 13;
+  required string marriagetime = 14;
+  required string status = 15;
+  required string error_id = 16;
+  required _file_record file = 17;
+  message _file_record {
+    required string data = 1;
+    required string location_id = 2;
+    required string name = 3;
+  }
+  required string type = 18;
+  required string cmd = 19;
+}

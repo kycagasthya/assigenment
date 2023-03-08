@@ -1,0 +1,23 @@
+name: CDE Training
+inputs:
+- {name: project_number, type: String}
+- {name: processor_id, type: String}
+- {name: version, type: String}
+- {name: location, type: String}
+- {name: check_status_after, type: String}
+outputs:
+- {name: version_name, type: Artifact}
+implementation:
+  container:
+    image: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cde-pipeline/training:latest
+    command: [python, /app/training_cde.py]
+    args: [
+      --executor_input, {executorInput: null},
+      --function_to_execute, cde_train,
+      --project-number, {inputValue: project_number},
+      --processor-id, {inputValue: processor_id},
+      --version, {inputValue: version},
+      --location, {inputValue: location},
+      --check-status-after, {inputValue: check_status_after},
+      --version-name, {outputPath: version_name}
+    ]

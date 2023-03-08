@@ -1,0 +1,79 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  optional string pubsub_message_id = 5;
+  optional string appVersion = 6;
+  optional string environmentTypeId = 7;
+  required string type = 8;
+  required string orderId = 9;
+  optional double orderPartId = 10;
+  optional string addressId = 11;
+  optional bool noAddress = 12;
+  optional int64 bagCount = 13;
+  optional int64 count = 14;
+  optional int64 totesCount = 15;
+  repeated _labels_record labels = 16;
+  message _labels_record {
+    required string zpl = 1;
+    optional string tote = 2;
+    optional string toteId = 3;
+  }
+  optional string retailerId = 17;
+  optional string stagingLocation = 18;
+  optional string email = 19;
+  optional string userId = 20;
+  optional _user_record user = 21;
+  message _user_record {
+    required string email = 1;
+    required string id = 2;
+  }
+  required int64 workTaskId = 22;
+  required string id = 23;
+  optional int64 stepNumber = 24;
+  optional string deviceId = 25;
+  optional string deviceTimestamp = 26;
+  optional string mfcId = 27;
+  optional double totalRequested = 28;
+  optional double totalPicked = 29;
+  optional int64 totalPickingActions = 30;
+  optional string pickingMode = 31;
+  optional _pick_record pick = 32;
+  message _pick_record {
+    optional string addressId = 1;
+    required string productId = 2;
+    required int64 quantity = 3;
+    repeated _pick_barcodes_record barcodes = 4;
+    message _pick_barcodes_record {
+      required string barcode = 1;
+      required string originalBarcode = 2;
+      required int64 checkDigit = 3;
+      required string identifier = 4;
+      optional bool isValid = 5;
+      required string prefix = 6;
+      required string type = 7;
+      optional _pick_barcodes_variableMeasure_record variableMeasure = 8;
+      message _pick_barcodes_variableMeasure_record {
+        required string barcode = 1;
+        required double value = 2;
+        required int64 checkDigit = 3;
+        required int64 middleCheckDigit = 4;
+        optional bool middleCheckDigitIsValid = 5;
+      }
+    }
+    optional int64 stepNumber = 5;
+    optional bool toteFirst = 6;
+    optional string toteId = 7;
+    optional double weight = 8;
+  }
+  repeated string toteBarcodes = 33;
+  optional bool isVariableMeasure = 34;
+  optional string variableMeasureType = 35;
+  optional bool isAggregatedWeight = 36;
+  optional bool isMultipleFulfillmentTaskActions = 37;
+  optional string pubsub_publish_time = 38;
+  optional string attributes = 39;
+}

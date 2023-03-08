@@ -1,0 +1,193 @@
+steps:
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/pythonimage:pylint
+    args:
+      - '-c'
+      - cp /app/pylint/.pylintrc . && pre-commit run --all-files
+    id: pylint
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker build --network=cloudbuild -t
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} -f ./Dockerfile . && 
+
+        docker image inspect ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} --format
+        '{{index .RepoTags 0}}@{{.Id}}' > /workspace/image-digest.txt
+    id: Build container image
+    entrypoint: /bin/bash
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - >
+        gcloud artifacts docker images scan
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+        --format='value(response.scan)' > /workspace/scan_id.txt &&
+
+        gcloud artifacts docker images list-vulnerabilities $(cat
+        /workspace/scan_id.txt)
+        --format='value(vulnerability.effectiveSeverity)' > severity.txt
+    id: Scan container image
+    entrypoint: /bin/bash
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - |
+        COUNT=$(grep -o $_SEVERITY severity.txt | wc -l ) 
+        echo "$$COUNT"
+        if (("$$COUNT" >= "$_SEVERITY_COUNT"));
+        then echo 'Failed vulnerability check' && exit 1; else exit 0; fi
+    id: Severity check
+    entrypoint: /bin/bash
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker tag ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+        ${_REPOSITORY_URL}/${_IMAGE}:latest &&
+
+        docker push ${_REPOSITORY_URL}/${_IMAGE}:latest
+    id: Tag Container image
+    entrypoint: /bin/bash
+timeout: 800s
+options:
+  workerPool: >-
+    projects/ibank-docai-devops/locations/asia-south1/workerPools/ibsi-docai-devops-cb-wp01
+  logging: CLOUD_LOGGING_ONLY
+  
+  
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cdceval', '-f', 'vertexai/testd', '.' ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cdceval']
+images: ['asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cdceval']
+options:
+logging: CLOUD_LOGGING_ONLY
+
+-------------------------
+
+
+steps:
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - |
+        gcloud secrets versions access 1 --secret="Vertex-AI-JSON" >> key.json
+        echo $key.json
+        cat key.json
+        gcloud auth activate-service-account --key-file=key.json
+    entrypoint: bash
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - '-t'
+      - >-
+        asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cdceval
+      - '-f'
+      - vertexai/docker
+      - .
+    entrypoint: bash
+options:
+  logging: CLOUD_LOGGING_ONLY
+  
+  
+    - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - |
+        gcloud secrets versions access 1 --secret="Vertex-AI-JSON" >> key.json
+        echo $key.json
+        cat key.json
+        gcloud auth activate-service-account --key-file=key.json
+    entrypoint: bash
+	
+	
+	gcrane cp asia-south1-docker.pkg.dev/ibank-development/ml-packages asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar
+-------------docker images---
+gcrane cp -r  asia-south1-docker.pkg.dev/ibank-development/mlops-training-pipeline/cde-pipeline/training \
+asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-python-ar
+---- python-----
+
+
+gcrane cp -r  asia-south1-python.pkg.dev/ibank-development/ml-packages \
+asia-south1-python.pkg.dev/ibank-docai-devops/ibci-docai-python-ar/py
+
+--------------------------------------------------------------------
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
+    args:
+      - '-c'
+      - >
+        gcloud auth print-access-token --impersonate-service-account
+        docai-devops-cloudbuild-sa@ibank-docai-devops.iam.gserviceaccount.com >
+        /workspace/access_token
+    entrypoint: sh
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker build -t asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cdcevaltest:latest
+        --build-arg TOKEN=$(cat /workspace/access_token) -f
+        ./vertexai/testd/Dockerfile . &&
+
+        docker push asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cdcevaltest
+    entrypoint: sh
+	------------------------------------------------------------------------------
+	
+	steps:
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
+    args:
+      - '-c'
+      - |
+        gcloud auth print-access-token --impersonate-service-account=
+        artifact-registry-reader@ibank-development.iam.gserviceaccount.com >
+        /workspace/access_token
+    entrypoint: sh
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker build -t
+        asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cdcevaltest:latest
+        --build-arg TOKEN=$(cat /workspace/access_token) -f
+        ./vertexai/testd/Dockerfile . &&
+
+        docker push
+        asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cdcevaltest
+    entrypoint: sh
+options:
+  logging: CLOUD_LOGGING_ONLY
+  
+  
+  
+auth_token=`gcloud auth print-access-token` && pip install -r require
+ments.txt  --index-url https://oauth2accesstoken:$auth_token@asia-south1-python.pkg.dev/ibank-development/mlops/simple/ --no-deps  
+------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------- pylint test ---------
+--------------------------------------------------------------------------------
+steps:
+  - name: python
+    args:
+      - install
+      - '-r'
+      - ./requirements.txt
+      - '--user'
+    entrypoint: pip3
+  - name: python
+    args:
+      - '-m'
+      - pylint
+      - test.py
+      - '--fail-under=7.0'
+    entrypoint: python
+  - name: bash
+    args:
+      - echo
+      - Success!
+options:
+  logging: CLOUD_LOGGING_ONLY
+-----------------------------------------------------
+
+
+

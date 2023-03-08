@@ -1,0 +1,96 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Address inside MFC from where item was supposed to be picked.",
+    "mode": "REQUIRED",
+    "name": "address",
+    "type": "STRING"
+  },
+  {
+    "description": "Quantity that was picked during the session. Always 0 for not picked event.",
+    "mode": "REQUIRED",
+    "name": "amount",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Message attributes.",
+    "mode": "REQUIRED",
+    "name": "attributes",
+    "type": "STRING"
+  },
+  {
+    "description": "List of actual barcodes that was scanned during picking session. Empty list for not picked event.",
+    "mode": "REPEATED",
+    "name": "barcodes",
+    "type": "STRING"
+  },
+  {
+    "description": "Product id that was picked.",
+    "mode": "REQUIRED",
+    "name": "item_id",
+    "type": "STRING"
+  },
+  {
+    "description": "MFC location id where picking session was performed.",
+    "mode": "REQUIRED",
+    "name": "location_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Id of the order for what item was picked.",
+    "mode": "REQUIRED",
+    "name": "order_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Pub/Sub message id.",
+    "mode": "NULLABLE",
+    "name": "pubsub_message_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Timestamp when message was published to topic.",
+    "mode": "NULLABLE",
+    "name": "pubsub_publish_time",
+    "type": "STRING"
+  },
+  {
+    "description": "Id of the tote to where item was picked. Can be `null` for not picked event.",
+    "mode": "NULLABLE",
+    "name": "tote_id",
+    "type": "STRING"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  }
+]

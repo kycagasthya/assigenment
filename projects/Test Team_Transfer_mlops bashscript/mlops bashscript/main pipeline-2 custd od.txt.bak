@@ -1,0 +1,232 @@
+
+--------------------custod-------------evaluation------------------------------------
+steps:
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/pycov/mlops:latest
+    args:
+      - '-c'
+      - >
+        pip install -r requirements.txt --extra-index-url
+        https://asia-south1-python.pkg.dev/ibank-docai-devops/ibci-docai-python-ar/simple
+        && source /app/variables.env &&  pytest tests/unit/src/mlops_pipeline
+        --cov=src/mlops_pipeline
+    id: Code Coverage
+    entrypoint: bash
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/docker:latest
+    args:
+      - '-c'
+      - >
+        docker build --network=cloudbuild -t
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} -f
+        ./src/mlops_pipeline/custom_od_model_pipeline/components/evaluation/Dockerfile
+        .
+    id: Build container image
+    entrypoint: /bin/bash
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/docker:latest
+    args:
+      - '-c'
+      - >
+        docker tag ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+        ${_REPOSITORY_URL}/${_IMAGE}:latest && 
+
+        docker push ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+    id: Tag Container image
+    entrypoint: /bin/bash
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/pycov/mlops:latest
+    args:
+      - '-c'
+      - |
+        ./cutod_pp_spec.sh
+    id: spec file genaration
+    entrypoint: /bin/bash
+timeout: 800s
+options:
+  workerPool: >-
+    projects/ibank-docai-devops/locations/asia-south1/workerPools/ibsi-docai-devops-cb-wp01
+  logging: CLOUD_LOGGING_ONLY
+ 
+ 
+--------------------------------custod pp------------------
+steps:
+  - name: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/pycov/mlops:latest
+    args:
+      - '-c'
+      - >
+        pip install -r requirements.txt --extra-index-url
+        https://asia-south1-python.pkg.dev/ibank-docai-devops/ibci-docai-mlopsod-ar/simple  
+        && source /app/variables.env &&  pytest tests/unit/src/mlops_pipeline
+        --cov=src/mlops_pipeline
+    id: Code Coverage
+    entrypoint: bash  
+  - name: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/docker:latest
+    args:
+      - '-c'
+      - >
+        docker build --network=cloudbuild -t
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} -f
+        ./src/mlops_pipeline/custom_od_model_pipeline/components/preprocess/Dockerfile .
+    id: Build container image
+    entrypoint: /bin/bash
+  - name: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/docker:latest
+    args:
+      - '-c'
+      - |
+        docker tag ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} ${_REPOSITORY_URL}/${_IMAGE}:latest && 
+        docker push ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+    id: Tag Container image
+    entrypoint: /bin/bash
+  - name: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/pycov/mlops:latest
+    args:
+      - '-c'
+      - |
+        ./cutod_pp_spec.sh
+    id: spec file genaration
+    entrypoint: /bin/bash
+timeout: 800s
+options:
+  workerPool: >-
+    projects/ibank-docai-devops/locations/asia-south1/workerPools/ibsi-docai-devops-cb-wp01
+  logging: CLOUD_LOGGING_ONLY
+ 
+ ---------------------------------export model-----------------------------
+steps:
+  - name: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/pycov/mlops:latest
+    args:
+      - '-c'
+      - >
+        pip install -r requirements.txt --extra-index-url
+        https://asia-south1-python.pkg.dev/ibank-docai-devops/ibci-docai-python-ar/simple
+        && source /app/variables.env &&  pytest tests/unit/src/mlops_pipeline
+        --cov=src/mlops_pipeline
+    id: Code Coverage
+    entrypoint: bash  
+  - name: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/docker:latest
+    args:
+      - '-c'
+      - >
+        docker build --network=cloudbuild -t
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} -f
+        ./src/mlops_pipeline/custom_od_model_pipeline/components/export_model/Dockerfile .
+    id: Build container image
+    entrypoint: /bin/bash
+  - name: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/docker:latest
+    args:
+      - '-c'
+      - |
+        docker tag ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} ${_REPOSITORY_URL}/${_IMAGE}:latest && 
+        docker push ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+    id: Tag Container image
+    entrypoint: /bin/bash
+  - name: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/pycov/mlops:latest
+    args:
+      - '-c'
+      - |
+        ./cutod_pp_spec.sh
+    id: spec file genaration
+    entrypoint: /bin/bash
+timeout: 800s
+options:
+  workerPool: >-
+    projects/ibank-docai-devops/locations/asia-south1/workerPools/ibsi-docai-devops-cb-wp01
+  logging: CLOUD_LOGGING_ONLY
+  
+  
+ ----------------------------------update to bq-----------------------------
+ 
+ steps:
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/pycov/mlops:latest
+    args:
+      - '-c'
+      - >
+        pip install -r requirements.txt --extra-index-url
+        https://asia-south1-python.pkg.dev/ibank-docai-devops/ibci-docai-python-ar/simple
+        && source /app/variables.env &&  pytest tests/unit/src/mlops_pipeline
+        --cov=src/mlops_pipeline
+    id: Code Coverage
+    entrypoint: bash
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/docker:latest
+    args:
+      - '-c'
+      - >
+        docker build --network=cloudbuild -t
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} -f
+        ./src/mlops_pipeline/custom_od_model_pipeline/components/updatetobq/Dockerfile .
+    id: Build container image
+    entrypoint: /bin/bash
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/docker:latest
+    args:
+      - '-c'
+      - >
+        docker tag ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+        ${_REPOSITORY_URL}/${_IMAGE}:latest && 
+
+        docker push ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+    id: Tag Container image
+    entrypoint: /bin/bash
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/pycov/mlops:latest
+    args:
+      - '-c'
+      - |
+        ./cutod_pp_spec.sh
+    id: spec file genaration
+    entrypoint: /bin/bash
+timeout: 800s
+options:
+  workerPool: >-
+    projects/ibank-docai-devops/locations/asia-south1/workerPools/ibsi-docai-devops-cb-wp01
+  logging: CLOUD_LOGGING_ONLY
+  
+----------------------------cust od ----------------------training----------------------------
+ steps:
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/pycov/mlops:latest
+    args:
+      - '-c'
+      - >
+        pip install -r requirements.txt --extra-index-url
+        https://asia-south1-python.pkg.dev/ibank-docai-devops/ibci-docai-python-ar/simple
+        && source /app/variables.env &&  pytest tests/unit/src/mlops_pipeline
+        --cov=src/mlops_pipeline
+    id: Code Coverage
+    entrypoint: bash
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/docker:latest
+    args:
+      - '-c'
+      - >
+        docker build --network=cloudbuild -t
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} -f
+        ./src/mlops_pipeline/custom_od_model_pipeline/components/train_eval/Dockerfile .
+    id: Build container image
+    entrypoint: /bin/bash
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/docker:latest
+    args:
+      - '-c'
+      - >
+        docker tag ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+        ${_REPOSITORY_URL}/${_IMAGE}:latest && 
+
+        docker push ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+    id: Tag Container image
+    entrypoint: /bin/bash
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/pycov/mlops:latest
+    args:
+      - '-c'
+      - |
+        ./cutod_pp_spec.sh
+    id: spec file genaration
+    entrypoint: /bin/bash
+timeout: 800s
+options:
+  workerPool: >-
+    projects/ibank-docai-devops/locations/asia-south1/workerPools/ibsi-docai-devops-cb-wp01
+  logging: CLOUD_LOGGING_ONLY

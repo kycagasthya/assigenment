@@ -1,0 +1,80 @@
+{
+    "schema_name": "isps_pick_work_item_reason_code",
+    "schema_description": "ISPS Pick work item reason code. Source: Postgres extract",
+    "schema_version": "v1",
+    "labels": {},
+    "fields": [
+      {
+        "description": "Client name.",
+        "mode": "REQUIRED",
+        "name": "__client_name",
+        "type": "STRING"
+      },
+      {
+        "description": "Source name.",
+        "mode": "REQUIRED",
+        "name": "__source_name",
+        "type": "STRING"
+      },
+      {
+        "description": "Schema version.",
+        "mode": "REQUIRED",
+        "name": "__schema_version",
+        "type": "STRING"
+      },
+      {
+        "description": "Event timestamp.",
+        "mode": "REQUIRED",
+        "name": "__event_timestamp",
+        "type": "TIMESTAMP"
+      },
+      {
+        "description": "ID of Reason Code",
+        "mode": "REQUIRED",
+        "name": "pick_work_item_reason_code_id",
+        "type": "INTEGER"
+      },
+      {
+        "description": "Short name of Reason Code",
+        "mode": "REQUIRED",
+        "name": "pick_work_item_reason_code_code",
+        "type": "STRING"
+      },
+      {
+        "description": "Name of Reason Code",
+        "mode": "REQUIRED",
+        "name": "pick_work_item_reason_code_name",
+        "type": "STRING"
+      },
+      {
+        "description": "Description of Reason Code",
+        "mode": "NULLABLE",
+        "name": "pick_work_item_reason_code_desc",
+        "type": "STRING"
+      },
+      {
+        "description": "Time when Reason Code was created",
+        "mode": "REQUIRED",
+        "name": "pick_work_item_reason_code_created_at",
+        "type": "TIMESTAMP"
+      },
+      {
+        "description": "User, created Reason Code",
+        "mode": "REQUIRED",
+        "name": "pick_work_item_reason_code_created_by",
+        "type": "STRING"
+      },
+      {
+        "description": "Time when Reason Code was updated (UTC)",
+        "mode": "REQUIRED",
+        "name": "pick_work_item_reason_code_last_modified_at",
+        "type": "TIMESTAMP"
+      },
+      {
+        "description": "User, updated Reason Code",
+        "mode": "REQUIRED",
+        "name": "pick_work_item_reason_code_last_modified_by",
+        "type": "STRING"
+      }
+    ]
+  }

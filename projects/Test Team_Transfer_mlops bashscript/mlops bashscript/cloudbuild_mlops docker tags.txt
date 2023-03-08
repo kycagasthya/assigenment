@@ -1,0 +1,73 @@
+------------cdc---------------------------------------
+asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cdc-pipeline/evaluation
+asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cdc-pipeline/training
+asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cdc-pipeline/updatetobq
+
+
+----------cde-------------------------------
+asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cde-pipeline/evaluation
+asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cde-pipeline/training
+asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cde-pipeline/updatetobq
+
+---------------custom/od -------------------
+asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/custom-od/evaluation
+asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/custom-od/model-export
+asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/custom-od/preprocessing
+asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/custom-od/train-eval
+asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/custom-od/updatetobq
+
+
+
+git tag -a cdc-ev1.0.1 5b156f5 -m "1.0.1"           ----------(.*)$------------
+--------------------------------------------------------------------
+
+git push && git tag -a cdc-tr1.0 210acac -m "1.0" && git push --tags
+
+f6d6f25 
+git push && git tag -a cdc-ev1.0 f6d6f25  -m "1.0" && git push --tags
+
+dc19c1b 4b48182 fe8779f
+git push && git tag -a cdc-utbq1.0.2 fe8779f -m "1.0.2" && git push --tags
+
+c69274c b9f649d
+git push && git tag -a cde-ev1.0.1 b9f649d -m "1.0.1" && git push --tags
+
+3dcdf4a 5039487 739dfa0
+git push && git tag -a cde-tr1.0.1 5039487 -m "1.0.1" && git push --tags
+
+e6db9f5 968f073
+git push && git tag -a cde-utbq1.0.2 968f073 -m "1.0.2" && git push --tags
+
+c4273ad
+git push && git tag -a cuod-ev1.0.1 c4273ad -m "1.0.1" && git push --tags
+ 
+ 2c13d1f
+git push && git tag -a cuod-exm1.0.1 c4273ad -m "1.0.1" && git push --tags
+
+e7605b4
+git push && git tag -a cuod-pp1.0.1 e7605b4 -m "1.0.1" && git push --tags
+
+^cuod-traev(.*)$
+
+git push && git tag -a cuod-traev1.0.1 3e5a6be -m "1.0.1" && git push --tags
+
+git push && git tag -a cuod-utbq1.0.1 474b359 -m "1.0.1" && git push --tags
+
+cdags-dev
+
+git push && git tag -a cdags-dev1.0.1 474b359 -m "1.0.1" && git push --tags
+
+49b9cbe
+
+git push && git tag -a cdags-uat1.0.2 c5fbb1b -m "1.0.2" && git push --tags
+
+----------------------------------------------------------------------------------------
+mddocai-dev(.*)$
+git push && git tag -a mddocai-dev1.0.1 c5fbb1b -m "1.0.1" && git push --tags
+mdvertexai-dev(.*)$
+git push && git tag -a mdvertexai-dev1.0.1 c5fbb1b -m "1.0.1" && git push --tags
+-----------------------------------------------------------------------------------
+mddocai-uat(.*)$
+git push && git tag -a mddocai-uat1.0.1 c5fbb1b -m "1.0.1" && git push --tags
+mdvertexai-uat(.*)$
+git push && git tag -a mdvertexai-uat1.0.1 c5fbb1b -m "1.0.1" && git push --tags

@@ -1,0 +1,56 @@
+{
+    "pipeline_config":{
+        "job_name": "dev-flex-tma-v4",
+        "num_workers": 1,
+        "max_num_workers": 200,
+        "machine_type": "n1-standard-4",
+        "disk_size_gb": 50,
+        "run_local": false,
+        "project_id": "ihc-qc-sandbox",
+        "region": "us-west1"
+    },
+
+    "environment":{
+        "network":"seagen-vpc",
+        "subnetwork":"regions/us-west1/subnetworks/oregon-subnet"
+    },
+    
+    "function_config":{
+        "open_svs":{
+            "extra_dwn": 1.5625
+        },
+		"predict_image_object_detection_sample":{
+			"endpoint_id": "3687366175374704640",
+			"location": "us-central1",
+			"api_endpoint": "us-central1-prediction-aiplatform.googleapis.com"
+		},
+		"visualization":{
+			"save_cores": true,
+                        "save_cores_rgb": true,
+                        "dy_frac": 0.5,
+                        "tl_find_mult": 5,
+                        "do_nms": true,
+                        "C_THRESH": 0.025
+		  
+		},
+        "plot_figure":{
+                        "opacity": 0.5,
+                        "cmap": "Spectral",
+                        "plot_row_boundaries": false,
+                        "plot_box_midline": false,
+                        "upper_cp": false,
+                        "save_as_rgb": true
+		},
+		"write_to_bigquery":{
+			"dataset_id": "seagen_quantiphi",
+			"table_id": "Dev_TMA_paths"
+		},
+        "Insert_Error_BQ":{"dataset_id": "seagen_quantiphi",
+                           "table_id": "Dev_TMA_Errors"
+                          },
+"load_biomax_csv":{
+                "table_id_biomax":"Dev_Biomax_Metadata"
+}
+}
+}
+

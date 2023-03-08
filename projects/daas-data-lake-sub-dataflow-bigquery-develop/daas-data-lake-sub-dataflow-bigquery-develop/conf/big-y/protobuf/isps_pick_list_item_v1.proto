@@ -1,0 +1,16 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required int64 pick_list_item_id = 5;
+  required int64 pick_list_id = 6;
+  required string pick_list_item_number = 7;
+  required string prod_pick_list_item = 8;
+  required int64 pick_list_item_qnty = 9;
+  optional double pick_list_item_weight = 10;
+  optional string pick_list_item_weight_unit_of_measure = 11;
+  optional string pick_list_item_created_at = 12;
+}

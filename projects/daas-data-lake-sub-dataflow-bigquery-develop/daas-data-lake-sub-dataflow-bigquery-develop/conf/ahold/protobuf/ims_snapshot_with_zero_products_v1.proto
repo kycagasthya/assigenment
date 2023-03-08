@@ -1,0 +1,16 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required string address = 5;
+  required string last_update_date = 6;
+  required string location_id = 7;
+  required string product_id = 8;
+  required int64 qty_allocated = 9;
+  required int64 qty_available = 10;
+  required int64 qty_reserved = 11;
+  required int64 qty_total = 12;
+}

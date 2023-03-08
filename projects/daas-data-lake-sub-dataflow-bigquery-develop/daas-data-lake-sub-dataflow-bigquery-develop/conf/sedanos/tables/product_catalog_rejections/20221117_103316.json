@@ -1,0 +1,98 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Environment were product catalog file was processed.",
+    "mode": "REQUIRED",
+    "name": "env",
+    "type": "STRING"
+  },
+  {
+    "description": "Product catalog file name.",
+    "mode": "REQUIRED",
+    "name": "file_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Run id of the product processing.",
+    "mode": "REQUIRED",
+    "name": "run_id",
+    "type": "STRING"
+  },
+  {
+    "description": "TOM product item id.",
+    "mode": "NULLABLE",
+    "name": "tom_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Retailer-specific store-id represents MFC as a store location.",
+    "mode": "NULLABLE",
+    "name": "mfc_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Item id represents unique line id in file.",
+    "mode": "NULLABLE",
+    "name": "item_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Event message.",
+    "mode": "REQUIRED",
+    "name": "message",
+    "type": "STRING"
+  },
+  {
+    "description": "Error type.",
+    "mode": "REQUIRED",
+    "name": "error_type",
+    "type": "STRING"
+  },
+  {
+    "description": "Component code_name which creates the event.",
+    "mode": "REQUIRED",
+    "name": "component",
+    "type": "STRING"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "BigQuery ingestion timestamp"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "PubSub publish timestamp"
+  },
+  {
+    "name": "__pubsub_message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "ID of the message assigned by PubSub"
+  }
+]

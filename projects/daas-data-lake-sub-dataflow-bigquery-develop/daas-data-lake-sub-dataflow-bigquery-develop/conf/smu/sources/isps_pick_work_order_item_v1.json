@@ -1,0 +1,122 @@
+{
+  "schema_name": "isps_pick_work_order_item",
+  "schema_description": "ISPS Pick Work Order Item. Source: Postgres extract",
+  "schema_version": "v1",
+  "labels": {},
+  "fields": [
+    {
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "ID of Work Order Item",
+      "mode": "REQUIRED",
+      "name": "pick_work_order_item_id",
+      "type": "INTEGER"
+    },
+    {
+      "description": "ID of Work Order Item Reason Code",
+      "mode": "NULLABLE",
+      "name": "pick_work_item_reason_code_id",
+      "type": "INTEGER"
+    },
+    {
+      "description": "ID of asked product (tom-id)",
+      "mode": "REQUIRED",
+      "name": "pick_prod_work_order_item",
+      "type": "STRING"
+    },
+    {
+      "description": "Location of Work Order Item in the store (can be null if it's unknown",
+      "mode": "NULLABLE",
+      "name": "pick_work_order_item_location",
+      "type": "STRING"
+    },
+    {
+      "description": "Time when Work Order Item was picked (UTC)",
+      "mode": "NULLABLE",
+      "name": "pick_work_order_item_performed_at",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "ID of connected Work Order",
+      "mode": "REQUIRED",
+      "name": "pick_work_order_id",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Business Code of the Work Order",
+      "mode": "REQUIRED",
+      "name": "pick_work_order_item_number",
+      "type": "STRING"
+    },
+    {
+      "description": "ID of connected Pick List Item",
+      "mode": "REQUIRED",
+      "name": "pick_list_item_id",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Quantity asked to be picked in the store",
+      "mode": "REQUIRED",
+      "name": "pick_work_order_item_asked_qnty",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Quantity picked in the store",
+      "mode": "NULLABLE",
+      "name": "pick_work_order_item_picked_qnty",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Weight asked to be picked in the store",
+      "mode": "NULLABLE",
+      "name": "pick_work_order_item_asked_weight",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Picked weight in the store",
+      "mode": "NULLABLE",
+      "name": "pick_work_order_item_picked_weight",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Unit of measure item to pick",
+      "mode": "NULLABLE",
+      "name": "pick_work_order_item_asked_weight_unit_of_measure",
+      "type": "STRING"
+    },
+    {
+      "description": "Time when Work Order Item was created (UTC)",
+      "mode": "NULLABLE",
+      "name": "pick_work_order_item_created_at",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Time when Work Order Item was last modified (UTC)",
+      "mode": "NULLABLE",
+      "name": "pick_work_order_item_last_modified_at",
+      "type": "TIMESTAMP"
+    }
+  ]
+}

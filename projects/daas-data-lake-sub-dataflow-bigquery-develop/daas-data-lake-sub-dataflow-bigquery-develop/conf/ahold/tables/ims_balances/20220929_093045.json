@@ -1,0 +1,70 @@
+[
+  {
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "address",
+    "type": "STRING",
+    "description": "Id of shelf that product is assigned to. OSR can be regarded as one single shelf (01K)"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "last_updated",
+    "type": "TIMESTAMP",
+    "description": "The last time at which quantity was changed"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "location_id",
+    "type": "STRING",
+    "description": "Location-id of the mfc"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "product_id",
+    "type": "STRING",
+    "description": "TOM product id"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "quantity",
+    "type": "INTEGER",
+    "description": "The amount of the product assigned to an address"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "BigQuery ingestion timestamp"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "PubSub publish timestamp"
+  },
+  {
+    "name": "__pubsub_message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "ID of the message assigned by PubSub"
+  }
+]

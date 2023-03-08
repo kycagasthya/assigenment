@@ -1,0 +1,23 @@
+name: OD preprocessing
+inputs:
+- {name: train_path, type: String}
+- {name: validation_path, type: String}
+- {name: label_path, type: String}
+- {name: data_pipeline_root, type: String}
+outputs:
+- {name: output_train, type: Dataset}
+- {name: output_validation, type: Dataset}
+implementation:
+  container:
+    image: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/custom-od/preprocessing:latest
+    command: [python, /app/preprocess.py]
+    args: [
+      --executor_input, {executorInput: null},
+      --function_to_execute, preprocess,
+      --train-path, {inputValue: train_path},
+      --validation-path, {inputValue: validation_path},
+      --label-path, {inputValue: label_path},
+      --data-pipeline-root, {inputValue: data_pipeline_root},
+      --output-train, {outputPath: output_train},
+      --output-validation, {outputPath: output_validation},
+    ]

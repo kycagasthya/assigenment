@@ -1,0 +1,84 @@
+{
+  "schema_name": "ims_order_reservation",
+  "schema_description": "List of reservation items for an order",
+  "schema_version": "v1",
+  "labels": {
+    "owner": "outbound"
+  },
+  "fields": [
+    {
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Message attributes.",
+      "mode": "REQUIRED",
+      "name": "attributes",
+      "type": "STRING"
+    },
+    {
+      "description": "Pub/Sub message id.",
+      "mode": "NULLABLE",
+      "name": "pubsub_message_id",
+      "type": "STRING"
+    },
+    {
+      "description": "The Takeoff system Order ID",
+      "mode": "REQUIRED",
+      "name": "order_id",
+      "type": "STRING"
+    },
+    {
+      "description": "The location ID used in the Takeoff system for this MFC",
+      "mode": "REQUIRED",
+      "name": "location_id",
+      "type": "STRING"
+    },
+    {
+      "description": "An array of maps with the following keys: product_id, quantity_unit_to_prepare, picking_address",
+      "name": "reservation",
+      "type": "RECORD",
+      "mode": "REPEATED",
+      "fields": [
+        {
+          "description": "Identifier of the product in Takeoff system",
+          "name": "product_id",
+          "type": "STRING",
+          "mode": "REQUIRED"
+        },
+        {
+          "description": "Qty that was actually reserved based on available inventory",
+          "name": "quantity_unit_to_prepare",
+          "type": "INTEGER",
+          "mode": "REQUIRED"
+        },
+        {
+          "description": "Address where reservation happened. Can be shelf id for Manual zone, 01K for OSR zone",
+          "name": "picking_address",
+          "type": "STRING",
+          "mode": "REQUIRED"
+        }
+      ]
+    }
+  ]
+}

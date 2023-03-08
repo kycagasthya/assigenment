@@ -1,0 +1,68 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __event_timestamp = 2;
+  required string __schema_version = 3;
+  required string __source_name = 4;
+  required string _id = 5;
+  optional string _rev = 6;
+  optional bool _deleted = 7;
+  optional string batch_order_id = 8;
+  repeated string boxes = 9;
+  optional bool boxes_retrieved = 10;
+  optional string boxes_retrieved_time = 11;
+  optional string client_id = 12;
+  optional string created = 13;
+  optional string delivery_contract_id = 14;
+  optional _delivery_contract_params_record delivery_contract_params = 15;
+  message _delivery_contract_params_record {
+    optional string contract_id = 1;
+    optional int64 delivery_price = 2;
+    optional string delivery_type = 3;
+    optional string end_time = 4;
+    optional string location_id = 5;
+    optional string route_id = 6;
+    optional string start_time = 7;
+    optional string timezone = 8;
+    optional string zone_id = 9;
+  }
+  repeated _items_record items = 16;
+  message _items_record {
+    optional int64 amount = 1;
+    optional string avg_weight_unit = 2;
+    optional double avg_weight_value = 3;
+    optional string comment = 4;
+    optional string id = 5;
+    optional bool is_alcoholic = 6;
+    optional bool is_beer = 7;
+    optional bool is_scalable = 8;
+    optional bool is_weight_variable = 9;
+    optional string name = 10;
+    optional int64 old_price = 11;
+    optional int64 price = 12;
+    optional string unit = 13;
+    optional int64 unit_count = 14;
+    optional int64 base_price = 15;
+    optional int64 unit_price = 16;
+    optional string requested_unit_of_measure = 17;
+    optional string requested_weight = 18;
+  }
+  optional string location_id = 17;
+  optional string packer_id = 18;
+  optional string picker_id = 19;
+  optional string picking_method = 20;
+  optional string route_number = 21;
+  optional string secret = 22;
+  optional bool sent_to_queue = 23;
+  optional string served = 24;
+  optional int64 shift_number = 25;
+  optional string stage_by_datetime = 26;
+  optional string stage_location = 27;
+  optional string status = 28;
+  optional int64 stop_number = 29;
+  optional int64 tax = 30;
+  optional bool totes_unstaged = 31;
+  optional string totes_unstaged_time = 32;
+  optional string totes_unstaging_error_reason = 33;
+}

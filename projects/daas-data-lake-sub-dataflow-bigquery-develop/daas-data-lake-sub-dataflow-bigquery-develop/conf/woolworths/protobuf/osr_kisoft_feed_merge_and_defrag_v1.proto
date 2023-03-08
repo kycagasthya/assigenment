@@ -1,0 +1,27 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required string created = 5;
+  required string recordid = 6;
+  required string event_id = 7;
+  required string master_fp_name = 8;
+  required string itemno = 9;
+  optional string expiry_date = 10;
+  required string reason = 11;
+  required string pin_code = 12;
+  required string locno_act = 13;
+  optional string message_created = 14;
+  required string mfc_id = 15;
+  repeated _records_record records = 16;
+  message _records_record {
+    required string adjustment_type = 1;
+    optional int64 qty = 2;
+    optional string licenceplate = 3;
+    optional int64 slot_id = 4;
+  }
+  required string csv = 17;
+}

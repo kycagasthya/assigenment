@@ -1,0 +1,86 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required string _id = 5;
+  optional string _rev = 6;
+  required string created = 7;
+  optional string last_modified_ts = 8;
+  required string licenceplate = 9;
+  required string mfc = 10;
+  optional _sections_record sections = 11;
+  message _sections_record {
+    optional _sections_section_1_record section_1 = 1;
+    message _sections_section_1_record {
+      required int64 amount = 1;
+      optional string expiration_date = 2;
+      optional string po = 3;
+      optional string product = 4;
+    }
+    optional _sections_section_2_record section_2 = 2;
+    message _sections_section_2_record {
+      required int64 amount = 1;
+      optional string expiration_date = 2;
+      optional string po = 3;
+      optional string product = 4;
+    }
+    optional _sections_section_3_record section_3 = 3;
+    message _sections_section_3_record {
+      required int64 amount = 1;
+      optional string expiration_date = 2;
+      optional string po = 3;
+      optional string product = 4;
+    }
+    optional _sections_section_4_record section_4 = 4;
+    message _sections_section_4_record {
+      required int64 amount = 1;
+      optional string expiration_date = 2;
+      optional string po = 3;
+      optional string product = 4;
+    }
+    optional _sections_section_5_record section_5 = 5;
+    message _sections_section_5_record {
+      required int64 amount = 1;
+      optional string expiration_date = 2;
+      optional string po = 3;
+      optional string product = 4;
+    }
+    optional _sections_section_6_record section_6 = 6;
+    message _sections_section_6_record {
+      required int64 amount = 1;
+      optional string expiration_date = 2;
+      optional string po = 3;
+      optional string product = 4;
+    }
+    optional _sections_section_7_record section_7 = 7;
+    message _sections_section_7_record {
+      required int64 amount = 1;
+      optional string expiration_date = 2;
+      optional string po = 3;
+      optional string product = 4;
+    }
+    optional _sections_section_8_record section_8 = 8;
+    message _sections_section_8_record {
+      required int64 amount = 1;
+      optional string expiration_date = 2;
+      optional string po = 3;
+      optional string product = 4;
+    }
+  }
+  required string status = 12;
+  required int64 tote_size = 13;
+  optional _user_record user = 14;
+  message _user_record {
+    optional string id = 1;
+    optional string name = 2;
+  }
+  optional _user_info_record user_info = 15;
+  message _user_info_record {
+    optional string user_id = 1;
+    optional string user_name = 2;
+  }
+  optional string wpno = 16;
+}

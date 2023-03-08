@@ -1,0 +1,99 @@
+********************************************************************
+--------------alpine ------------------------------
+steps:
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/alpine:latest
+    env:
+      - 'user_input=${_USER_INPUT}'
+      - 'project_id=${_PROJECT_ID}'
+      - 'project_number=${_PROJECT_NUMBER}'
+      - 'model_name=${_MODEL_NAME}'
+      - 'endpoint_name=${_ENDPOINT_NAME}'
+      - 'endpoint_id=${_ENDPOINT_ID}'
+      - 'gs_path=${_GS_PATH}'
+      - 'location=${_LOCATIONS}'
+      - 'processor_Versions_ID=${_PROCESSOR_VERSION_ID}'
+      - 'project_number=${_PROJECT_NUMBER}'
+      - 'processor_id=${_PROCESSOR_ID}'
+    args:
+      - '-c'
+      - >
+        cd vertexai && ls && envsubst < "final_bashscript_template.sh" >
+        "final_bashscript.sh"
+    id: generating the sh file
+    entrypoint: sh
+  - name: 'google/cloud-sdk:latest'
+    env:
+      - 'user_input=${_USER_INPUT}'
+      - 'project_id=${_PROJECT_ID}'
+      - 'project_number=${_PROJECT_NUMBER}'
+      - 'model_name=${_MODEL_NAME}'
+      - 'endpoint_name=${_ENDPOINT_NAME}'
+      - 'endpoint_id=${_ENDPOINT_ID}'
+      - 'gs_path=${_GS_PATH}'
+      - 'location=${_LOCATIONS}'
+      - 'processor_Versions_ID=${_PROCESSOR_VERSION_ID}'
+      - 'project_number=${_PROJECT_NUMBER}'
+      - 'processor_id=${_PROCESSOR_ID}'
+    args:
+      - '-c'
+      - |
+        cd vertexai 
+        gcloud auth list
+        apt -y install jq
+        chmod +x final_bashscript_template.sh
+        ./final_bashscript_template.sh
+    id: deployment of sh file
+    entrypoint: bash
+options:
+  logging: CLOUD_LOGGING_ONLY
+  
+----------------------------------------------------------------------
+********************************************************************
+---------------fooo---------------------------------------------------
+steps:
+  - name: 'google/cloud-sdk:latest'
+    env:
+      - 'user_input=${_USER_INPUT}'
+      - 'project_id=${_PROJECT_ID}'
+      - 'project_number=${_PROJECT_NUMBER}'
+      - 'model_name=${_MODEL_NAME}'
+      - 'endpoint_name=${_ENDPOINT_NAME}'
+      - 'endpoint_id=${_ENDPOINT_ID}'
+      - 'gs_path=${_GS_PATH}'
+      - 'location=${_LOCATIONS}'
+      - 'processor_Versions_ID=${_PROCESSOR_VERSION_ID}'
+      - 'project_number=${_PROJECT_NUMBER}'
+      - 'processor_id=${_PROCESSOR_ID}'
+    args:
+      - vertexai/final_bashscript.sh
+      - foo
+    entrypoint: bash
+options:
+  logging: CLOUD_LOGGING_ONLY
+  
+--------------------------------------------------------
+********************************************************************
+----------------auth--- list ---------------------------
+steps:
+  - name: 'google/cloud-sdk:latest'
+    args:
+      - gcloud auth list
+    entrypoint: bash
+options:
+  logging: CLOUD_LOGGING_ONLY
+---------------------------------------------------------- 
+******************************************************************** 
+----------auth token ----------------------------------
+steps:
+  - name: 'google/cloud-sdk:latest'
+    args:
+      - '-c'
+      - |
+        gcloud auth print-access-token >> filename.txt
+        cat filename.txt
+    entrypoint: bash
+options:
+  logging: CLOUD_LOGGING_ONLY
+-------------------------------------------------------------
+

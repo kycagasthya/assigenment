@@ -1,0 +1,37 @@
+name: Evaluation
+inputs:
+- {name: project_id, type: String}
+- {name: processor_id, type: String}
+- {name: location, type: String}
+- {name: version_name, type: Artifact}
+- {name: parser_keys, type: String}
+- {name: check_status_after, type: String}
+- {name: data_pipeline_root, type: String}
+- {name: ground_truth_csv, type: String}
+- {name: doc_type, type: String}
+- {name: retry_count, type: Integer}
+
+
+outputs:
+- {name: overall_metrics, type: Metrics}
+- {name: class_metrics, type: Metrics}
+implementation:
+  container:
+    image: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cde-pipeline/evaluation:latest
+    command: [python, /app/evaluate_cde.py]
+    args: [
+      --executor_input, {executorInput: null},
+      --function_to_execute, evaluation,
+      --project-id, {inputValue: project_id},
+      --processor-id, {inputValue: processor_id},
+      --location, {inputValue: location},
+      --version-name, {inputPath: version_name},
+      --parser-keys, {inputValue: parser_keys},
+      --data-pipeline-root, {inputValue: data_pipeline_root},
+      --check-status-after, {inputValue: check_status_after},
+      --retry-count, {inputValue: retry_count},      
+      --ground-truth-csv, {inputValue: ground_truth_csv},
+      --doc-type, {inputValue: doc_type},
+      --overall_metrics, {outputPath: overall_metrics},
+      --class_metrics, {outputPath: class_metrics},
+    ]

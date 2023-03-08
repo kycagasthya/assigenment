@@ -1,0 +1,53 @@
+name: Write Metrics to BQ
+inputs:
+- {name: model_display_name, type: String}
+- {name: job_id, type: String}
+- {name: processor_id, type: String} 
+- {name: data_pipeline_root, type: String}
+- {name: project_number, type: String}
+- {name: ref_code_file_version, type: String}
+- {name: doc_type, type: String} 
+- {name: region, type: String}
+- {name: timestamp, type: String}
+- {name: dataset_model, type: String}
+- {name: table_name_model, type: String}
+- {name: dataset_class, type: String}                        
+- {name: table_name_class, type: String} 
+- {name: project_id, type: String}
+- {name: pipeline_name, type: String}
+- {name: location, type: String}
+- {name: gcs_path_model, type: String}
+- {name: is_deployed, type: String}
+- {name: configuration, type: String}
+- {name: version_name, type: Artifact}
+- {name: overall_metrics, type: Metrics} 
+- {name: class_metrics, type: Metrics} 
+
+outputs:
+implementation:
+  container:
+    image: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cdc-pipeline/updatetobq:latest
+    command: [python, /app/update_to_bq_cdc.py]
+    args: [
+      --executor_input, {executorInput: null},
+      --function_to_execute, write_metrics_to_bq,
+      --model-display-name, {inputValue: model_display_name},
+      --job-id, {inputValue: job_id},
+      --processor-id, {inputValue: processor_id},
+      --data-pipeline-root, {inputValue: data_pipeline_root},
+      --project-number, {inputValue: project_number},
+      --ref-code-file-version, {inputValue: ref_code_file_version},
+      --doc-type, {inputValue: doc_type},
+      --project-id, {inputValue: project_id},
+      --region, {inputValue: region},
+      --timestamp, {inputValue: timestamp},
+      --pipeline-name, {inputValue: pipeline_name},
+      --is-deployed, {inputValue: is_deployed},
+      --location, {inputValue: location},
+      --gcs-path-model, {inputValue: gcs_path_model},
+      --configuration, {inputValue: configuration},
+      --dataset-model, {inputValue: dataset_model},
+      --table-name-model, {inputValue: table_name_model},
+      --dataset-class, {inputValue: dataset_class},
+      --table-name-class, {inputValue: table_name_class},
+   ]

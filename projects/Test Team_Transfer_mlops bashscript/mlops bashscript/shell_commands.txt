@@ -1,0 +1,26 @@
+ 33  pip download google-cloud-aiplatform
+   34  ls
+   35  cd ..
+   36  #twine upload --repository-url https://asia-south1
+   37  gcloud config set artifacts/repository python --project ibank-development
+   38  gcloud artifacts print-settings python
+   39  gcloud config set artifacts/location asia-south1
+   40  gcloud config set artifacts/repository python --project ibank-development
+   41  gcloud artifacts print-settings python
+   42  gcloud config set artifacts/repository ar-python-packages --project ibank-development
+   43  gcloud artifacts print-settings python
+   44  twine upload --repository-url https://asia-south1-python.pkg.dev/ibank-development/ar-python-packages/ dist/*
+   45  vi pip.conf
+   46  gsutil cp pip.conf gs://asia-south1-icici-docai-ia--517c7a58-bucket/config/pip/
+   47  cat pip.conf
+
+
+
+pip install twine keyrings.google-artifactregistry-auth
+mkdir dist
+cd dist
+pip download google-cloud-aiplatform
+
+gcloud config set artifacts/location asia-south1
+gcloud artifacts print-settings python
+twine upload --repository-url https://asia-south1-python.pkg.dev/ibank-development/ar-python-packages/ dist/*

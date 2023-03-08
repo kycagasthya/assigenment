@@ -1,0 +1,36 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required string action = 5;
+  required string recordid = 6;
+  required int64 actqty = 7;
+  required string cmd = 8;
+  required string cntno = 9;
+  required string csv = 10;
+  required int64 id = 11;
+  required _file_record file = 12;
+  message _file_record {
+    required string data = 1;
+    required string location_id = 2;
+    required string name = 3;
+  }
+  required string itemno = 13;
+  optional string locno_act = 14;
+  required string master_fp_name = 15;
+  optional string pin_code = 16;
+  optional string remark = 17;
+  required string status = 18;
+  required string error_id = 19;
+  required string sub_action = 20;
+  required string systemid = 21;
+  optional string record_id = 22;
+  required string event_id = 23;
+  required string type = 24;
+  required string wpono = 25;
+  required int64 ws_no = 26;
+  required string ws_type = 27;
+}

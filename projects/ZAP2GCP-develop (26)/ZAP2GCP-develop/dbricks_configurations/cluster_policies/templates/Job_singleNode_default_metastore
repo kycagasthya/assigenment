@@ -1,0 +1,63 @@
+{
+  "spark_conf.spark.databricks.cluster.profile": {
+    "type": "fixed",
+    "value": "singleNode",
+    "hidden": false
+  },
+  "spark_version": {
+    "type": "regex",
+    "pattern": "[8-9]\\.[1-9]+\\.x-scala.*"
+  },
+  "cluster_type": {
+    "type": "fixed",
+    "value": "job"
+  },
+  "instance_pool_id": {
+    "type": "forbidden",
+    "hidden": true
+  },
+  "node_type_id": {
+    "type": "allowlist",
+    "values": [
+      "n1-standard-4",
+      "n1-highmem-4",
+      "n1-standard-8",
+      "n1-highmem-8"
+    ],
+    "defaultValue": "n1-standard-4"
+  },
+  "driver_node_type_id": {
+    "type": "allowlist",
+    "values": [
+      "n1-standard-4",
+      "n1-highmem-4",
+      "n1-standard-8",
+      "n1-highmem-8"
+    ],
+    "defaultValue": "n1-standard-4"
+  },
+  "custom_tags.bu_owner_technical": {
+    "type": "fixed",
+    "value": "Person A"
+  },
+   "custom_tags.bu_owner_manager": {
+    "type": "fixed",
+    "value": "Person B"
+  },
+   "custom_tags.organization": {
+    "type": "fixed",
+    "value": "zebra"
+  },
+   "custom_tags.project_or_product": {
+    "type": "fixed",
+    "value": "project"
+  },
+   "custom_tags.cost_center": {
+    "type": "fixed",
+    "value": "1234"
+  },
+  "gcp_attributes.google_service_account": {
+    "type": "fixed",
+    "value": "sa-gke-gcs-object-admin@its-managed-dbx-zap-d.iam.gserviceaccount.com"
+  }
+}

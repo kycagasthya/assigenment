@@ -1,0 +1,16 @@
+# apache-beam[gcp]
+# click
+# google-cloud-storage
+# google-cloud-automl
+# Pillow
+# fsspec
+# gcsfs
+# numpy==1.18.5
+# pandas==1.1.4
+# pandas-gbq
+# pathlib
+# google-cloud-core==1.4.1
+# google-cloud-datastore==1.15.0
+# psutil
+# matplotlib
+# seaborn

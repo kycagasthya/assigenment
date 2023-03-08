@@ -1,0 +1,256 @@
+# Smart processing of all PRs to `develop` branch.
+# Once succeded, the PR is ready to be merged.
+# Triggered on pull request:
+#   base: `develop` <- head: `any`
+# Workflow:
+#   - Create list of clients 
+#   - If conf/** changed:
+#       \_Generate JSON and Protobuf for each client
+#         Commit files to head branch
+#   - Approve the PR
+
+name: CI/CD - Dev PR smart processing
+
+on:
+  pull_request:
+    branches:
+      - develop
+    paths-ignore:
+      - .github/**
+      - historical/**
+  workflow_dispatch:
+    inputs:
+      refresh-dataflow-config:
+        description: "Refresh Dataflow config files (force)"
+        required: true
+        type: boolean
+        default: false
+
+jobs:
+  prepare:
+    name: Prerequisites
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: scripts
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      # Checkout the head commit in a detached head state.
+      - name: Checkout the latest commit
+        uses: actions/checkout@v2
+
+      - name: Get specific deleted files
+        id: table_schemas
+        uses: tj-actions/changed-files@v18.3
+        with:
+          files: |
+            conf/**/tables/**
+            conf/**/protobuf/**
+
+      - name: Validate table schemas
+        if: steps.table_schemas.outputs.any_deleted == 'true'
+        run: |
+          echo 'Table/Topic schemas cannot be deleted. Revert these changes before continuing.'
+          exit 1
+
+      # Set up environment depending on the base branch.
+      - name: Check branch and set environment
+        id: check_branch
+        run: |
+          echo "Running on branch ${{ github.event.pull_request.base.ref }}"
+          if [[ "${{ github.event.pull_request.base.ref }}" == "main" ]]; then
+            echo '::set-output name=env_name::production'
+          elif [[ "${{ github.event.pull_request.base.ref }}" == "develop" ]]; then
+            echo '::set-output name=env_name::develop'
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      # Iterate over conf/** to combine a list of clients.
+      - name: Generate a list of clients
+        id: looper
+        run: |
+          python iterate_config.py ../conf
+
+    outputs:
+      folders: ${{ steps.looper.outputs.folders }}
+      env_name: ${{ steps.check_branch.outputs.env_name }}
+
+  generate_schema:
+    name: Generate BigQuery and Pub/Sub schemas
+    runs-on: ubuntu-latest
+    needs: prepare
+
+    defaults:
+      run:
+        working-directory: scripts
+
+    # Define a matrix of different job configurations.
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        folder: ${{fromJson(needs.prepare.outputs.folders)}}
+
+    steps:
+      # Checkout the head commit in a detached head state.
+      - name: Checkout the latest commit
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Get specific changed files
+        id: conf_files
+        uses: tj-actions/changed-files@v18.3
+        with:
+          files: |
+            conf/**
+            scripts/utils/common.py
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        if: steps.conf_files.outputs.any_changed == 'true'
+        with:
+          python-version: 3.9
+          cache: pip
+
+      - name: Install Python dependencies
+        if: steps.conf_files.outputs.any_changed == 'true'
+        run: pip install -r requirements.txt
+
+      # Checkout the branch the PR is coming from.
+      - name: Checkout the head branch
+        uses: actions/checkout@v2
+        if: steps.conf_files.outputs.any_changed == 'true'
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Generate JSON and .proto files
+        if: steps.conf_files.outputs.any_changed == 'true'
+        run: |
+          python generate_schema.py ${{ matrix.folder }}
+
+      - name: Add source files to datalow
+        if: (github.event_name == 'pull_request' && steps.conf_files.outputs.any_changed == 'true') || (github.event_name == 'workflow_dispatch' && github.event.inputs.refresh-dataflow-config == 'true')
+        run: |
+          cd ..
+          find conf -maxdepth 1 -mindepth 1 -type d | while IFS= read -r subdir; do
+             mkdir -p dataflow/template/takeoff/dl/ingest/sources/"$(basename $subdir)" &&
+             cp -r "$subdir"/sources dataflow/template/takeoff/dl/ingest/sources/"$(basename $subdir)"/ &&
+             touch dataflow/template/takeoff/dl/ingest/sources/"$(basename $subdir)"/__init__.py;
+          done
+          cd scripts
+
+      - name: Add and commit
+        uses: EndBug/add-and-commit@v9.0.1
+        if: steps.conf_files.outputs.any_changed == 'true'
+        with:
+          add: conf dataflow/template/takeoff/dl/ingest/sources
+          message: ${{ matrix.folder }} - commit from GitHub Actions (${{ github.workflow }}).
+          pull: --rebase --autostash
+
+  validate:
+    name: Run TF integration tests
+    runs-on: ubuntu-latest
+    needs: prepare
+    environment:
+      name: ${{ needs.prepare.outputs.env_name }}
+    env:
+      TF_VAR_project: ${{ secrets.GOOGLE_PROJECT_ID }}
+      TF_VAR_env: ${{ needs.prepare.outputs.env_name }}
+
+    defaults:
+      run:
+        working-directory: test/integration
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout the latest commit
+        uses: actions/checkout@v2
+
+      - name: Set up Golang
+        uses: actions/setup-go@v2
+        with:
+          go-version: '^1.17.6'
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          token_format: access_token
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: ${{ secrets.GOOGLE_PROJECT_ID }}
+
+      - name: Get the Dataflow image tag
+        id: get_image
+        run: |
+          echo "::set-output name=image_tag::$(gcloud container images list-tags gcr.io/${{ secrets.GOOGLE_PROJECT_ID }}/takeoff-dl-ingest \
+            --limit 1 --format 'value(tags)')"
+
+      - name: Validate YAML config
+        run: |
+          go test validate_config_test.go -v
+
+      - name: Validate prefly script
+        run: |
+          go test run_prefly_test.go -v
+
+      - name: Validate .tfvars JSON file
+        run: |
+          go test validate_tfvars_test.go -v
+
+      - name: Validate Terraform deployment
+        env:
+          TF_VAR_template_path: gs://${{ secrets.GOOGLE_PROJECT_ID }}-dataflow/templates/takeoff-dl-ingest-${{ steps.get_image.outputs.image_tag }}.json
+
+        run: |
+          rm -f ../../terraform/datalake/dataflow.tf && go test terraform_acme_test.go -v
+
+  approve:
+    # name: Label PR and provide approval
+    name: Provide PR approval
+    runs-on: ubuntu-latest
+    needs: [generate_schema, validate]
+    steps:
+      # - name: Add labels to pull request
+      #   uses: actions/labeler@v4
+      #   with:
+      #     repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # The PR to `develop` requires at least one approval. See branch protection rules for details.
+      - name: Approve pull request
+        uses: juliangruber/approve-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ github.event.pull_request.number }}
+
+  # automerge:
+  #   name: Merge the PR automatically
+  #   runs-on: ubuntu-latest
+  #   needs: approve
+  #   steps:
+  #     # Merge th PR with user private access token to trigger further CI workflows.
+  #     # This will make the resulting commit the same as if you made it yourself.
+  #     - name: Merge the pull request
+  #       uses: pascalgn/automerge-action@v0.14.3
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.PRIVATE_ACCESS_TOKEN }}

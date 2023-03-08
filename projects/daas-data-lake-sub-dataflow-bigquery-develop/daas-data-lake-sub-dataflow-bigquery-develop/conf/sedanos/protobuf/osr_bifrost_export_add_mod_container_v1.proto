@@ -1,0 +1,65 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required string action = 5;
+  required string attributes = 6;
+  required int64 id = 7;
+  optional string pubsub_message_id = 8;
+  optional string pubsub_publish_time = 9;
+  required string recordid = 10;
+  repeated _records_record records = 11;
+  message _records_record {
+    required string recordid = 1;
+    required string wpono = 2;
+    required int64 cntno = 3;
+    required int64 fp_cnt = 4;
+    required int64 status = 5;
+    optional int64 errorid = 6;
+    optional string marriagetime = 7;
+    optional string endtime = 8;
+    optional string licenceplate = 9;
+    optional int64 weight_act = 10;
+    optional string laststation = 11;
+    optional string remark = 12;
+    repeated _records_records_record records = 13;
+    message _records_records_record {
+      required string recordid = 1;
+      required string wpono = 2;
+      required int64 cntno = 3;
+      required string master_fp_name = 4;
+      required int64 ws_cnt = 5;
+      required int64 status = 6;
+      optional int64 errorid = 7;
+      optional string remark = 8;
+      repeated _records_records_records_record records = 9;
+      message _records_records_records_record {
+        required string recordid = 1;
+        required string wpono = 2;
+        required int64 cntno = 3;
+        required string master_fp_name = 4;
+        required int64 ws_no = 5;
+        required int64 status = 6;
+        optional int64 errorid = 7;
+        required string ws_type = 8;
+        required int64 actqty = 9;
+        optional string remark = 10;
+        optional string itemno = 11;
+        optional string pin_code = 12;
+        optional string locno_act = 13;
+        optional string expiry_date = 14;
+        optional string licenceplate = 15;
+        optional int64 metasector_id = 16;
+        optional int64 slot_id = 17;
+        optional string lot_number = 18;
+        optional int64 weight_act = 19;
+        optional int64 item_code = 20;
+      }
+    }
+  }
+  required string subaction = 12;
+  required string systemid = 13;
+}

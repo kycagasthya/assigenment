@@ -1,0 +1,160 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "This is a primary key used to identify TOM product-item.",
+    "mode": "REQUIRED",
+    "name": "tom_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Environment were prediction was called.",
+    "mode": "REQUIRED",
+    "name": "env",
+    "type": "STRING"
+  },
+  {
+    "description": "Takeoff-specific store-id represents MFC as a store location.",
+    "mode": "REQUIRED",
+    "name": "location_code_tom",
+    "type": "STRING"
+  },
+  {
+    "fields": [
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "description": "Product unit height.",
+                "mode": "NULLABLE",
+                "name": "height",
+                "type": "FLOAT"
+              },
+              {
+                "description": "Product unit width.",
+                "mode": "NULLABLE",
+                "name": "width",
+                "type": "FLOAT"
+              },
+              {
+                "description": "Product unit length.",
+                "mode": "NULLABLE",
+                "name": "length",
+                "type": "FLOAT"
+              },
+              {
+                "description": "Unit in which product item is weighted.",
+                "mode": "NULLABLE",
+                "name": "unit_of_measure",
+                "type": "STRING"
+              }
+            ],
+            "mode": "NULLABLE",
+            "name": "dimensions",
+            "type": "RECORD"
+          }
+        ],
+        "mode": "REQUIRED",
+        "name": "retail_item",
+        "type": "RECORD"
+      }
+    ],
+    "mode": "REQUIRED",
+    "name": "raw_product",
+    "type": "RECORD"
+  },
+  {
+    "description": "Array of the attributes determined as anomalous.",
+    "mode": "REPEATED",
+    "name": "anomalous_attributes",
+    "type": "STRING"
+  },
+  {
+    "fields": [
+      {
+        "description": "Predicted product unit height.",
+        "mode": "NULLABLE",
+        "name": "product_height",
+        "type": "FLOAT"
+      },
+      {
+        "description": "Predicted product unit width.",
+        "mode": "NULLABLE",
+        "name": "product_width",
+        "type": "FLOAT"
+      },
+      {
+        "description": "Predicted product unit length.",
+        "mode": "NULLABLE",
+        "name": "product_length",
+        "type": "FLOAT"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "prediction",
+    "type": "RECORD"
+  },
+  {
+    "description": "Run id of the product processing.",
+    "mode": "REQUIRED",
+    "name": "run_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Name of the retailer's file were product received.",
+    "mode": "REQUIRED",
+    "name": "file_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Timestamp of the prediction",
+    "mode": "REQUIRED",
+    "name": "date",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Array of the reasons",
+    "mode": "REPEATED",
+    "name": "reason",
+    "type": "STRING"
+  },
+  {
+    "description": "Array of the sub-reasons",
+    "mode": "REPEATED",
+    "name": "sub_reason",
+    "type": "STRING"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  }
+]

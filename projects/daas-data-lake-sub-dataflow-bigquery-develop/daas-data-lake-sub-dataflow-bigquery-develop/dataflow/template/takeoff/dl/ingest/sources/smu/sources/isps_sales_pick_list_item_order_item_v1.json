@@ -1,0 +1,80 @@
+{
+    "schema_name": "isps_sales_pick_list_item_order_item",
+    "schema_description": "ISPS Sales Pick List Item Order Item. Source: Postgres extract",
+    "schema_version": "v1",
+    "labels": {},
+    "fields": [
+      {
+        "description": "Client name.",
+        "mode": "REQUIRED",
+        "name": "__client_name",
+        "type": "STRING"
+      },
+      {
+        "description": "Source name.",
+        "mode": "REQUIRED",
+        "name": "__source_name",
+        "type": "STRING"
+      },
+      {
+        "description": "Schema version.",
+        "mode": "REQUIRED",
+        "name": "__schema_version",
+        "type": "STRING"
+      },
+      {
+        "description": "Event timestamp.",
+        "mode": "REQUIRED",
+        "name": "__event_timestamp",
+        "type": "TIMESTAMP"
+      },
+      {
+        "description": "ID of Sales Order Item link",
+        "mode": "REQUIRED",
+        "name": "sales_pick_list_item_order_item_id",
+        "type": "INTEGER"
+      },
+      {
+        "description": "ID of connected Pick List Item",
+        "mode": "REQUIRED",
+        "name": "pick_list_item_id",
+        "type": "INTEGER"
+      },
+      {
+        "description": "Name of Work Order Status",
+        "mode": "REQUIRED",
+        "name": "sales_order_number",
+        "type": "STRING"
+      },
+      {
+        "description": "Sales order item number",
+        "mode": "REQUIRED",
+        "name": "sales_order_item_number",
+        "type": "STRING"
+      },
+      {
+        "description": "Description of Work Order Status",
+        "mode": "REQUIRED",
+        "name": "sales_pick_list_item_order_item_created_at",
+        "type": "TIMESTAMP"
+      },
+      {
+        "description": "User, created Sales Order Item link",
+        "mode": "REQUIRED",
+        "name": "sales_pick_list_item_order_item_created_by",
+        "type": "STRING"
+      },
+      {
+        "description": "Time when Sales Order Item link was updated  (UTC)",
+        "mode": "REQUIRED",
+        "name": "sales_pick_list_item_order_item_last_modified_at",
+        "type": "TIMESTAMP"
+      },
+      {
+        "description": "User, updated Sales Order Item link",
+        "mode": "REQUIRED",
+        "name": "sales_pick_list_item_order_item_last_modified_by",
+        "type": "STRING"
+      }
+    ]
+  }

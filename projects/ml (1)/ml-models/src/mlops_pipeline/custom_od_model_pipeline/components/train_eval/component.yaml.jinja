@@ -1,0 +1,25 @@
+name: Train Eval
+inputs:
+- {name: pipeline_config_path, type: String}
+- {name: label_map_uri, type: String}
+- {name: pipeline_root, type: String}
+- {name: train_tfrecord, type: Dataset}
+- {name: val_tfrecord, type: Dataset}
+outputs:
+- {name: val_metrics, type: Metrics}
+- {name: best_checkpoint, type: Artifact}
+implementation:
+  container:
+    image: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/custom-od/train-eval:latest
+    command: [python, /home/tensorflow/models/train_eval.py]
+    args: [
+      --executor_input, {executorInput: null},
+      --function_to_execute, train_and_eval,
+      --pipeline-config-path, {inputValue: pipeline_config_path},
+      --label-map-uri, {inputValue: label_map_uri},
+      --pipeline-root, {inputValue: pipeline_root},
+      --train-tfrecord, {inputPath: train_tfrecord},
+      --val-tfrecord, {inputPath: val_tfrecord},
+      --val-metrics, {outputPath: val_metrics},
+      --best-checkpoint, {outputPath: best_checkpoint}
+    ]

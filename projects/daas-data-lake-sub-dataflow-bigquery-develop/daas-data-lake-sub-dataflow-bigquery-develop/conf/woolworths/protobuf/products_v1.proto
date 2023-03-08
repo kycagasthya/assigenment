@@ -1,0 +1,112 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  optional string __publish_timestamp = 5;
+  optional string __ingest_timestamp = 6;
+  optional string description = 7;
+  repeated string corp_ids = 8;
+  optional bool requires_expiration_date = 9;
+  required bool mfc_stop_buy = 10;
+  optional bool ecom_only_item = 11;
+  optional string primary_corp_id = 12;
+  repeated string ecom_ids = 13;
+  required string last_modified_ts = 14;
+  optional bool is_weight_variable_on_webcart = 15;
+  optional string preset_area = 16;
+  required int64 revision = 17;
+  required string name = 18;
+  repeated string temperature_zone = 19;
+  optional bool is_weight_variable_on_receipt = 20;
+  required string tom_id = 21;
+  optional bool is_weight_variable_on_po = 22;
+  optional string sleeping_area = 23;
+  required string item_type = 24;
+  required bool mfc_stop_fulfill = 25;
+  optional string location_code_retailer = 26;
+  optional string location_code_tom = 27;
+  repeated string barcodes = 28;
+  optional string image = 29;
+  optional int64 shelf_life = 30;
+  optional int64 min_remaining_shelf_life = 31;
+  required string created_ts = 32;
+  required _department_record department = 33;
+  message _department_record {
+    optional string id = 1;
+    optional string name = 2;
+  }
+  required _case_item_record case_item = 34;
+  message _case_item_record {
+    optional _case_item_weight_record weight = 1;
+    message _case_item_weight_record {
+      optional double weight = 1;
+      optional string unit_of_measure = 2;
+    }
+    optional _case_item_dimensions_record dimensions = 2;
+    message _case_item_dimensions_record {
+      optional double height = 1;
+      optional double width = 2;
+      optional double length = 3;
+      optional string unit_of_measure = 4;
+    }
+    optional int64 case_count = 3;
+  }
+  repeated _categories_hierarchy_record categories_hierarchy = 35;
+  message _categories_hierarchy_record {
+    optional string name = 1;
+    optional string id = 2;
+  }
+  repeated _supplier_info_record supplier_info = 36;
+  message _supplier_info_record {
+    optional string supplier_id = 1;
+    optional string supplier_name = 2;
+    optional string supplier_sub_account = 3;
+    optional string supplier_type = 4;
+    optional string supplier_product_id = 5;
+    optional bool supplier_keep_buy = 6;
+    optional int64 supplier_perform_cycle = 7;
+  }
+  optional _item_address_record item_address = 37;
+  message _item_address_record {
+    optional string area = 1;
+    optional string aisle = 2;
+    optional string bay = 3;
+    optional string shelf = 4;
+    optional string position = 5;
+  }
+  optional _feature_attributes_record feature_attributes = 38;
+  message _feature_attributes_record {
+    optional bool is_bulk = 1;
+    optional bool is_crushable = 2;
+    optional bool is_hazardous = 3;
+    optional bool is_heavy = 4;
+    optional bool is_raw = 5;
+    optional bool is_chemical = 6;
+    optional bool is_specific_chilled = 7;
+    optional bool is_glass_packaged = 8;
+    optional bool is_vertical = 9;
+    optional bool is_stackable = 10;
+    optional bool is_case_storage = 11;
+    optional bool is_requires_plastic_bag = 12;
+  }
+  required _retail_item_record retail_item = 39;
+  message _retail_item_record {
+    optional _retail_item_weight_record weight = 1;
+    message _retail_item_weight_record {
+      optional double weight = 1;
+      optional string unit_of_measure = 2;
+    }
+    optional _retail_item_dimensions_record dimensions = 2;
+    message _retail_item_dimensions_record {
+      optional double height = 1;
+      optional double width = 2;
+      optional double length = 3;
+      optional string unit_of_measure = 4;
+    }
+  }
+  repeated string linked_tom_ids = 40;
+  optional string extra = 41;
+}

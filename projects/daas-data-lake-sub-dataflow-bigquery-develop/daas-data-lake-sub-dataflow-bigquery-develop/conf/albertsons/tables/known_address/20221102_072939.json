@@ -1,0 +1,124 @@
+[
+  {
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "attributes",
+    "type": "STRING"
+  },
+  {
+    "description": "Unique per location_id",
+    "mode": "REQUIRED",
+    "name": "address",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "area",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "temp_zone",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "aisle",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "bay",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "stack",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "shelf",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "overstock",
+    "type": "BOOLEAN"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "dynamic",
+    "type": "BOOLEAN"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "pickable",
+    "type": "BOOLEAN"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "active",
+    "type": "BOOLEAN"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "pick_zone",
+    "type": "STRING"
+  },
+  {
+    "description": "Pub/Sub message id.",
+    "mode": "NULLABLE",
+    "name": "pubsub_message_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Timestamp when message was published to topic.",
+    "mode": "NULLABLE",
+    "name": "pubsub_publish_time",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "The unique id of the mfc in the context of the retailer.",
+    "mode": "NULLABLE",
+    "name": "mfc_id",
+    "type": "STRING"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "BigQuery ingestion timestamp"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "PubSub publish timestamp"
+  },
+  {
+    "name": "__pubsub_message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "ID of the message assigned by PubSub"
+  }
+]

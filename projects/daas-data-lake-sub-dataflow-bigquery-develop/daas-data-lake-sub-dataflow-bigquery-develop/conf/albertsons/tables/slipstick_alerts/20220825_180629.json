@@ -1,0 +1,84 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Indicates if alert was acknowledged by the user.",
+    "mode": "REQUIRED",
+    "name": "acked",
+    "type": "BOOLEAN"
+  },
+  {
+    "description": "Date and time of alert.",
+    "mode": "REQUIRED",
+    "name": "created",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "A unique auto-generated number.",
+    "mode": "REQUIRED",
+    "name": "id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Alert level. Posible values: warning, danger.",
+    "mode": "REQUIRED",
+    "name": "level",
+    "type": "STRING"
+  },
+  {
+    "description": "MFC location identifier.",
+    "mode": "REQUIRED",
+    "name": "location_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Number of totes remaining for decanting.",
+    "mode": "REQUIRED",
+    "name": "totes_remaining",
+    "type": "INTEGER"
+  },
+  {
+    "description": "User identifier.",
+    "mode": "REQUIRED",
+    "name": "user_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Name of zone inside OSR. Posible values: raw, refrigerated, ambient.",
+    "mode": "REQUIRED",
+    "name": "zone_name",
+    "type": "STRING"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  }
+]

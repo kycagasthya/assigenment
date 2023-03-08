@@ -1,0 +1,235 @@
+{
+  "schema_name": "oms_orders",
+  "schema_description": "Holds pre-processed order information (full order data before split)",
+  "schema_version": "v4",
+  "labels": {
+    "owner": "outbound",
+    "primary_key": "order_id"
+  },
+  "fields": [
+    {
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "order_id",
+        "type": "STRING",
+        "description": "Customer Order ID as in ID in Retailer's Order Management System (OMS). is always unique regardless of store id or date."
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "store_id",
+        "type": "STRING",
+        "description": "MFC location id"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "ecom_order_id",
+        "type": "STRING"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "service_type",
+        "type": "STRING"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "spoke_id",
+        "type": "STRING",
+        "description": "Spoke location id that customer wants to pickup from (in case of service-type=\"Pickup\") or Store ID that will be the starting point for the second-leg (last-mile) of delivery."
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "creation_datetime",
+        "type": "TIMESTAMP",
+        "description": "Order creation date and time. If skipped from the retailer then set up by current DateTime by default."
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "ecom_status",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "ecom_payment_status",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "shift_number",
+        "type": "INTEGER",
+        "description": "ID of a shift. Truck departure will be organized in shifts, therefore, MFC operations are revolving around these shifts. Should be sequential (growing monotonously) within a day (example valid: 55, 58, 61). Default: hour of the day."
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "route_number",
+        "type": "STRING",
+        "description": "Route ID for the first leg of logistics. In case of one-leg logistics this will be direct routes from MFC-stores to customer homes. In case of two-step logistics, this will routes from MFC-stores to pickup-stores or pickup-points. If blank, order is believed to be \"unrouted\". Can be updated up until order is loaded into truck. If \"Pickup\" this means order will be picked up in hub-store. Route-number can be changed only if it changes from \"UNROUTED\" to any other \"route-number\". Route-number cannot be changed if TO CO status is \"Picked\" or any other TO CO status which follows after \"Picked\"."
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "stop_number",
+        "type": "INTEGER",
+        "description": "Number of stop within requested route. Stops are sequential, i.e. 1 2 3 4. With prefix zeroes aligned to three digits long. For \"Pickup\" orders this will be sequential \"Pickup\" order number within a day within a store (no relation to staging addresses). Can be changed after cut-off time. Stop-number can be changed only if it changes from \"UNROUTED\" to any other \"stop-number\". Stop-number cannot be changed if TO CO status is \"Picked\" or any other TO CO status which follows after \"Picked\"."
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "total_shift_orders",
+        "type": "INTEGER",
+        "description": "Total number of customer orders known by retailer's system for a given shift (same as shift of current order) at the moment of request. Value must be >= 0."
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "total_route_orders",
+        "type": "INTEGER",
+        "description": "Total number of customer orders known by retailer's system for a given route within a given shift (same as route+shift of current order) at the moment of request. Value must be >= 0 and =< totalShiftOrders."
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "fulfillment_datetime",
+        "type": "TIMESTAMP",
+        "description": "The date-time when Order SHOULD be fulfilled"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "stage_by_datetime",
+        "type": "TIMESTAMP",
+        "description": "Date-time for when customer order should be staged. I.e. ready to be picked up by truck for the first leg. Stage-by-datetime is always in the interval of time between cut-off time and the beginning of the slot. Stage-by-datetime can be changed only before the cut-off time."
+    },
+    {
+        "mode": "REPEATED",
+        "name": "shipping_label",
+        "type": "STRING",
+        "description": "Shipping label lines, additional info should be presented on the shipping label."
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "splitted",
+        "type": "BOOLEAN",
+        "description": "Flag is Order is already split (moved to the Platform (Couch DB))"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "cutoff_datetime",
+        "type": "TIMESTAMP",
+        "description": "Date-time when picking of Order in the MFC SHOULD be startedValue is set after split. Before that - value is 'null]"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "corp_order_id",
+        "type": "STRING",
+        "description": "Retailer external order-id. Can be not unique"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "empty_tom_items",
+        "type": "BOOLEAN",
+        "description": "Definition if after split NO items can be picked in MFC (valid for cases when ALL items in the Order are OOS)"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "cancelled_by_client",
+        "type": "BOOLEAN",
+        "description": "Definition if Order was canceled by Retailer (Cancel Order API call was sent)"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "splitted_by_client",
+        "type": "BOOLEAN",
+        "description": "Definition if Order was split by Retailer (SPLIT Order API call was sent)"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "batch_created",
+        "type": "BOOLEAN"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "tote_estimate",
+        "type": "RECORD",
+        "description": "Estimation of Totes to be used for Order picking",
+        "fields": [
+          {
+            "mode": "NULLABLE",
+            "name": "ambient",
+            "type": "INTEGER"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "chilled",
+            "type": "INTEGER"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "frozen",
+            "type": "INTEGER"
+          }
+        ]
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "service_window_start",
+        "type": "TIMESTAMP",
+        "description": "The date-time when Order SHOULD be fulfilled"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "preliminary_batch_id",
+        "type": "STRING",
+        "description": "ID of connceted Preliminary batch (link to preliminary_batch table)"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "order_note",
+        "type": "STRING",
+        "description": "Note, provided by client"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "bypassed",
+        "type": "BOOLEAN"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "last_modified",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "status",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "stage_location",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "is_express",
+        "type": "BOOLEAN"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "deleted_at",
+        "type": "TIMESTAMP"
+    }
+  ]
+}

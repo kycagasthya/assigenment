@@ -1,0 +1,389 @@
+client_id: sedanos
+enabled: true
+dataset_id: datalake_sedanos
+sources:
+  amp_recommendation_decisions_v1:
+    source_name: amp_recommendation_decisions
+    schema_version: v1
+    configuration: amp_recommendation_decisions_v1.json
+    owner: team-waltz@takeoff.com
+  amp_recommendation_details_v1:
+    source_name: amp_recommendation_details
+    schema_version: v1
+    configuration: amp_recommendation_details_v1.json
+    owner: team-waltz@takeoff.com
+  couchdb_orders_v1:
+    source_name: couchdb_orders
+    schema_version: v1
+    configuration: couchdb_orders_v1.json
+    owner: team-mario@takeoff.com
+  couchdb_orders_v2:
+    source_name: couchdb_orders
+    schema_version: v2
+    configuration: couchdb_orders_v2.json
+    owner: team-mario@takeoff.com
+  sc_op_locations_v2:
+    source_name: sc_op_locations
+    schema_version: v2
+    configuration: sc_op_locations_v2.json
+    owner: team-mario@takeoff.com
+  distiller_products_v1:
+    source_name: distiller_products
+    schema_version: v1
+    configuration: distiller_products_v1.json
+    owner: team-mario@takeoff.com
+  distiller_products_v2:
+    source_name: distiller_products
+    schema_version: v2
+    configuration: distiller_products_v2.json
+    owner: team-mario@takeoff.com
+  ims_balances_v1:
+    source_name: ims_balances
+    schema_version: v1
+    configuration: ims_balances_v1.json
+    owner: team-mario@takeoff.com
+  ims_adjustment_history_v1:
+    source_name: ims_adjustment_history
+    schema_version: v1
+    configuration: ims_adjustment_history_v1.json
+    owner: team-mario@takeoff.com
+  oms_items_v1:
+    source_name: oms_items
+    schema_version: v1
+    configuration: oms_items_v1.json
+    owner: team-mario@takeoff.com
+  oms_lines_v1:
+    source_name: oms_lines
+    schema_version: v1
+    configuration: oms_lines_v1.json
+    owner: team-mario@takeoff.com
+  oms_orders_v1:
+    source_name: oms_orders
+    schema_version: v1
+    configuration: oms_orders_v1.json
+    owner: team-mario@takeoff.com
+  oms_orders_v2:
+    source_name: oms_orders
+    schema_version: v2
+    configuration: oms_orders_v2.json
+    owner: team-mario@takeoff.com
+  oms_orders_v3:
+    source_name: oms_orders
+    schema_version: v3
+    configuration: oms_orders_v3.json
+    owner: team-mario@takeoff.com
+  oms_orders_v4:
+    source_name: oms_orders
+    schema_version: v4
+    configuration: oms_orders_v4.json
+    owner: team-mario@takeoff.com
+  rint_products_v2:
+    source_name: rint_products
+    schema_version: v2
+    configuration: rint_products_v2.json
+    owner: team-mario@takeoff.com
+  decanting_product_v1:
+    source_name: decanting_product
+    schema_version: v1
+    configuration: decanting_product_v1.json
+    owner: team-mario@takeoff.com
+  decanting_task_v1:
+    source_name: decanting_task
+    schema_version: v1
+    configuration: decanting_task_v1.json
+    owner: team-mario@takeoff.com
+  decanting_event_v1:
+    source_name: decanting_event
+    schema_version: v1
+    configuration: decanting_event_v1.json
+    owner: team-mario@takeoff.com
+  decanting_operator_v1:
+    source_name: decanting_operator
+    schema_version: v1
+    configuration: decanting_operator_v1.json
+    owner: team-mario@takeoff.com
+  decanting_section_v1:
+    source_name: decanting_section
+    schema_version: v1
+    configuration: decanting_section_v1.json
+    owner: team-mario@takeoff.com
+  tom_osr_decanting_event_v1:
+    source_name: tom_osr_decanting_event
+    schema_version: v1
+    configuration: tom_osr_decanting_event_v1.json
+    owner: team-mario@takeoff.com
+  tom_osr_decanting_event_couchdb_v1:
+    source_name: tom_osr_decanting_event_couchdb
+    schema_version: v1
+    configuration: tom_osr_decanting_event_couchdb_v1.json
+    owner: team-mario@takeoff.com
+  ims_snapshot_with_zero_products_v1:
+    source_name: ims_snapshot_with_zero_products
+    schema_version: v1
+    configuration: ims_snapshot_with_zero_products_v1.json
+    owner: team-mario@takeoff.com
+  ims_snapshot_with_zero_products_bq_v1:
+    source_name: ims_snapshot_with_zero_products_bq
+    schema_version: v1
+    configuration: ims_snapshot_with_zero_products_bq_v1.json
+    owner: team-mario@takeoff.com
+  as_users_v1:
+    source_name: as_users
+    schema_version: v1
+    configuration: as_users_v1.json
+    owner: team-mario@takeoff.com
+  osr_kisoft_feed_add_mod_container_v2:
+    source_name: osr_kisoft_feed_add_mod_container
+    schema_version: v2
+    configuration: osr_kisoft_feed_add_mod_container_v2.json
+    owner: team-mario@takeoff.com
+  osr_kisoft_feed_merge_and_defrag_v1:
+    source_name: osr_kisoft_feed_merge_and_defrag
+    schema_version: v1
+    configuration: osr_kisoft_feed_merge_and_defrag_v1.json
+    owner: team-mario@takeoff.com
+  osr_kisoft_feed_mod_ws_v2:
+    source_name: osr_kisoft_feed_mod_ws
+    schema_version: v2
+    configuration: osr_kisoft_feed_mod_ws_v2.json
+    owner: team-mario@takeoff.com
+  known_address_v1:
+    source_name: known_address
+    schema_version: v1
+    configuration: known_address_v1.json
+    owner: team-mario@takeoff.com
+  pick_list_v1:
+    source_name: pick_list
+    schema_version: v1
+    configuration: pick_list_v1.json
+    owner: team-mario@takeoff.com
+  isps_pick_list_v1:
+    source_name: isps_pick_list
+    schema_version: v1
+    configuration: isps_pick_list_v1.json
+    owner: team-mario@takeoff.com
+  isps_pick_list_status_v1:
+    source_name: isps_pick_list_status
+    schema_version: v1
+    configuration: isps_pick_list_status_v1.json
+    owner: team-mario@takeoff.com
+  isps_pick_list_type_v1:
+    source_name: isps_pick_list_type
+    schema_version: v1
+    configuration: isps_pick_list_type_v1.json
+    owner: team-mario@takeoff.com
+  isps_pick_work_order_type_v1:
+    source_name: isps_pick_work_order_type
+    schema_version: v1
+    configuration: isps_pick_work_order_type_v1.json
+    owner: team-mario@takeoff.com
+  isps_pick_work_item_reason_code_v1:
+    source_name: isps_pick_work_item_reason_code
+    schema_version: v1
+    configuration: isps_pick_work_item_reason_code_v1.json
+    owner: team-mario@takeoff.com
+  isps_pick_work_order_v1:
+    source_name: isps_pick_work_order
+    schema_version: v1
+    configuration: isps_pick_work_order_v1.json
+    owner: team-mario@takeoff.com
+  isps_pick_zone_v1:
+    source_name: isps_pick_zone
+    schema_version: v1
+    configuration: isps_pick_zone_v1.json
+  isps_pick_work_order_status_v1:
+    source_name: isps_pick_work_order_status
+    schema_version: v1
+    configuration: isps_pick_work_order_status_v1.json
+    owner: team-mario@takeoff.com
+  isps_sales_pick_list_item_order_item_v1:
+    source_name: isps_sales_pick_list_item_order_item
+    schema_version: v1
+    configuration: isps_sales_pick_list_item_order_item_v1.json
+    owner: team-mario@takeoff.com
+  isps_pick_work_order_item_v1:
+    source_name: isps_pick_work_order_item
+    schema_version: v1
+    configuration: isps_pick_work_order_item_v1.json
+    owner: team-mario@takeoff.com
+  isps_pick_list_item_v1:
+    source_name: isps_pick_list_item
+    schema_version: v1
+    configuration: isps_pick_list_item_v1.json
+    owner: team-mario@takeoff.com
+  osr_bifrost_export_add_mod_container_v1:
+    source_name: osr_bifrost_export_add_mod_container
+    schema_version: v1
+    configuration: osr_bifrost_export_add_mod_container_v1.json
+    owner: team-mario@takeoff.com
+  osr_bifrost_export_mod_ws_v1:
+    source_name: osr_bifrost_export_mod_ws
+    schema_version: v1
+    configuration: osr_bifrost_export_mod_ws_v1.json
+    owner: team-mario@takeoff.com
+  osr_bifrost_export_move_stock_v1:
+    source_name: osr_bifrost_export_move_stock
+    schema_version: v1
+    configuration: osr_bifrost_export_move_stock_v1.json
+    owner: team-mario@takeoff.com
+  ims_order_reservation_v1:
+    source_name: ims_order_reservation
+    schema_version: v1
+    configuration: ims_order_reservation_v1.json
+    owner: team-mario@takeoff.com
+  order_fulfillment_task_actions_v1:
+    source_name: order_fulfillment_task_actions
+    schema_version: v1
+    configuration: order_fulfillment_task_actions_v1.json
+    owner: team-mario@takeoff.com
+  product_catalog_predictions_v1:
+    source_name: product_catalog_predictions
+    schema_version: v1
+    configuration: product_catalog_predictions_v1.json
+    owner: team-mario@takeoff.com
+  pickerman_manual_picking_session_decisions_v1:
+    source_name: pickerman_manual_picking_session_decisions
+    schema_version: v1
+    configuration: pickerman_manual_picking_session_decisions_v1.json
+    owner: team-mario@takeoff.com
+  product_catalog_rejections_v1:
+    source_name: product_catalog_rejections
+    schema_version: v1
+    configuration: product_catalog_rejections_v1.json
+    owner: team-mario@takeoff.com
+tables:
+  product_catalog_rejections:
+    table_id: product_catalog_rejections
+    protected: false
+  product_catalog_predictions:
+    table_id: product_catalog_predictions
+    protected: false
+  amp_recommendation_decisions:
+    table_id: amp_recommendation_decisions
+    protected: false
+  amp_recommendation_details:
+    table_id: amp_recommendation_details
+    protected: false
+  couchdb_orders:
+    table_id: couchdb_orders
+    protected: false
+  sc_op_locations:
+    table_id: sc_op_locations
+    protected: false
+  distiller_products:
+    table_id: distiller_products
+    protected: false
+  ims_balances:
+    table_id: ims_balances
+    protected: false
+  ims_adjustment_history:
+    table_id: ims_adjustment_history
+    protected: false
+  oms_items:
+    table_id: oms_items
+    protected: false
+  oms_lines:
+    table_id: oms_lines
+    protected: false
+  oms_orders:
+    table_id: oms_orders
+    protected: false
+  rint_products:
+    table_id: rint_products
+    protected: false
+  decanting_product:
+    table_id: decanting_product
+    protected: false
+  decanting_task:
+    table_id: decanting_task
+    protected: false
+  decanting_event:
+    table_id: decanting_event
+    protected: false
+  decanting_operator:
+    table_id: decanting_operator
+    protected: false
+  decanting_section:
+    table_id: decanting_section
+    protected: false
+  tom_osr_decanting_event:
+    table_id: tom_osr_decanting_event
+    protected: false
+  tom_osr_decanting_event_couchdb:
+    table_id: tom_osr_decanting_event_couchdb
+    protected: false
+  ims_snapshot_with_zero_products:
+    table_id: ims_snapshot_with_zero_products
+    protected: false
+  ims_snapshot_with_zero_products_bq:
+    table_id: ims_snapshot_with_zero_products_bq
+    protected: false
+  as_users:
+    table_id: as_users
+    protected: false
+  osr_kisoft_feed_add_mod_container:
+    table_id: osr_kisoft_feed_add_mod_container
+    protected: false
+  osr_kisoft_feed_merge_and_defrag:
+    table_id: osr_kisoft_feed_merge_and_defrag
+    protected: false
+  osr_kisoft_feed_mod_ws:
+    table_id: osr_kisoft_feed_mod_ws
+    protected: false
+  known_address:
+    table_id: known_address
+    protected: false
+  pick_list:
+    table_id: pick_list
+    protected: false
+  isps_pick_list:
+    table_id: isps_pick_list
+    protected: false
+  isps_pick_list_status:
+    table_id: isps_pick_list_status
+    protected: false
+  isps_pick_list_type:
+    table_id: isps_pick_list_type
+    protected: false
+  isps_pick_work_order_type:
+    table_id: isps_pick_work_order_type
+    protected: false
+  isps_pick_work_item_reason_code:
+    table_id: isps_pick_work_item_reason_code
+    protected: false
+  isps_pick_work_order:
+    table_id: isps_pick_work_order
+    protected: false
+  isps_pick_zone:
+    table_id: isps_pick_zone
+    protected: false
+  isps_pick_work_order_status:
+    table_id: isps_pick_work_order_status
+    protected: false
+  isps_sales_pick_list_item_order_item:
+    table_id: isps_sales_pick_list_item_order_item
+    protected: false
+  isps_pick_work_order_item:
+    table_id: isps_pick_work_order_item
+    protected: false
+  isps_pick_list_item:
+    table_id: isps_pick_list_item
+    protected: false
+  osr_bifrost_export_add_mod_container:
+    table_id: osr_bifrost_export_add_mod_container
+    protected: false
+  osr_bifrost_export_mod_ws:
+    table_id: osr_bifrost_export_mod_ws
+    protected: false
+  osr_bifrost_export_move_stock:
+    table_id: osr_bifrost_export_move_stock
+    protected: false
+  ims_order_reservation:
+    table_id: ims_order_reservation
+    protected: false
+  order_fulfillment_task_actions:
+    table_id: order_fulfillment_task_actions
+    protected: false
+  pickerman_manual_picking_session_decisions:
+    table_id: pickerman_manual_picking_session_decisions
+    protected: false

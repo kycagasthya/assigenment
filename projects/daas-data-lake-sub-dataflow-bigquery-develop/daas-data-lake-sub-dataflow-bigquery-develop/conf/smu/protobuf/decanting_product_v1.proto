@@ -1,0 +1,22 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required int64 id = 5;
+  required int64 task_id = 6;
+  required string product = 7;
+  required string description = 8;
+  required string date_received = 9;
+  required int64 qty = 10;
+  required int64 qty_decanted = 11;
+  required int64 units = 12;
+  optional string last_modified = 13;
+  optional string corp_id = 14;
+  optional string upc = 15;
+  optional string ship_unit_description = 16;
+  optional int64 quantity_in_ship_unit = 17;
+  optional int64 purchase_price = 18;
+}

@@ -1,0 +1,5 @@
+{
+"processor_id": "4fd83649b68e0f12",
+"gcs_uri": "gs://ibank-development-transfer-bucket/ML/evaluation/cdc/20220412133453/eval_df.csv",
+"version" : "latest"
+}

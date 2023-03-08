@@ -1,0 +1,18 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required string attributes = 5;
+  optional string pubsub_message_id = 6;
+  required string order_id = 7;
+  required string location_id = 8;
+  repeated _reservation_record reservation = 9;
+  message _reservation_record {
+    required string product_id = 1;
+    required int64 quantity_unit_to_prepare = 2;
+    required string picking_address = 3;
+  }
+}

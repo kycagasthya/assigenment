@@ -1,0 +1,14 @@
+
+inputs -----------
+	   
+ --model ==== (cde and cdc custom_od)
+  -pipeline_spe === 
+  
+-------------------------------------------
+-----------------for uat -----------
+bq query --nouse_legacy_sql --project_id=ibank-docai-uat 
+'update icici_docai_bq.training_model_metrics' 
+set  is_deployed=false 
+where "processor_version_id='84dcd9f309d55f7e' and model_id='124828ce3c36e5c7'"
+-----------------for dev-----------
+bq query --nouse_legacy_sql --project_id=ibank-development'update icici_docai_bq.training_model_metrics' set  is_deployed=true where "processor_version_id='df722ecbf083a7bd' and model_id='4fd83649b68e0f12'"

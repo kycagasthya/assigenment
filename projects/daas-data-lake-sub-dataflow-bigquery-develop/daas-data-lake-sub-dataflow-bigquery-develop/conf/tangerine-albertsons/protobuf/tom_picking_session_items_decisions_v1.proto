@@ -1,0 +1,26 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __event_timestamp = 2;
+  required string __schema_version = 3;
+  required string __source_name = 4;
+  required string _id = 5;
+  optional string _rev = 6;
+  required int64 amount = 7;
+  repeated string barcodes = 8;
+  required string created_time = 9;
+  optional bool done_with_address = 10;
+  required string item_id = 11;
+  optional int64 line_number = 12;
+  optional string lot_id = 13;
+  optional string picking_address = 14;
+  optional bool released_from_inventory = 15;
+  optional string serial = 16;
+  optional string session_id = 17;
+  repeated string tote_ids = 18;
+  required int64 type = 19;
+  optional string user_id = 20;
+  repeated double weights = 21;
+  optional string ws_number = 22;
+}

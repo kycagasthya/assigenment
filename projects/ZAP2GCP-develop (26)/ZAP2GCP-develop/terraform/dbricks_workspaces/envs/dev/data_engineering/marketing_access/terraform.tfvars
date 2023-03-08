@@ -1,0 +1,15 @@
+project_id         = "its-managed-dbx-zap-d"
+terraform_sa_email = "quantiphi-terraform-dev@za-global-service-accounts-p.iam.gserviceaccount.com"
+storage_bucket_labels = {
+  bu_owner_manager        = ""
+  bu_owner_technical      = ""
+  cost_center             = ""
+  project_or_product      = ""
+  security_agent_exempt   = ""
+  tier                    = ""
+  os_hostname             = ""
+  access_privileges       = ""
+  security_classification = ""
+  backup                  = ""
+  organization            = ""
+}

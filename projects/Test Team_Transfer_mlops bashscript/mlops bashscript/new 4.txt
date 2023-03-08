@@ -1,0 +1,64 @@
+steps:
+  - name: alpine
+    env:
+      - 'BASE_IMAGE=${_BASE_IMAGE}'
+    args:
+      - '-c'
+      - |
+        apk add gettext && envsubst < "./Dockerfile.tmp.yaml" > "./Dockerfile"
+    id: Change base image in Dockerfile
+    entrypoint: sh
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - '-t'
+      - >-
+        asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:${SHORT_SHA}
+      - .
+    id: Build container image
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker tag
+        asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:${SHORT_SHA}
+        asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:latest
+
+        docker push
+        asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:latest
+    id: Tag Image
+    entrypoint: /bin/sh
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - >-
+        asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:${SHORT_SHA}
+    id: Push new tagged container image to registry
+  - name: alpine
+    env:
+      - 'LIMIT_MEMORY=${_LIMIT_MEMORY}'
+      - 'REQUEST_MEMORY=${_REQUEST_MEMORY}'
+      - 'LIMIT_CPU=${_LIMIT_CPU}'
+      - 'REQUEST_CPU=${_REQUEST_CPU}'
+      - 'APP_NAME=${_APP_NAME}'
+      - 'WORKLOAD_IDENTITY_SA=${_WORKLOAD_IDENTITY_SA}'
+      - 'NAMESPACE=${_NAMESPACE}'
+    args:
+      - '-c'
+      - >
+        export
+        CONTAINER_IMG=asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:${SHORT_SHA}
+
+        apk add gettext && envsubst <
+        "./release/kubernetes-manifest.template.yaml" >
+        "./release/kubernetes-manifest.yaml"
+    id: Generate Manifest files for dev environment
+    entrypoint: sh
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - gsutil
+      - cp
+      - ./release/kubernetes-manifest.yaml
+      - 'gs://icici-docai-ia-gcs-customer-dev-batch/'
+    id: Copy Manifest
+---------------------------

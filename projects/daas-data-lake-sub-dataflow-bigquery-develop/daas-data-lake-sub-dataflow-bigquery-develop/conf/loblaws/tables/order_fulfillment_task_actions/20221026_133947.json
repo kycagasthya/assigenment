@@ -1,0 +1,396 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Source system Pub/Sub message id (use in case of pubsub2pubsub pattern)",
+    "mode": "NULLABLE",
+    "name": "pubsub_message_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Version of the Takeoff Mobile App instance which generated the action",
+    "mode": "NULLABLE",
+    "name": "appVersion",
+    "type": "STRING"
+  },
+  {
+    "description": "Environment type: dev, qai, uat, or prod",
+    "mode": "NULLABLE",
+    "name": "environmentTypeId",
+    "type": "STRING"
+  },
+  {
+    "description": "Code name of the event that created/altered order fulfillment like fulfillment.picking.itemPicked",
+    "mode": "REQUIRED",
+    "name": "type",
+    "type": "STRING"
+  },
+  {
+    "description": "The ID of the order ID associated with the action",
+    "mode": "REQUIRED",
+    "name": "orderId",
+    "type": "STRING"
+  },
+  {
+    "description": "Reserved for future use; currently always 0",
+    "mode": "NULLABLE",
+    "name": "orderPartId",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "addressId",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "noAddress",
+    "type": "BOOLEAN"
+  },
+  {
+    "description": "Intermediate count of the bags. This action is sent by the app every time the user changes the bag count during picking",
+    "mode": "NULLABLE",
+    "name": "bagCount",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Number of labels printed by the user",
+    "mode": "NULLABLE",
+    "name": "count",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Count of the totes. The count of the totes and the label array length will be the same if there are no issues",
+    "mode": "NULLABLE",
+    "name": "totesCount",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "REPEATED",
+    "name": "labels",
+    "type": "RECORD",
+    "description": "Array of the labels represented as ZPL strings",
+    "fields": [
+      {
+        "mode": "REQUIRED",
+        "name": "zpl",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "tote",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "toteId",
+        "type": "STRING"
+      }
+    ]
+  },
+  {
+    "description": "Retailer codename, e.g. alpha",
+    "mode": "NULLABLE",
+    "name": "retailerId",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "stagingLocation",
+    "type": "STRING"
+  },
+  {
+    "description": "Firebase registered email of the user that created this action",
+    "mode": "NULLABLE",
+    "name": "email",
+    "type": "STRING"
+  },
+  {
+    "description": "Firebase UID of the user that created this action",
+    "mode": "NULLABLE",
+    "name": "userId",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "user",
+    "type": "RECORD",
+    "description": "Identification data of the user that created the event",
+    "fields": [
+      {
+        "mode": "REQUIRED",
+        "name": "email",
+        "type": "STRING"
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "id",
+        "type": "STRING"
+      }
+    ]
+  },
+  {
+    "description": "Reserved for future use; currently always 0",
+    "mode": "REQUIRED",
+    "name": "workTaskId",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Unique identifier for the task action. It is composed of a random UUID concatenated with the orderID",
+    "mode": "REQUIRED",
+    "name": "id",
+    "type": "STRING"
+  },
+  {
+    "description": "Number representing the ordering of this step in the pick path. A 'step' is a product + address combination. The order of the steps is the same as in Pickerman Facade\u2019s asynchronous assignment response (/api/v1/queue/<mfcId>/orders/assign-async",
+    "mode": "NULLABLE",
+    "name": "stepNumber",
+    "type": "INTEGER"
+  },
+  {
+    "description": "MAC address of the device. Android controls access to the MAC address of the device via user permission; if this permission is not set, or the OS restricts this information for any reason, this field will contain the string takeoff-mobile",
+    "mode": "NULLABLE",
+    "name": "deviceId",
+    "type": "STRING"
+  },
+  {
+    "description": "Timestamp when the task action was created at the device. It is useful to understand the potential delays in the message",
+    "mode": "NULLABLE",
+    "name": "deviceTimestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "ID (TOM code) of the MFC. This value  is retrieved from the Service Catalog API",
+    "mode": "NULLABLE",
+    "name": "mfcId",
+    "type": "STRING"
+  },
+  {
+    "description": "Total number of units requested for this task",
+    "mode": "NULLABLE",
+    "name": "totalRequested",
+    "type": "FLOAT"
+  },
+  {
+    "description": "Total number of units picked for this task",
+    "mode": "NULLABLE",
+    "name": "totalPicked",
+    "type": "FLOAT"
+  },
+  {
+    "description": "Count of the fulfillment.picking.itemPicked actions that were created for the fulfillment task",
+    "mode": "NULLABLE",
+    "name": "totalPickingActions",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "pickingMode",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "pick",
+    "type": "RECORD",
+    "description": "Record of order fulfillment picking details that represents an individual item pick. An item in this context corresponds to each of the rows of the picking screen table",
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "addressId",
+        "type": "STRING",
+        "description": "Shelf address where this product was picked from"
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "productId",
+        "type": "STRING",
+        "description": "The identifier of item in takeoff system"
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "quantity",
+        "type": "INTEGER",
+        "description": "The picked quantity of the item"
+      },
+      {
+        "mode": "REPEATED",
+        "name": "barcodes",
+        "type": "RECORD",
+        "description": "List of picked barcodes as they were scanned (output) by barcode scanner of picking device",
+        "fields": [
+          {
+            "mode": "REQUIRED",
+            "name": "barcode",
+            "type": "STRING"
+          },
+          {
+            "mode": "REQUIRED",
+            "name": "originalBarcode",
+            "type": "STRING"
+          },
+          {
+            "mode": "REQUIRED",
+            "name": "checkDigit",
+            "type": "INTEGER"
+          },
+          {
+            "mode": "REQUIRED",
+            "name": "identifier",
+            "type": "STRING"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "isValid",
+            "type": "BOOLEAN"
+          },
+          {
+            "mode": "REQUIRED",
+            "name": "prefix",
+            "type": "STRING"
+          },
+          {
+            "mode": "REQUIRED",
+            "name": "type",
+            "type": "STRING"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "variableMeasure",
+            "type": "RECORD",
+            "fields": [
+              {
+                "mode": "REQUIRED",
+                "name": "barcode",
+                "type": "STRING"
+              },
+              {
+                "mode": "REQUIRED",
+                "name": "value",
+                "type": "FLOAT"
+              },
+              {
+                "mode": "REQUIRED",
+                "name": "checkDigit",
+                "type": "INTEGER"
+              },
+              {
+                "mode": "REQUIRED",
+                "name": "middleCheckDigit",
+                "type": "INTEGER"
+              },
+              {
+                "mode": "NULLABLE",
+                "name": "middleCheckDigitIsValid",
+                "type": "BOOLEAN"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "stepNumber",
+        "type": "INTEGER",
+        "description": "Number representing the ordering of this step in the pick path. A 'step' is a product + address combination"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "toteFirst",
+        "type": "BOOLEAN"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "toteId",
+        "type": "STRING",
+        "description": "ID of the tote into which the product was picked"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "weight",
+        "type": "FLOAT",
+        "description": "When variable weight applies, this will contain the weight of the item in the unit of measure described in the product catalog"
+      }
+    ]
+  },
+  {
+    "description": "An array of the IDs of the totes that were collected/staged",
+    "mode": "REPEATED",
+    "name": "toteBarcodes",
+    "type": "STRING"
+  },
+  {
+    "description": "This variable signals that the pick was of type variable measure. Note that we are sending this flag only if true, therefore it\u2019s absence (rather than the value false) will represent the opposite condition",
+    "mode": "NULLABLE",
+    "name": "isVariableMeasure",
+    "type": "BOOLEAN"
+  },
+  {
+    "description": "For variable measure picks only:  type of variable measure, weight or price. This is set by: NORMALIZATION_IS_WEIGHT variable in TSC config",
+    "mode": "NULLABLE",
+    "name": "variableMeasureType",
+    "type": "STRING"
+  },
+  {
+    "description": "Describes that this was picked with aggregated weight (multiple items and a single weight represented).",
+    "mode": "NULLABLE",
+    "name": "isAggregatedWeight",
+    "type": "BOOLEAN"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "isMultipleFulfillmentTaskActions",
+    "type": "BOOLEAN"
+  },
+  {
+    "description": "Timestamp when message was published to topic.",
+    "mode": "NULLABLE",
+    "name": "pubsub_publish_time",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Message attributes.",
+    "mode": "NULLABLE",
+    "name": "attributes",
+    "type": "STRING"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "BigQuery ingestion timestamp"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "PubSub publish timestamp"
+  },
+  {
+    "name": "__pubsub_message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "ID of the message assigned by PubSub"
+  }
+]

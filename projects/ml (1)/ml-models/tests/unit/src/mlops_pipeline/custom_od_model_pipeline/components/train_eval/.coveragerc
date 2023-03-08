@@ -1,0 +1,3 @@
+#.coveragerc
+[report]
+omit = src/mlops_pipeline/custom_od_model_pipeline/components/train_eval/src/model_lib_v2_mod.py

@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required int64 id = 5;
+  required string user_id = 6;
+  required string username = 7;
+  optional string serial = 8;
+  optional string last_modified = 9;
+}

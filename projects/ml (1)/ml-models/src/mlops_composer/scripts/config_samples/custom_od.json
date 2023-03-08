@@ -1,0 +1,5 @@
+{"train_path": "gs://asia-south1-docai-mlops-com-4dda2ed4-bucket/od-mlops/preprocess_data/scf_data/train", 
+"validation_path": "gs://asia-south1-docai-mlops-com-4dda2ed4-bucket/od-mlops/preprocess_data/scf_data/test", 
+"label_path": "gs://asia-south1-docai-mlops-com-4dda2ed4-bucket/od-mlops/preprocess_data/label_map_class.pbtxt", 
+"pipeline_config_path": "gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/mohsin/training/configs/ssd_mobilenet_v1_fpn_640x640_coco17_tpu-8-test_mk6.config"
+}

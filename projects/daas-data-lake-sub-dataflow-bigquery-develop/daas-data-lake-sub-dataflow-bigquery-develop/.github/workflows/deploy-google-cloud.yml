@@ -1,0 +1,241 @@
+# Uploading Dataflow artifacts and deploying Google Cloud with Terraform.
+# Triggered on push to either `main` or `develop`.
+# Workflow:
+#   - Set up environment, create list of clients and get short SHA
+#   - If detaflow/** changed:
+#       \_Build Docker image
+#         Create Dataflow template
+#         Notify in Slack
+#   - Deploy GCP with Terraform
+
+name: CI/CD - GCP smart deployment
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - conf/**
+      - dataflow/**
+      - terraform/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  prepare:
+    name: Prerequisites
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: scripts
+
+    steps:
+      # Checkout the head commit in a detached head state.
+      - name: Checkout the latest commit
+        uses: actions/checkout@v2
+
+      # Set up environment depending on the base branch.
+      - name: Check branch and set environment
+        id: check_branch
+        run: |
+          echo "Running on branch ${{ github.ref }}"
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo '::set-output name=env_name::production'
+          elif [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
+            echo '::set-output name=env_name::develop'
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate a list of clients
+        id: looper
+        run: |
+          python iterate_config.py ../conf
+
+      # Get commit short SHA.
+      - name: Get commit SHA
+        id: hash
+        run: echo "::set-output name=short_sha::$(git rev-parse --short HEAD)"
+
+    outputs:
+      folders: ${{ steps.looper.outputs.folders }}
+      env_name: ${{ steps.check_branch.outputs.env_name }}
+      short_sha: ${{ steps.hash.outputs.short_sha }}
+
+  bake:
+    name: Build the Dataflow flex template
+    runs-on: ubuntu-latest
+    needs: prepare
+    environment:
+      name: ${{ needs.prepare.outputs.env_name }}
+    env:
+      TEMPLATE_IMAGE: gcr.io/${{ secrets.GOOGLE_PROJECT_ID }}/takeoff-dl-ingest:${{ needs.prepare.outputs.short_sha }}
+      TEMPLATE_PATH: gs://${{ secrets.GOOGLE_PROJECT_ID }}-dataflow/templates/takeoff-dl-ingest-${{ needs.prepare.outputs.short_sha }}.json
+
+    defaults:
+      run:
+        working-directory: dataflow/template
+
+    steps:
+      - name: Checkout the latest commit
+        uses: actions/checkout@v2
+
+      - name: Get specific changed files
+        id: dataflow_files
+        uses: tj-actions/changed-files@v18.3
+        with:
+          files: |
+            dataflow/**
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        if: steps.dataflow_files.outputs.any_changed == 'true'
+        with:
+          token_format: access_token
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+        if: steps.dataflow_files.outputs.any_changed == 'true'
+        with:
+          project_id: ${{ secrets.GOOGLE_PROJECT_ID }}
+
+      - name: Build image
+        if: steps.dataflow_files.outputs.any_changed == 'true'
+        run: gcloud builds submit --tag ${{ env.TEMPLATE_IMAGE }} .
+
+      - name: Create a template
+        if: steps.dataflow_files.outputs.any_changed == 'true'
+        run: |
+          gcloud dataflow flex-template build ${{ env.TEMPLATE_PATH }} \
+            --image ${{ env.TEMPLATE_IMAGE }} \
+            --sdk-language PYTHON
+
+      - name: Send custom JSON data to Slack workflow
+        uses: slackapi/slack-github-action@v1.18.0
+        if: steps.dataflow_files.outputs.any_changed == 'true'
+        with:
+          payload: |
+            {
+              "text": "GitHub Action job result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "GitHub Action job result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  deploy:
+    name: Deploy GCP with Terraform
+    runs-on: ubuntu-latest
+    needs: [prepare, bake]
+    environment:
+      name: ${{ needs.prepare.outputs.env_name }}
+    env:
+      TF_VAR_project: ${{ secrets.GOOGLE_PROJECT_ID }}
+      TF_VAR_env: ${{ needs.prepare.outputs.env_name }}
+      TF_VARS_FILE: terraform.auto.tfvars.json
+      TF_PLAN_FILE: terraform.tfplan
+
+    defaults:
+      run:
+        working-directory: terraform/datalake
+
+    strategy:
+      fail-fast: false
+      matrix:
+        folder: ${{ fromJson(needs.prepare.outputs.folders) }}
+
+    steps:
+      - name: Checkout the latest commit
+        uses: actions/checkout@v2
+
+      # Check, if Dataflow specific files changed.
+      # These files can cause the compatibility check to fail.
+      # See https://cloud.google.com/dataflow/docs/guides/updating-a-pipeline#CCheck for details. 
+      - name: Get specific changed files
+        id: compat_check
+        uses: tj-actions/changed-files@v18.3
+        with:
+          files: |
+            conf/${{ matrix.folder }}/**
+            dataflow/**
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          token_format: access_token
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: ${{ secrets.GOOGLE_PROJECT_ID }}
+
+      - name: Get the Dataflow image tag
+        id: get_image
+        run: |
+          echo "::set-output name=image_tag::$(gcloud container images list-tags gcr.io/${{ secrets.GOOGLE_PROJECT_ID }}/takeoff-dl-ingest \
+            --limit 1 --format 'value(tags)')"
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r ../../scripts/requirements.txt
+
+      - name: Generate .tfvars from the client config
+        run: |
+          python ../../scripts/prefly.py ${{ matrix.folder }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform init
+        run: terraform init -backend-config=bucket=${{ secrets.GOOGLE_PROJECT_ID }}-state
+
+      - name: Create a workspace
+        run: terraform workspace new ${{ matrix.folder }} || terraform workspace select ${{ matrix.folder }}
+
+      - name: Terraform validate
+        run: terraform validate
+
+      # Replace Dataflow resource if related files changed.
+      # The job must be drained gracefully.
+      - name: Terraform plan (Dataflow replace)
+        if: steps.compat_check.outputs.any_changed == 'true'
+        env:
+          TF_VAR_template_path: gs://${{ secrets.GOOGLE_PROJECT_ID }}-dataflow/templates/takeoff-dl-ingest-${{ steps.get_image.outputs.image_tag }}.json
+        run: terraform plan -var-file=${{ env.TF_VARS_FILE }} -out ${{ env.TF_PLAN_FILE }} -replace "google_dataflow_flex_template_job.df_job"
+
+      - name: Terraform plan
+        if: steps.compat_check.outputs.any_changed == 'false'
+        env:
+          TF_VAR_template_path: gs://${{ secrets.GOOGLE_PROJECT_ID }}-dataflow/templates/takeoff-dl-ingest-${{ steps.get_image.outputs.image_tag }}.json
+        run: terraform plan -var-file=${{ env.TF_VARS_FILE }} -out ${{ env.TF_PLAN_FILE }}
+
+      - name: Terraform apply
+        run: terraform apply ${{ env.TF_PLAN_FILE }}

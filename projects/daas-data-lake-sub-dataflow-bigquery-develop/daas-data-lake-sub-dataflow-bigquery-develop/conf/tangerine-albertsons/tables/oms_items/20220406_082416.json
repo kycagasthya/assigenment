@@ -1,0 +1,74 @@
+[
+  {
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "id",
+    "type": "INTEGER",
+    "description": "Unique id of the item. Primary key."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "takeoff_item_id",
+    "type": "STRING",
+    "description": "Product id (tom-id) of the item"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "requested_quantity",
+    "type": "INTEGER",
+    "description": "Requested quantity"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "creation_datetime",
+    "type": "TIMESTAMP",
+    "description": "Date of creation"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "order_id",
+    "type": "STRING",
+    "description": "Customer Order ID as in ID in Retailer's Order Management System (OMS). is always unique regardless of store id or date."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "line_id",
+    "type": "INTEGER",
+    "description": "Line ID. References oms_lines table"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "last_modified",
+    "type": "TIMESTAMP",
+    "description": "Order last modified date"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  }
+]

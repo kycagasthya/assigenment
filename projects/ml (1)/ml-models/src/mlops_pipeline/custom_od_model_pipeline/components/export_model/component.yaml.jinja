@@ -1,0 +1,19 @@
+name: OD model export
+inputs:
+- {name: output_directory, type: String}
+- {name: input_size, type: String}
+- {name: checkpoint, type: Artifact}
+outputs:
+- {name: deployable_model, type: Model}
+implementation:
+  container:
+    image: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/custom-od/model-export:latest
+    command: [python, /home/tensorflow/models/export_model.py]
+    args: [
+      --executor_input, {executorInput: null},
+      --function_to_execute, export_model,
+      --output-directory, {inputValue: output_directory},
+      --input-size, {inputValue: input_size},
+      --checkpoint, {inputPath: checkpoint},
+      --deployable-model, {outputPath: deployable_model},
+    ]

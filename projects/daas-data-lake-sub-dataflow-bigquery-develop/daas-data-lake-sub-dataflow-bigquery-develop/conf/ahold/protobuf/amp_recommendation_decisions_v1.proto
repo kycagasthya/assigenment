@@ -1,0 +1,20 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required string id = 5;
+  required int64 item_movement_recommendation_id = 6;
+  required int64 consolidated_inventory_id = 7;
+  required string retailer = 8;
+  required string mfc_id = 9;
+  required string ecomm_id = 10;
+  required string decision_status = 11;
+  required string decision_state = 12;
+  repeated string reason_codes = 13;
+  required string created_by_user = 14;
+  required string created_by_ts = 15;
+  required bool pre_approved = 16;
+}

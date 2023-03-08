@@ -1,0 +1,134 @@
+# Creating monitoring dashboards and alerts for Datalake clients.
+# Once succeded, Terraform provides and handles the infrastructure (IaC).
+# Can be triggered either once or continuously within CI/CD pipeline. 
+# Triggered manually:
+#   workflow_dispatch -> select branch
+# Workflow:
+#   - Set up environment
+#   - Deploy monitoring with Terraform
+
+name: Manual - Delete specific client
+
+on:
+  workflow_dispatch:
+    inputs:
+      client_id:
+        description: 'Client ID'
+        required: true 
+        type: string
+
+env:
+  TF_PLAN_FILE: terraform.tfplan
+
+defaults:
+  run:
+    working-directory: terraform/datalake
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  prepare:
+    name: Prerequisites
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: scripts
+
+    steps:
+      # Checkout the head commit in a detached head state.
+      - name: Checkout the latest commit
+        uses: actions/checkout@v2
+
+      # Set up environment depending on the base branch.
+      - name: Check branch and set environment
+        id: check_branch
+        run: |
+          echo "Running on branch ${{ github.ref }}"
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo '::set-output name=env_name::production'
+          elif [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
+            echo '::set-output name=env_name::develop'
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Validate the client
+        id: validate
+        run: |
+          python validate_to_delete.py ${{ github.event.inputs.client_id }}
+
+    outputs:
+      to_delete: ${{ steps.validate.outputs.to_delete }}
+      env_name: ${{ steps.check_branch.outputs.env_name }}
+  
+  destroy:
+    name: Destroy client infrastructure
+    runs-on: ubuntu-latest
+    needs: prepare
+    environment:
+      name: ${{ needs.prepare.outputs.env_name }}
+    env:
+      TF_VAR_project: ${{ secrets.GOOGLE_PROJECT_ID }}
+      TF_VAR_env: ${{ needs.prepare.outputs.env_name }}
+
+    steps:
+      - name: Checkout the latest commit
+        uses: actions/checkout@v2
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          token_format: access_token
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: ${{ secrets.GOOGLE_PROJECT_ID }}
+
+      - name: Get the Dataflow image tag
+        id: get_image
+        run: |
+          echo "::set-output name=image_tag::$(gcloud container images list-tags gcr.io/${{ secrets.GOOGLE_PROJECT_ID }}/takeoff-dl-ingest \
+            --limit 1 --format 'value(tags)')"
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r ../../scripts/requirements.txt
+
+      - name: Generate .tfvars from the client config
+        run: |
+          python ../../scripts/prefly.py ${{ needs.prepare.outputs.to_delete }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform init
+        run: terraform init -backend-config=bucket=${{ secrets.GOOGLE_PROJECT_ID }}-state
+
+      - name: Select a workspace
+        run: terraform workspace select ${{ needs.prepare.outputs.to_delete }}
+
+      - name: Terraform validate
+        run: terraform validate
+
+      - name: Terraform destroy
+        env:
+          TF_VAR_template_path: gs://${{ secrets.GOOGLE_PROJECT_ID }}-dataflow/templates/takeoff-dl-ingest-${{ steps.get_image.outputs.image_tag }}.json
+        run: terraform destroy -auto-approve

@@ -1,0 +1,147 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Creation timestamp",
+    "mode": "REQUIRED",
+    "name": "created",
+    "type": "STRING"
+  },
+  {
+    "description": "Type of record data.",
+    "mode": "REQUIRED",
+    "name": "recordid",
+    "type": "STRING"
+  },
+  {
+    "description": "Actually commissioned quantity.",
+    "mode": "REQUIRED",
+    "name": "event_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Name of the functional point, here always OSR",
+    "mode": "REQUIRED",
+    "name": "master_fp_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Item number",
+    "mode": "REQUIRED",
+    "name": "itemno",
+    "type": "STRING"
+  },
+  {
+    "description": "Expiry date of the article",
+    "mode": "NULLABLE",
+    "name": "expiry_date",
+    "type": "STRING"
+  },
+  {
+    "description": "Reason codes for that message",
+    "mode": "REQUIRED",
+    "name": "reason",
+    "type": "STRING"
+  },
+  {
+    "description": "Operator identification",
+    "mode": "REQUIRED",
+    "name": "pin_code",
+    "type": "STRING"
+  },
+  {
+    "description": "Actually used picking station",
+    "mode": "REQUIRED",
+    "name": "locno_act",
+    "type": "STRING"
+  },
+  {
+    "description": "Time of data record creation (only sent for MOVE STOCK and MODSTOCK message; not for SUM STOCK message)",
+    "mode": "NULLABLE",
+    "name": "message_created",
+    "type": "STRING"
+  },
+  {
+    "description": "",
+    "mode": "REQUIRED",
+    "name": "mfc_id",
+    "type": "STRING"
+  },
+  {
+    "name": "records",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "fields": [
+      {
+        "description": "Stock correction: A for Add, S for Subtract",
+        "name": "adjustment_type",
+        "type": "STRING",
+        "mode": "REQUIRED"
+      },
+      {
+        "description": "Stock information",
+        "name": "qty",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Licenceplate of the container",
+        "name": "licenceplate",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Slot id of the container",
+        "name": "slot_id",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  {
+    "description": "Message content",
+    "mode": "REQUIRED",
+    "name": "csv",
+    "type": "STRING"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "BigQuery ingestion timestamp"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "PubSub publish timestamp"
+  },
+  {
+    "name": "__pubsub_message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "ID of the message assigned by PubSub"
+  }
+]

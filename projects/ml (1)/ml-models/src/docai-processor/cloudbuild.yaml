@@ -1,0 +1,17 @@
+steps:
+
+- id: Build whl file
+  name: 'asia-south1-docker.pkg.dev/india-dai-parsers/icici-dai-gke-ms/pythonimage:package-slim'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    cd ./src/docai-classification/ && python3 ./setup.py sdist bdist_wheel
+
+- id: Push package to Artifact
+  name: 'asia-south1-docker.pkg.dev/india-dai-parsers/icici-dai-gke-ms/pythonimage:package-slim'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    twine upload --repository-url https://asia-south1-python.pkg.dev/india-dai-parsers/docai/ ./src/docai-classification/dist/*

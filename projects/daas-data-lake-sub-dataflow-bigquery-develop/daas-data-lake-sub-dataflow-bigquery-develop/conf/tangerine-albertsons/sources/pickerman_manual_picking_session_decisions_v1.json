@@ -1,0 +1,149 @@
+{
+  "schema_name": "pickerman_manual_picking_session_decisions",
+  "schema_description": "Manual picking sessions decisions from pickerman.",
+  "schema_version": "v1",
+  "labels": {
+    "owner": "outbound",
+    "primary_key": "id"},
+  "fields": [
+    {
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Quantity that was picked during the session. 0 if session type is `not-picked`.",
+      "mode": "REQUIRED",
+      "name": "amount",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Message attributes.",
+      "mode": "REQUIRED",
+      "name": "attributes",
+      "type": "STRING"
+    },
+    {
+      "description": "List of actual barcodes that was scanned during picking session.",
+      "mode": "REPEATED",
+      "name": "barcodes",
+      "type": "STRING"
+    },
+    {
+      "description": "Creation timestamp of picking session.",
+      "mode": "REQUIRED",
+      "name": "created_time",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Device serial number.",
+      "mode": "NULLABLE",
+      "name": "device_serial_number",
+      "type": "STRING"
+    },
+    {
+      "description": "Id of picking session.",
+      "mode": "NULLABLE",
+      "name": "id",
+      "type": "STRING"
+    },
+    {
+      "description": "Product id that was picked.",
+      "mode": "REQUIRED",
+      "name": "item_id",
+      "type": "STRING"
+    },
+    {
+      "description": "MFC location id where picking session was performed.",
+      "mode": "REQUIRED",
+      "name": "location_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Id of the order for what item was picked.",
+      "mode": "REQUIRED",
+      "name": "order_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Address inside MFC from where item was picked. Null if session type is `not-picked`.",
+      "mode": "NULLABLE",
+      "name": "picking_address",
+      "type": "STRING"
+    },
+    {
+      "description": "Pub/Sub message id.",
+      "mode": "NULLABLE",
+      "name": "pubsub_message_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Timestamp when message was published to topic.",
+      "mode": "NULLABLE",
+      "name": "pubsub_publish_time",
+      "type": "STRING"
+    },
+    {
+      "description": "Requested item quantity.",
+      "mode": "NULLABLE",
+      "name": "quantity_unit_to_prepare",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Id of the tote to where item was picked. Null id session type is `not-picked`",
+      "mode": "NULLABLE",
+      "name": "tote_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Session type. Could be one of `picked`, `not-picked`.",
+      "mode": "REQUIRED",
+      "name": "type",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "user",
+      "type": "RECORD",
+      "fields": [
+        {
+          "description": "Email of the user who performed picking session.",
+          "name": "email",
+          "type": "STRING",
+          "mode": "REQUIRED"
+        },
+        {
+          "description": "Id of the user who performed picking session.",
+          "name": "id",
+          "type": "STRING",
+          "mode": "REQUIRED"
+        }
+      ]
+    },
+    {
+      "description": "Actual weight for variable weight items that was piked during the session.",
+      "mode": "REPEATED",
+      "name": "weights",
+      "type": "FLOAT"
+    }
+  ]
+}

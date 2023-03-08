@@ -1,0 +1,39 @@
+client_id: acme # Only hyphens allowed
+enabled: false
+dataset_id: datalake_acme # Only underscores allowed
+# List of sources
+sources:
+  products_v1:
+    source_name: t_products # Need to have this in snake_case-case to construct pub/sub topics based on naming convention
+    type: streaming
+    schema_version: v1
+    configuration: test_products_v1.json
+    owner: team-luigi@takeoff.com
+  locations_v1:
+    source_name: t_locations # Need to have this in snake_case to construct pub/sub topics based on naming convention
+    type: streaming
+    schema_version: v1
+    configuration: test_locations_v1.json
+    owner: team-luigi@takeoff.com
+  profiles_v1:
+    source_name: t_profiles # Need to have this in snake_case to construct pub/sub topics based on naming convention
+    type: streaming
+    schema_version: v1
+    configuration: test_profiles_v1.json
+    owner: team-mario@takeoff.com
+tables:
+  t_products:  # This should map to source name in this config
+    table_id: acme_products_table # This is a real expected table name in BigQuery
+    # The following option is relevant for `prod` only. Always `false` for non-prod environments.
+    protected: false # If table protected from deletion or not
+  t_locations: # This should map to source name in this config
+    table_id: acme_locations_table   # This is a real expected table name in BigQuery
+    protected: false
+  t_profiles:
+    table_id: acme_profiles_table
+    protected: false
+
+views:
+  vw_test:
+    view_id: acme_test_view
+    view_query_file: acme_test_view_query.sql

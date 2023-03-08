@@ -1,0 +1,5 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'asia-south1-docker.pkg.dev/ibank-development/mlops-training-pipeline/custom_od_base_image', '.' ]
+images:
+- 'asia-south1-docker.pkg.dev/ibank-development/mlops-training-pipeline/custom_od_base_image'

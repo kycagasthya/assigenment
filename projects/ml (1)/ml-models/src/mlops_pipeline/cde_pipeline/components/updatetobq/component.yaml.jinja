@@ -1,0 +1,57 @@
+name: Write Metrics to BQ
+inputs:
+- {name: job_id, type: String}
+- {name: processor_id, type: String}
+- {name: project_number, type: String}
+- {name: ref_code_file_version, type: String}
+- {name: is_deployed, type: String}
+- {name: configuration, type: String}
+- {name: doc_type, type: String}
+- {name: project_id, type: String} 
+- {name: region, type: String}
+- {name: timestamp, type: String}
+- {name: dataset_model, type: String}
+- {name: table_name_model, type: String}
+- {name: dataset_class, type: String}                        
+- {name: table_name_class, type: String}  
+- {name: version_name, type: Artifact}
+- {name: overall_metrics, type: Metrics}
+- {name: class_metrics, type: Metrics}
+- {name: data_pipeline_root, type: String}
+- {name: model_name, type: String}
+- {name: location, type: String}
+- {name: pipeline_name, type: String}
+- {name: gcs_path_model, type: String}
+
+outputs:
+implementation:
+  container:
+    image: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cde-pipeline/updatetobq:latest
+    command: [python, /app/update_to_bq_cde.py]
+    args: [
+      --executor_input, {executorInput: null},
+      --function_to_execute, write_metrics_to_bq,
+      --job-id, {inputValue: job_id},
+      --processor-id, {inputValue: processor_id},
+      --project-number, {inputValue: project_number},
+      --ref-code-file-version, {inputValue: ref_code_file_version},
+      --is-deployed, {inputValue: is_deployed},
+      --configuration, {inputValue: configuration},
+      --doc-type, {inputValue: doc_type},
+      --project-id, {inputValue: project_id},
+      --region, {inputValue: region},
+      --timestamp, {inputValue: timestamp},
+      --dataset-model, {inputValue: dataset_model},
+      --table-name-model, {inputValue: table_name_model},
+      --dataset-class, {inputValue: dataset_class},
+      --table-name-class, {inputValue: table_name_class},     
+      --data_pipeline_root, {inputValue: data_pipeline_root},
+      --model_name, {inputValue: model_name},
+      --pipeline_name, {inputValue: pipeline_name},
+      --location, {inputValue: location},
+      --gcs_path_model, {inputValue: gcs_path_model},
+      --version-name, {inputPath: version_name},
+      --overall-metrics, {inputPath: overall_metrics},
+      --class-metrics, {inputPath: class_metrics},
+      
+   ]

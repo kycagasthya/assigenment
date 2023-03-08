@@ -1,0 +1,501 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Barcodes is a upc list reduced only to those UPC that correspond to retail_level units plus normalized to such a form as in output of barcode reading.",
+    "name": "barcodes",
+    "type": "STRING",
+    "mode": "REPEATED"
+  },
+  {
+    "description": "Number of product units in the product case.",
+    "name": "boxcase",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "case_dimensions",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+      {
+        "description": "Product case unit height.",
+        "name": "height",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Product case unit length.",
+        "name": "length",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Unit in which cases's size is measured.",
+        "name": "unit_of_measure",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Product case unit width.",
+        "name": "width",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  {
+    "name": "case_weight",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+      {
+        "description": "Unit in which product case's size is weighted.",
+        "name": "unit_of_measure",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Product case unit gross weight.",
+        "name": "weight",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  {
+    "description": "Corp_id is the ID used by retailer for their supply chain management operations.",
+    "name": "corp_ids",
+    "type": "STRING",
+    "mode": "REPEATED"
+  },
+  {
+    "description": "Ecom_id is used by retailer to identify a product entity selectable by customers in shopping applications.",
+    "name": "ecom_ids",
+    "type": "STRING",
+    "mode": "REPEATED"
+  },
+  {
+    "description": "Field to store additional or service information about product in location.",
+    "mode": "NULLABLE",
+    "name": "extra",
+    "type": "STRING"
+  },
+  {
+    "name": "feature_attributes",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+      {
+        "description": "Bulk items are not pushed into OSR.",
+        "name": "is_bulk",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Chemical designation should be used to designate anything that should not be stored in a tote with a food item because of risk of odor or flavor contamination.",
+        "name": "is_chemical",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Everything that will lose the form and structure when placed under heavy products.",
+        "name": "is_crushable",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Everything that will crush other products and can't be stacked.",
+        "name": "is_heavy",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Raw is used for items that should be stored at the lowest level of the OSR chilled section.",
+        "name": "is_raw",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Mid-temperature chilled area (~45-50F instead of 35F)",
+        "mode": "NULLABLE",
+        "name": "is_specific_chilled",
+        "type": "BOOLEAN"
+      },
+      {
+        "description": "Hazardous are items that can become an operations or safety risk if stored in the OSR",
+        "mode": "NULLABLE",
+        "name": "is_hazardous",
+        "type": "BOOLEAN"
+      },
+      {
+        "description": "Fragile items",
+        "mode": "NULLABLE",
+        "name": "is_glass_packaged",
+        "type": "BOOLEAN"
+      },
+      {
+        "description": "TRUE denotes that the item requires strictly vertical storage",
+        "mode": "NULLABLE",
+        "name": "is_vertical",
+        "type": "BOOLEAN"
+      },
+      {
+        "description": "TRUE denotes that the item can be placed on top of another item",
+        "mode": "NULLABLE",
+        "name": "is_stackable",
+        "type": "BOOLEAN"
+      },
+      {
+        "description": "TRUE denotes that the item has to be stored by cases only",
+        "mode": "NULLABLE",
+        "name": "is_case_storage",
+        "type": "BOOLEAN"
+      },
+      {
+        "description": "Some items require additional bagging at the picking station",
+        "mode": "NULLABLE",
+        "name": "is_requires_plastic_bag",
+        "type": "BOOLEAN"
+      }
+    ]
+  },
+  {
+    "description": "Primary key used to identify TOM product_item.",
+    "name": "id",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "Chemical designation should be used to designate anything that should not be stored in a tote with a food item because of risk of odor or flavor contamination.",
+    "name": "is_chemical",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "Everything that will lose the form and structure when placed under heavy products.",
+    "name": "is_crushable",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "Raw is used for items that should be stored at the lowest level of the OSR chilled section. ",
+    "name": "is_raw",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "Flag indicates if the product is weight-variable.",
+    "name": "is_scalable",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "Timestamp when product attributes was updated.",
+    "name": "last_modified_ts",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "location_info",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "fields": [
+      {
+        "description": "The average weight of 1 unit for scalable items.",
+        "name": "average_weight_measure",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Average weight unit of measure. Can be only 'lb' or 'ea'.",
+        "name": "average_weight_unit",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Shows if item is sold only in e-store.",
+        "name": "ecom_only_item",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Identify if the product price will be calculated by the actual weight of picked items.",
+        "name": "is_weight_variable",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "item_address",
+        "type": "RECORD",
+        "mode": "NULLABLE",
+        "fields": [
+          {
+            "description": "Specified aisle in the shop floor, not MFC.",
+            "name": "aisle",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "description": "Specified bay in the shop floor, not MFC.",
+            "name": "bay",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "description": "Specified shelf in the shop floor, not MFC.",
+            "name": "shelf",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          }
+        ]
+      },
+      {
+        "description": "FLO or REG. FLO for all batch items (picked from shop floor), REG otherwise. All other values (including blank) will be treated as invalid.",
+        "name": "item_type",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Identify if the product can be purchased for MFC:ntrue - do not include the item into purchase order, false - item can be included into purchase order.",
+        "name": "mfc_stop_buy",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Identify that the product can't be picked for customer order even if it has positive stock:true - do not pick the product, false - the product can be picked.",
+        "name": "mfc_stop_fulfill",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Corp-id is the ID used by retailer for their supply chain management operations. refer to corp-ids attribute. We have many-to-many relationship between Corp-id and UPCs In this  attribute retailer provide us primary corp-id, it can be different for different locations.",
+        "name": "primary_corp_id",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Retailer-specific store-id represents MFC as a store location, this attribute is important in resolving location-specific parameters.",
+        "name": "store_id",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "supplier_info",
+        "type": "RECORD",
+        "mode": "REPEATED",
+        "fields": [
+          {
+            "description": "Identify for what amount of product purchase-price specified.",
+            "name": "purchase_price_amount",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "description": "Purchase price for the specified amount.",
+            "name": "purchase_price_cents",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "description": "Specify unit of measure for purchase-price-amount.",
+            "name": "purchase_price_unit",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "description": "Retailer-specific supplier id.",
+            "name": "supplier_id",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "description": "Identify if the product can be purchased from the supplier:true - do not include the item into the purchase order for this supplier, false - item can be included into the purchase order for this supplier.",
+            "name": "supplier_keep_buy",
+            "type": "BOOLEAN",
+            "mode": "NULLABLE"
+          },
+          {
+            "description": "Retailer-specific supplier name.",
+            "name": "supplier_name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "description": "Supplier-specific product id.",
+            "name": "supplier_product_id",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "description": "Retailer-specific sub-account code, 3 digits number.",
+            "name": "supplier_sub_account",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "description": "Can be  one of  {\"orderable-dsd\" , \"dsd\" , \"dc\"} \n\nStrictly one of the three:\n\n\"Orderable DSD\" \u2013 Orderable DSD, delivered from DC warehouses  of retailer\n\n\"DSD\" \u2013 true DSD vendor (non-orderable dsd)\n\n\"DC\" \u2013 DC vendor, non DSD-items, centralized delivery\n\nTO would need to print expected demand for each individual true DSD (non-orderable DSD) vendor, e.g. separate sheet of paper with vendor name on top, to assist re-order. true DSD vendors will not be able to see a shelf with their merchandize (that's something new for them).",
+            "name": "supplier_type",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "description": "Link to product's image.",
+    "name": "main_image",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "Product description.",
+    "name": "name",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "If requires-expiration-date = true, then decanting operator would be required to enter expiration date (which can be found on item packaging) at product intake.",
+    "name": "require_expiration_date",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "retailer_categories_path",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "fields": [
+      {
+        "description": "Retailer category name.",
+        "name": "name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Retailer category id.",
+        "name": "retailer_id",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  {
+    "description": "Record update counter. Through all the lines nextval('products_revision_seq').",
+    "name": "revision",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "The recommended maximum time for which products or fresh (harvested) produce can be stored, during which the defined quality of a specified proportion of the goods remains acceptable under expected (or specified) conditions of distribution, storage and display.",
+    "name": "shelf_life",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "Parameters for slotting.",
+    "name": "slot_params",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "Source document for product attributes.",
+    "mode": "NULLABLE",
+    "name": "source",
+    "type": "STRING"
+  },
+  {
+    "description": "Temperature zone where products can be stored.\n\nDual temperature items can only be Ambient/Chilled. It is not possible to have Chilled/Frozen items since the OSR doesn't have a frozen section. If Temperature Zone = empty cell, then it will be listed as ambient/chilled.",
+    "name": "temperature_zone",
+    "type": "STRING",
+    "mode": "REPEATED"
+  },
+  {
+    "name": "unit_dimensions",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+      {
+        "description": "Product unit height.",
+        "name": "height",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Product unit length.",
+        "name": "length",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Unit in which product's size is measured.",
+        "name": "unit_of_measure",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Product unit width.",
+        "name": "width",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  {
+    "name": "unit_weight",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+      {
+        "description": "Unit in which product item is weighted.",
+        "name": "unit_of_measure",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "description": "Product unit gross weight.",
+        "name": "weight",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  {
+    "description": "This is a list of all UPCs comprising the id (PK chosen for the purpose of described here product object entity). UPCs may include different packages (case GTIN) or various connected UPCs (identical for the purpose of picking).\n\nSome retailers might have addition data  (linked UPCs).",
+    "name": "upcs",
+    "type": "STRING",
+    "mode": "REPEATED"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  }
+]

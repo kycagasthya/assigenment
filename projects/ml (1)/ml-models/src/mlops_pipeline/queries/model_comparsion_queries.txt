@@ -1,0 +1,47 @@
+# Query to compare the class level metrics and model level metrics
+
+DECLARE model_name_to_check STRING DEFAULT "scf%";
+DECLARE date_to_check_after DATE DEFAULT "2022-05-15";
+select distinct a.model_name Model_name,
+a.version_name version, b.version_name version_compared_with,
+a.golden_dataset.precision version_golden_precision, b.golden_dataset.precision compared_with_golden_precision,
+a.golden_dataset.recall version_golden_recall, b.golden_dataset.recall compared_with_golden_recall,
+a.golden_dataset.f1_score version_golden_f1_score, b.golden_dataset.f1_score compared_with_golden_f1_score,
+a.golden_dataset.accuracy version_golden_accuracy, b.golden_dataset.accuracy compared_with_golden_accuracy,
+a.golden_dataset.roc_auc version_golden_roc_auc, b.golden_dataset.roc_auc compared_with_golden_roc_auc,
+a.golden_dataset.map version_golden_map, b.golden_dataset.map compared_with_golden_map ,
+a.test_dataset.precision version_test_precision, b.test_dataset.precision compared_with_test_precision,
+a.test_dataset.recall version_test_recall, b.test_dataset.recall compared_with_test_recall,
+a.test_dataset.f1_score version_test_f1_score, b.test_dataset.f1_score compared_with_test_f1_score,
+a.test_dataset.accuracy version_test_accuracy, b.test_dataset.accuracy compared_with_test_accuracy,
+a.test_dataset.roc_auc version_test_roc_auc, b.test_dataset.roc_auc compared_with_test_roc_auc,
+a.test_dataset.map version_test_map, b.test_dataset.map compared_with_test_map, a.trained_on
+from
+(select * except(score) ,score.golden as golden_dataset,score.test as test_dataset from `icici_docai_bq.training_model_metrics` ) a
+join
+(select * except(score) ,score.golden as golden_dataset,score.test as test_dataset from `icici_docai_bq.training_model_metrics` ) b
+on a.model_name=b.model_name
+where a.model_name like model_name_to_check
+and date(a.trained_on)>=date_to_check_after
+order by a.trained_on desc;
+
+
+# Query to compare the different versions of model for the metrices
+
+DECLARE model_name_to_check STRING DEFAULT "r_cde_train";
+DECLARE date_to_check_after DATE DEFAULT "2022-05-15";
+select model_name,version_name,
+round(cast(score.test.precision as float64),2) test_dataset_precision,
+round(cast(score.test.recall as float64),2) test_dataset_recall,
+round(cast(score.test.accuracy as float64),2) test_dataset_accuracy,
+round(cast(score.test.f1_score as float64),2) test_dataset_f1_score,
+round(cast(score.test.roc_auc as float64),2) test_dataset_roc_auc,
+round(cast(score.test.map as float64),2) test_dataset_map,
+round(cast(score.golden.precision as float64),2) golden_dataset_precision,
+round(cast(score.golden.recall as float64),2) golden_dataset_recall,
+round(cast(score.golden.f1_score as float64),2) golden_dataset_f1_score,
+round(cast(score.golden.accuracy as float64),2) golden_dataset_accuracy,
+round(cast(score.golden.roc_auc as float64),2) golden_dataset_roc_auc,
+round(cast(score.golden.map as float64),2) golden_dataset_map,
+trained_on
+from `ibank-development.icici_docai_bq.training_model_metrics` where model_name like model_name_to_check and date(trained_on)>=date_to_check_after;

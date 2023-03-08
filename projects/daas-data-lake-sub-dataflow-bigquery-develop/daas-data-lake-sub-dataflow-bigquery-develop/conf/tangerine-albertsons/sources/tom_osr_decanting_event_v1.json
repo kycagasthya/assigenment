@@ -1,0 +1,388 @@
+{
+  "schema_name": "tom_osr_decanting_event",
+  "schema_description": "Transformed dataset with custom query.",
+  "schema_version": "v1",
+  "labels": {},
+  "fields": [
+    {
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "A unique auto-generated number.",
+      "mode": "REQUIRED",
+      "name": "_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Revision from couch db and not in use in tom_osr_decanting_event.",
+      "mode": "NULLABLE",
+      "name": "_rev",
+      "type": "STRING"
+    },
+    {
+      "description": "An event’s creation date.",
+      "mode": "REQUIRED",
+      "name": "created",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Last Modified timestamp.",
+      "mode": "NULLABLE",
+      "name": "last_modified_ts",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "A 10 digit-string contains a tote ID (first 8 digits), tote orientation (9th digit) and a checksum (10th digit).",
+      "mode": "REQUIRED",
+      "name": "licenceplate",
+      "type": "STRING"
+    },
+    {
+      "description": "An id uniquely pointing to MFC.",
+      "mode": "REQUIRED",
+      "name": "mfc",
+      "type": "STRING"
+    },
+    {
+      "description": "Sections Data",
+      "mode": "NULLABLE",
+      "name": "sections",
+      "type": "RECORD",
+      "fields": [
+        {
+          "description": "Section 1 Data",
+          "mode": "NULLABLE",
+          "name": "section_1",
+          "type": "RECORD",
+          "fields": [
+            {
+              "description": "A qty of products proceeded under this section",
+              "name": "amount",
+              "type": "INTEGER",
+              "mode": "REQUIRED"
+            },
+            {
+              "description": "A product’s expiration date if applicable.",
+              "name": "expiration_date",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Id of the PO under which section was procced",
+              "name": "po",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "A product’s original id.",
+              "name": "product",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            }
+          ]
+        },
+        {
+          "description": "Section 2 Data",
+          "mode": "NULLABLE",
+          "name": "section_2",
+          "type": "RECORD",
+          "fields": [
+            {
+              "description": "A qty of products proceeded under this section",
+              "name": "amount",
+              "type": "INTEGER",
+              "mode": "REQUIRED"
+            },
+            {
+              "description": "A product’s expiration date if applicable.",
+              "name": "expiration_date",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Id of the PO under which section was procced",
+              "name": "po",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "A product’s original id.",
+              "name": "product",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            }
+          ]
+        },
+        {
+          "description": "Section 3 Data",
+          "mode": "NULLABLE",
+          "name": "section_3",
+          "type": "RECORD",
+          "fields": [
+            {
+              "description": "A qty of products proceeded under this section",
+              "name": "amount",
+              "type": "INTEGER",
+              "mode": "REQUIRED"
+            },
+            {
+              "description": "A product’s expiration date if applicable.",
+              "name": "expiration_date",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Id of the PO under which section was procced",
+              "name": "po",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "A product’s original id.",
+              "name": "product",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            }
+          ]
+        },
+        {
+          "description": "Section 4 Data",
+          "mode": "NULLABLE",
+          "name": "section_4",
+          "type": "RECORD",
+          "fields": [
+            {
+              "description": "A qty of products proceeded under this section",
+              "name": "amount",
+              "type": "INTEGER",
+              "mode": "REQUIRED"
+            },
+            {
+              "description": "A product’s expiration date if applicable.",
+              "name": "expiration_date",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Id of the PO under which section was procced",
+              "name": "po",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "A product’s original id.",
+              "name": "product",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            }
+          ]
+        },
+        {
+          "description": "Section 5 Data",
+          "mode": "NULLABLE",
+          "name": "section_5",
+          "type": "RECORD",
+          "fields": [
+            {
+              "description": "A qty of products proceeded under this section",
+              "name": "amount",
+              "type": "INTEGER",
+              "mode": "REQUIRED"
+            },
+            {
+              "description": "A product’s expiration date if applicable.",
+              "name": "expiration_date",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Id of the PO under which section was procced",
+              "name": "po",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "A product’s original id.",
+              "name": "product",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            }
+          ]
+        },
+        {
+          "description": "Section 6 Data",
+          "mode": "NULLABLE",
+          "name": "section_6",
+          "type": "RECORD",
+          "fields": [
+            {
+              "description": "A qty of products proceeded under this section",
+              "name": "amount",
+              "type": "INTEGER",
+              "mode": "REQUIRED"
+            },
+            {
+              "description": "A product’s expiration date if applicable.",
+              "name": "expiration_date",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Id of the PO under which section was procced",
+              "name": "po",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "A product’s original id.",
+              "name": "product",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            }
+          ]
+        },
+        {
+          "description": "Section 7 Data",
+          "mode": "NULLABLE",
+          "name": "section_7",
+          "type": "RECORD",
+          "fields": [
+            {
+              "description": "A qty of products proceeded under this section",
+              "name": "amount",
+              "type": "INTEGER",
+              "mode": "REQUIRED"
+            },
+            {
+              "description": "A product’s expiration date if applicable.",
+              "name": "expiration_date",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Id of the PO under which section was procced",
+              "name": "po",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "A product’s original id.",
+              "name": "product",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            }
+          ]
+        },
+        {
+          "description": "Section 8 Data",
+          "mode": "NULLABLE",
+          "name": "section_8",
+          "type": "RECORD",
+          "fields": [
+            {
+              "description": "A qty of products proceeded under this section",
+              "name": "amount",
+              "type": "INTEGER",
+              "mode": "REQUIRED"
+            },
+            {
+              "description": "A product’s expiration date if applicable.",
+              "name": "expiration_date",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Id of the PO under which section was procced",
+              "name": "po",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "A product’s original id.",
+              "name": "product",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "An event’s current status.",
+      "mode": "REQUIRED",
+      "name": "status",
+      "type": "STRING"
+    },
+    {
+      "description": "Number of slots during decanting can be 1,2,4,6,8 (calculated by number of sections).",
+      "mode": "REQUIRED",
+      "name": "tote_size",
+      "type": "INTEGER"
+    },
+    {
+      "name": "user",
+      "type": "RECORD",
+      "mode": "NULLABLE",
+      "fields": [
+        {
+          "description": "A unique auto-generated number",
+          "name": "id",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "A user’s name",
+          "name": "name",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        }
+      ]
+    },
+    {
+      "name": "user_info",
+      "type": "RECORD",
+      "mode": "NULLABLE",
+      "fields": [
+        {
+          "description": "A system-wide unique identifier for the user (currently Firebase ID)",
+          "name": "user_id",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "A user’s name",
+          "name": "user_name",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        }
+      ]
+    },
+    {
+      "description": "Order id.",
+      "mode": "NULLABLE",
+      "name": "wpno",
+      "type": "STRING"
+    }
+  ]
+}

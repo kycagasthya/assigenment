@@ -1,0 +1,80 @@
+{
+  "schema_name": "isps_pick_zone",
+  "schema_description": "Picking list zones. Source: Postgres extract",
+  "schema_version": "v1",
+  "labels": {},
+  "fields": [
+    {
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "ID of Pick List Zone",
+      "name": "pick_zone_id",
+      "type": "INTEGER",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Short name of Pick List Zone",
+      "name": "pick_zone_code",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Name of Pick List Zone",
+      "name": "pick_zone_name",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Description of Pick List Zone",
+      "name": "pick_zone_desc",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Time when Pick List Zone was created (UTC)",
+      "name": "pick_zone_created_at",
+      "type": "TIMESTAMP",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "User, created Pick List Zone",
+      "name": "pick_zone_created_by",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Time when Pick List Zone was updated (UTC)",
+      "name": "pick_zone_last_modified_at",
+      "type": "TIMESTAMP",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "User, updated Pick List Zone",
+      "name": "pick_zone_last_modified_by",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    }
+  ]
+}

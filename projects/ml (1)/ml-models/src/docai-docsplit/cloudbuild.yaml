@@ -1,0 +1,18 @@
+steps:
+
+- id: Build whl file
+  name: ${_DOCKER_IMAGE}
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    cd ./src/${_PACKAGE}/ && python3 ./setup.py sdist bdist_wheel
+
+
+- id: Push package to Artifact
+  name: ${_DOCKER_IMAGE}
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    twine upload --repository-url ${_REPOSITORY_URL} ./src/${_PACKAGE}/dist/*

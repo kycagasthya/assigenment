@@ -1,0 +1,22 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required int64 id = 5;
+  required string ecom_item_id = 6;
+  repeated string takeoff_item_ids = 7;
+  optional string ecom_line_id = 8;
+  required int64 requested_quantity = 9;
+  optional string price_formatted = 10;
+  optional string unit_of_measure = 11;
+  optional double value = 12;
+  optional string order_id = 13;
+  optional string creation_datetime = 14;
+  optional string fulfillment_location = 15;
+  optional string line_note = 16;
+  optional double requested_weight = 17;
+  optional string last_modified = 18;
+}

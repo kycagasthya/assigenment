@@ -1,0 +1,23 @@
+name: OD evaluation
+inputs:
+- {name: saved_model, type: Model}
+- {name: threshold, type: String}
+- {name: test_data_path, type: String}
+- {name: out_csv_path, type: String}
+outputs:
+- {name: overall, type: Metrics}
+- {name: classwise, type: Metrics}
+implementation:
+  container:
+    image: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/custom-od/evaluation:latest
+    command: [python, /app/evaluation.py]
+    args: [
+      --executor_input, {executorInput: null},
+      --function_to_execute, start_evaluation,
+      --saved-model, {inputPath: saved_model},
+      --threshold, {inputValue: threshold},
+      --test-data-path, {inputValue: test_data_path},
+      --out-csv-path, {inputValue: out_csv_path},
+      --overall, {outputPath: overall},
+      --classwise, {outputPath: classwise}
+    ]

@@ -1,0 +1,36 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required string tom_id = 5;
+  required string env = 6;
+  required string location_code_tom = 7;
+  required _raw_product_record raw_product = 8;
+  message _raw_product_record {
+    required _raw_product_retail_item_record retail_item = 1;
+    message _raw_product_retail_item_record {
+      optional _raw_product_retail_item_dimensions_record dimensions = 1;
+      message _raw_product_retail_item_dimensions_record {
+        optional double height = 1;
+        optional double width = 2;
+        optional double length = 3;
+        optional string unit_of_measure = 4;
+      }
+    }
+  }
+  repeated string anomalous_attributes = 9;
+  optional _prediction_record prediction = 10;
+  message _prediction_record {
+    optional double product_height = 1;
+    optional double product_width = 2;
+    optional double product_length = 3;
+  }
+  required string run_id = 11;
+  required string file_name = 12;
+  required string date = 13;
+  repeated string reason = 14;
+  repeated string sub_reason = 15;
+}

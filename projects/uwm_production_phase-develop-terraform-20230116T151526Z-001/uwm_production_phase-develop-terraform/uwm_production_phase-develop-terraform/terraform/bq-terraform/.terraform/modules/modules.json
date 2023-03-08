@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"bigquery","Source":"terraform-google-modules/bigquery/google","Version":"4.4.0","Dir":".terraform/modules/bigquery"}]}

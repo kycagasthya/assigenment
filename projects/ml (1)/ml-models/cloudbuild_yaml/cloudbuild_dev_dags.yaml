@@ -1,0 +1,16 @@
+steps:
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - >-
+        gsutil -m rsync -r -d ./src/mlops_composer
+        gs://${_COMPOSER_BUCKET_DEV}/dags
+    id: Deploy in dev enviorment 
+    entrypoint: bash
+timeout: 800s
+options:
+  workerPool: >-
+    projects/ibank-docai-devops/locations/asia-south1/workerPools/ibsi-docai-devops-cb-wp01
+  logging: CLOUD_LOGGING_ONLY
+substitutions:
+  _COMPOSER_BUCKET_DEV: asia-south1-icici-docai-ia--8286a39d-bucket

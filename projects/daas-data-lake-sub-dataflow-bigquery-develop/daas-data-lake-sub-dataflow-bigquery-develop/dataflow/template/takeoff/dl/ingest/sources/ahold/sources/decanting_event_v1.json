@@ -1,0 +1,86 @@
+{
+  "schema_name": "decanting_event",
+  "schema_description": "Decanting event data, mainly describing a tote with 1, 2, 4 or 8 sections.",
+  "schema_version": "v1",
+  "labels": {},
+  "fields": [
+    {
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "name": "id",
+      "type": "INTEGER",
+      "mode": "REQUIRED",
+      "description": "A unique auto-generated number."
+    },
+    {
+      "name": "operator_id",
+      "type": "INTEGER",
+      "mode": "REQUIRED",
+      "description": "A link to the decanting event operator."
+    },
+    {
+      "name": "created",
+      "type": "TIMESTAMP",
+      "mode": "REQUIRED",
+      "description": "An event’s creation time."
+    },
+    {
+      "name": "mfc",
+      "type": "INTEGER",
+      "mode": "REQUIRED",
+      "description": "An ID uniquely pointing to MFC."
+    },
+    {
+      "name": "licenceplate",
+      "type": "STRING",
+      "mode": "REQUIRED",
+      "description": "A 10 digit-string contains a tote ID (first 8 digits), tote orientation (9th digit) and a checksum (10th digit)."
+    },
+    {
+      "name": "last_modified",
+      "type": "TIMESTAMP",
+      "mode": "NULLABLE",
+      "description": "The last update date time."
+    },
+    {
+      "name": "status",
+      "type": "STRING",
+      "mode": "REQUIRED",
+      "description": "An event’s current status."
+    },
+    {
+      "name": "sent_timestamp",
+      "type": "TIMESTAMP",
+      "mode": "NULLABLE",
+      "description": "Time when the tote after decanting was sent to the OSR."
+    },
+    {
+      "name": "container_type",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "Tote configuration encoding the number of sections in the tote."
+    }
+  ]
+}

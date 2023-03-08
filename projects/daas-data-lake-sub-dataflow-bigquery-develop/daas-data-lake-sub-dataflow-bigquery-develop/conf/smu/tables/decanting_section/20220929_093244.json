@@ -1,0 +1,104 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "name": "id",
+    "type": "INTEGER",
+    "mode": "REQUIRED",
+    "description": "A unique auto-generated number."
+  },
+  {
+    "name": "event_id",
+    "type": "INTEGER",
+    "mode": "REQUIRED",
+    "description": "A link to the decanting event in which this section was processed."
+  },
+  {
+    "name": "product_id",
+    "type": "INTEGER",
+    "mode": "REQUIRED",
+    "description": "A link to the decanting task product."
+  },
+  {
+    "name": "index",
+    "type": "INTEGER",
+    "mode": "REQUIRED",
+    "description": "A section position number."
+  },
+  {
+    "name": "product",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "A product original ID."
+  },
+  {
+    "name": "amount",
+    "type": "INTEGER",
+    "mode": "REQUIRED",
+    "description": "A qty of products processed under this section."
+  },
+  {
+    "name": "expiration_date",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "A product expiration date if applicable."
+  },
+  {
+    "name": "purchase_order",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "ID of the PO under which section was processed."
+  },
+  {
+    "name": "last_modified",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "The last update date time."
+  },
+  {
+    "name": "reason_code",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "An inventory reason code for the operation."
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "BigQuery ingestion timestamp"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "PubSub publish timestamp"
+  },
+  {
+    "name": "__pubsub_message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "ID of the message assigned by PubSub"
+  }
+]

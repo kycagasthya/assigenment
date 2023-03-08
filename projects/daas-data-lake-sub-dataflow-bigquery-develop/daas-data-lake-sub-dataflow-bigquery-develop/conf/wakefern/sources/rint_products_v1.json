@@ -1,0 +1,539 @@
+{
+  "schema_name": "rint_products",
+  "schema_description": "Products attributes. Source: RINT API",
+  "schema_version": "v1",
+  "labels": {
+    "primary_key": "id"
+  },
+  "fields": [
+    {
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "List of all barcodes, which can be applied for the exact product",
+      "name": "barcodes",
+      "type": "STRING",
+      "mode": "REPEATED"
+    },
+    {
+      "name": "case_item",
+      "type": "RECORD",
+      "mode": "NULLABLE",
+      "fields": [
+        {
+          "name": "weight",
+          "type": "RECORD",
+          "mode": "NULLABLE",
+          "fields": [
+            {
+              "description": "Product case unit gross weight",
+              "name": "weight",
+              "type": "FLOAT",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Unit in which product case's size is weighted",
+              "name": "unit_of_measure",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            }
+          ]
+        },
+        {
+          "description": "",
+          "name": "dimensions",
+          "type": "RECORD",
+          "mode": "NULLABLE",
+          "fields": [
+            {
+              "description": "Product case unit height",
+              "name": "height",
+              "type": "FLOAT",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Product case unit width",
+              "name": "width",
+              "type": "FLOAT",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Product unit length",
+              "name": "length",
+              "type": "FLOAT",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Unit in which cases's size is measured",
+              "name": "unit_of_measure",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            }
+          ]
+        },
+        {
+          "description": "Number of product units in the product case (boxcase)",
+          "name": "case_count",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        }
+      ]
+    },
+    {
+      "name": "categories_hierarchy",
+      "type": "RECORD",
+      "mode": "REPEATED",
+      "fields": [
+        {
+          "description": "Name of category in Retailer's system",
+          "name": "name",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Id of a product category in Retailer's system",
+          "name": "id",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        }
+      ]
+    },
+    {
+      "description": "Corp-id is the ID used by retailer for their supply chain management operations",
+      "name": "corp_ids",
+      "type": "STRING",
+      "mode": "REPEATED"
+    },
+    {
+      "description": "Date and time of the product creation. One time action - date provided during first iteration",
+      "name": "created_ts",
+      "type": "TIMESTAMP",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Detailed, human_readable description of the e-commerce product to display on CUI",
+      "name": "description",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Ecom-id is used by retailer to identify a product entity selectable by customers in shopping applications",
+      "name": "ecom_ids",
+      "type": "STRING",
+      "mode": "REPEATED"
+    },
+    {
+      "description": "Technical field in RINT API",
+      "name": "extra",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "",
+      "name": "feature_attributes",
+      "type": "RECORD",
+      "mode": "NULLABLE",
+      "fields": [
+        {
+          "description": "Bulk items are not pushed into OSR",
+          "mode": "NULLABLE",
+          "name": "is_bulk",
+          "type": "BOOLEAN"
+        },
+        {
+          "description": "Everything that will lose the form and structure when placed under heavy products",
+          "mode": "NULLABLE",
+          "name": "is_crushable",
+          "type": "BOOLEAN"
+        },
+        {
+          "description": "Hazardous are items that can become an operations or safety risk if stored in the OSR",
+          "mode": "NULLABLE",
+          "name": "is_hazardous",
+          "type": "BOOLEAN"
+        },
+        {
+          "description": "Everything that will crush other products and can't be stacked",
+          "mode": "NULLABLE",
+          "name": "is_heavy",
+          "type": "BOOLEAN"
+        },
+        {
+          "description": "`Raw` is used for items that should be stored at the lowest level of the OSR chilled section",
+          "mode": "NULLABLE",
+          "name": "is_raw",
+          "type": "BOOLEAN"
+        },
+        {
+          "description": "Designation of CHEM and FOOD items",
+          "mode": "NULLABLE",
+          "name": "is_chemical",
+          "type": "BOOLEAN"
+        },
+        {
+          "description": "Mid-temperature chilled area (~45-50F instead of 35F)",
+          "mode": "NULLABLE",
+          "name": "is_specific_chilled",
+          "type": "BOOLEAN"
+        },
+        {
+          "description": "Fragile items",
+          "mode": "NULLABLE",
+          "name": "is_glass_packaged",
+          "type": "BOOLEAN"
+        },
+        {
+          "description": "TRUE denotes that the item requires strictly vertical storage",
+          "mode": "NULLABLE",
+          "name": "is_vertical",
+          "type": "BOOLEAN"
+        },
+        {
+          "description": "TRUE denotes that the item can be placed on top of another item",
+          "mode": "NULLABLE",
+          "name": "is_stackable",
+          "type": "BOOLEAN"
+        },
+        {
+          "description": "TRUE denotes that the item has to be stored by cases only",
+          "mode": "NULLABLE",
+          "name": "is_case_storage",
+          "type": "BOOLEAN"
+        },
+        {
+          "description": "Some items require additional bagging at the picking station",
+          "mode": "NULLABLE",
+          "name": "is_requires_plastic_bag",
+          "type": "BOOLEAN"
+        }
+      ]
+    },
+    {
+      "description": "Link to the product's image. CDN retailer_hosted version of the item image",
+      "name": "image",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "'po' means Purchase Order. Indicates if product can be replenished (purchased) by weight or by piece (each)",
+      "name": "is_weight_variable_on_po",
+      "type": "BOOLEAN",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Indicates if the product is sold from the shop by weight or by piece (each)",
+      "name": "is_weight_variable_on_receipt",
+      "type": "BOOLEAN",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Indicates if the product is sold on the website by weight or by piece (each)",
+      "name": "is_weight_variable_on_webcart",
+      "type": "BOOLEAN",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Last modified date and time",
+      "name": "last_modified_ts",
+      "type": "TIMESTAMP",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Consists of additional links between current tom_id and other tom_ids within the assortment that can be used as possible substitutions we can allow during the MFC fulfillment process",
+      "name": "linked_tom_ids",
+      "type": "STRING",
+      "mode": "REPEATED"
+    },
+    {
+      "description": "",
+      "name": "location_info",
+      "type": "RECORD",
+      "mode": "REPEATED",
+      "fields": [
+        {
+          "name": "item_address",
+          "type": "RECORD",
+          "mode": "NULLABLE",
+          "fields": [
+            {
+              "description": "The specified area on the shop floor, not MFC",
+              "mode": "NULLABLE",
+              "name": "area",
+              "type": "STRING"
+            },
+            {
+              "description": "Specified aisle on the shop floor, not MFC",
+              "mode": "NULLABLE",
+              "name": "aisle",
+              "type": "STRING"
+            },
+            {
+              "description": "Specified bay on the shop floor, not MFC",
+              "mode": "NULLABLE",
+              "name": "bay",
+              "type": "STRING"
+            },
+            {
+              "description": "The specified shelf on the shop floor, not MFC",
+              "mode": "NULLABLE",
+              "name": "shelf",
+              "type": "STRING"
+            },
+            {
+              "description": "A specified position on the shelf in the shop floor, not MFC",
+              "mode": "NULLABLE",
+              "name": "position",
+              "type": "STRING"
+            }
+          ]
+        },
+        {
+          "description": "",
+          "name": "department",
+          "type": "RECORD",
+          "mode": "NULLABLE",
+          "fields": [
+            {
+              "description": "",
+              "name": "id",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "",
+              "name": "name",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            }
+          ]
+        },
+        {
+          "description": "Product storage",
+          "name": "item_type",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Shows if item is sold only in e-store",
+          "name": "ecom_only_item",
+          "type": "BOOLEAN",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Identify if the product can be purchased for MFC",
+          "name": "mfc_stop_buy",
+          "type": "BOOLEAN",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Identify that the product can't be picked for customer order even if it has positive stock",
+          "name": "mfc_stop_fulfill",
+          "type": "BOOLEAN",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Corp-id is the ID used by retailer for their supply chain management operations. refer to corp-ids attribute",
+          "name": "primary_corp_id",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "Retailer-specific store_id represents MFC as a store location, this attribute is important in resolving location_specific parameters",
+          "name": "store_id",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "",
+          "name": "sleeping_area",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "",
+          "name": "supplier_info",
+          "type": "RECORD",
+          "mode": "REPEATED",
+          "fields": [
+            {
+              "description": "Retailer-specific supplier id.",
+              "mode": "NULLABLE",
+              "name": "supplier_id",
+              "type": "STRING"
+            },
+            {
+              "description": "Retailer-specific supplier name.",
+              "mode": "NULLABLE",
+              "name": "supplier_name",
+              "type": "STRING"
+            },
+            {
+              "description": "Sub-account code of supplier.",
+              "mode": "NULLABLE",
+              "name": "supplier_sub_account",
+              "type": "STRING"
+            },
+            {
+              "description": "Type of supplier: `DC`, `DSD`, `Orderable DSD`.",
+              "mode": "NULLABLE",
+              "name": "supplier_type",
+              "type": "STRING"
+            },
+            {
+              "description": "Supplier-specific product id.",
+              "mode": "NULLABLE",
+              "name": "supplier_product_id",
+              "type": "STRING"
+            },
+            {
+              "description": "Identify if the product can be purchased from the supplier.",
+              "mode": "NULLABLE",
+              "name": "supplier_keep_buy",
+              "type": "BOOLEAN"
+            },
+            {
+              "description": "Total lead time in days.",
+              "mode": "NULLABLE",
+              "name": "supplier_perform_cycle",
+              "type": "INTEGER"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Product description",
+      "name": "media",
+      "type": "RECORD",
+      "mode": "REPEATED",
+      "fields": [
+        {
+          "description": "Image view designation",
+          "name": "view",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "description": "The URL to a CDN retailer_hosted version of the item image",
+          "name": "url",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        }
+      ]
+    },
+    {
+      "description": "Product description",
+      "name": "name",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "If requires_expiration_date = true, then the decanting operator would be required to enter the expiration date",
+      "name": "requires_expiration_date",
+      "type": "BOOLEAN",
+      "mode": "NULLABLE"
+    },
+    {
+      "name": "retail_item",
+      "type": "RECORD",
+      "mode": "NULLABLE",
+      "fields": [
+        {
+          "name": "weight",
+          "type": "RECORD",
+          "mode": "NULLABLE",
+          "fields": [
+            {
+              "description": "Product unit gross weight",
+              "name": "weight",
+              "type": "FLOAT",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Unit in which product item is weighted",
+              "name": "unit_of_measure",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            }
+          ]
+        },
+        {
+          "name": "dimensions",
+          "type": "RECORD",
+          "mode": "NULLABLE",
+          "fields": [
+            {
+              "description": "Product unit height",
+              "name": "height",
+              "type": "FLOAT",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Product unit width",
+              "name": "width",
+              "type": "FLOAT",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Product unit length",
+              "name": "length",
+              "type": "FLOAT",
+              "mode": "NULLABLE"
+            },
+            {
+              "description": "Unit in which the product's size is measured",
+              "name": "unit_of_measure",
+              "type": "STRING",
+              "mode": "NULLABLE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Record update counter. Through all the lines nextval('products_revision_seq')",
+      "name": "revision",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "The recommended maximum time for which products or fresh (harvested) produce can be stored, during which the defined quality of a specified proportion of the goods remains acceptable under expected (or specified) conditions of distribution, storage and display",
+      "name": "shelf_life",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Temperature zone where products can be stored",
+      "name": "temperature_zone",
+      "type": "STRING",
+      "mode": "REPEATED"
+    },
+    {
+      "description": "This is a primary key used to identify TOM product_item",
+      "name": "tom_id",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    }
+  ]
+}

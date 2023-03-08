@@ -1,0 +1,309 @@
+{
+  "schema_name": "order_fulfillment_picking_item_picked",
+  "schema_description": "Manual picking sessions decisions from Takeoff Mobile app.",
+  "schema_version": "v1",
+  "labels": {
+    "owner": "user_interface",
+    "primary_key": "id"},
+  "fields": [
+    {
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Application version.",
+      "mode": "REQUIRED",
+      "name": "app_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Message attributes.",
+      "mode": "REQUIRED",
+      "name": "attributes",
+      "type": "STRING"
+    },
+    {
+      "description": "Device identification number.",
+      "mode": "REQUIRED",
+      "name": "device_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Creation timestamp.",
+      "mode": "REQUIRED",
+      "name": "device_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Email of the user who performed picking session.",
+      "mode": "REQUIRED",
+      "name": "email",
+      "type": "STRING"
+    },
+    {
+      "description": "Environment.",
+      "mode": "REQUIRED",
+      "name": "environment_type_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Id of picking session.",
+      "mode": "REQUIRED",
+      "name": "id",
+      "type": "STRING"
+    },
+    {
+      "description": "Flag indicating whether the item has aggregated weight.",
+      "mode": "NULLABLE",
+      "name": "is_aggregated_weight",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "Flag indicating whether the item has variable measure.",
+      "mode": "NULLABLE",
+      "name": "is_variable_measure",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "MFC location id where picking session was performed.",
+      "mode": "REQUIRED",
+      "name": "mfc_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Id of the order for what item was picked.",
+      "mode": "REQUIRED",
+      "name": "order_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Order part id.",
+      "mode": "REQUIRED",
+      "name": "order_part_id",
+      "type": "INTEGER"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "pick",
+      "type": "RECORD",
+      "fields": [
+        {
+          "description": "Address inside MFC from where item was picked. Null if session type is `not-picked`.",
+          "mode": "NULLABLE",
+          "name": "address_id",
+          "type": "STRING"
+        },
+        {
+          "description": "Parsed barcode data, variable measure data is embedded.",
+          "name": "barcodes",
+          "type": "RECORD",
+          "mode": "REPEATED",
+          "fields": [
+            {
+              "description": "Barcode.",
+              "mode": "NULLABLE",
+              "name": "barcode",
+              "type": "STRING"
+            },
+            {
+              "description": "Barcode check digit.",
+              "mode": "NULLABLE",
+              "name": "check_digit",
+              "type": "INTEGER"
+            },
+            {
+              "description": "Identifier.",
+              "mode": "NULLABLE",
+              "name": "identifier",
+              "type": "STRING"
+            },
+            {
+              "description": "Flag indicating whether barcode is valid.",
+              "mode": "NULLABLE",
+              "name": "is_valid",
+              "type": "BOOLEAN"
+            },
+            {
+              "description": "Original barcode.",
+              "mode": "NULLABLE",
+              "name": "original_barcode",
+              "type": "STRING"
+            },
+            {
+              "description": "Barcode's prefix.",
+              "mode": "NULLABLE",
+              "name": "prefix",
+              "type": "STRING"
+            },
+            {
+              "description": "Barcode's type.",
+              "mode": "NULLABLE",
+              "name": "type",
+              "type": "STRING"
+            },
+            {
+              "mode": "NULLABLE",
+              "name": "variable_measure",
+              "type": "RECORD",
+              "fields": [
+                {
+                  "description": "Barcode of item with variable measure.",
+                  "mode": "NULLABLE",
+                  "name": "barcode",
+                  "type": "STRING"
+                },
+                {
+                  "description": "Barcode's check digit.",
+                  "mode": "NULLABLE",
+                  "name": "check_digit",
+                  "type": "INTEGER"
+                },
+                {
+                  "description": "Barcode's middle check digit.",
+                  "mode": "NULLABLE",
+                  "name": "middle_check_digit",
+                  "type": "INTEGER"
+                },
+                {
+                  "description": "Flag indicating whether the barcode's middle check digit is valid.",
+                  "mode": "NULLABLE",
+                  "name": "middle_check_digit_is_valid",
+                  "type": "BOOLEAN"
+                },
+                {
+                  "description": "Value picked.",
+                  "mode": "NULLABLE",
+                  "name": "value",
+                  "type": "FLOAT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "description": "Flag indicating whether the product is needed to be entered manually.",
+          "mode": "NULLABLE",
+          "name": "needs_manual_entry",
+          "type": "BOOLEAN"
+        },
+        {
+          "description": "Product id that was picked.",
+          "mode": "REQUIRED",
+          "name": "product_id",
+          "type": "STRING"
+        },
+        {
+          "description": "Number of units picked.",
+          "mode": "REQUIRED",
+          "name": "quantity",
+          "type": "INTEGER"
+        },
+        {
+          "description": "Number of the step.",
+          "mode": "REQUIRED",
+          "name": "step_number",
+          "type": "INTEGER"
+        },
+        {
+          "description": "Id of the tote to where item was picked. Null id session type is `not-picked`",
+          "mode": "NULLABLE",
+          "name": "tote_id",
+          "type": "STRING"
+        },
+        {
+          "description": "Total picked weight that should be used for charging customers if applicable.",
+          "mode": "REQUIRED",
+          "name": "weight",
+          "type": "FLOAT"
+        }
+      ]
+    },
+    {
+      "description": "Identifier of picking mode. Possible values `priceEmbedded`, `eaches` and null.",
+      "mode": "NULLABLE",
+      "name": "picking_mode",
+      "type": "STRING"
+    },
+    {
+      "description": "Pub/Sub message id.",
+      "mode": "REQUIRED",
+      "name": "pubsub_message_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Timestamp when message was published to topic.",
+      "mode": "REQUIRED",
+      "name": "pubsub_publish_time",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Retailer.",
+      "mode": "REQUIRED",
+      "name": "retailer_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Action type.",
+      "mode": "REQUIRED",
+      "name": "type",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "user",
+      "type": "RECORD",
+      "fields": [
+        {
+          "description": "Email of the user who performed picking session.",
+          "mode": "REQUIRED",
+          "name": "email",
+          "type": "STRING"
+        },
+        {
+          "description": "Id of the user who performed picking session.",
+          "mode": "REQUIRED",
+          "name": "id",
+          "type": "STRING"
+        }
+      ]
+    },
+    {
+      "description": "Id of the user who performed picking session.",
+      "mode": "REQUIRED",
+      "name": "user_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Type of variable measure data.",
+      "mode": "NULLABLE",
+      "name": "variable_measure_type",
+      "type": "STRING"
+    },
+    {
+      "description": "Id of the work task.",
+      "mode": "REQUIRED",
+      "name": "work_task_id",
+      "type": "INTEGER"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+steps:
+  - name: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/cloud-sdk:latest
+    env:
+      - 'user_input=${_USER_INPUT}'
+      - 'project_id=${_PROJECT_ID}'
+      - 'project_number=${_PROJECT_NUMBER}'
+      - 'model_name=${_MODEL_NAME}'
+      - 'endpoint_name=${_ENDPOINT_NAME}'
+      - 'endpoint_id=${_ENDPOINT_ID}'
+      - 'gs_path=${_GS_PATH}'
+      - 'location=${_LOCATIONS}'
+      - 'processor_Versions_ID=${_PROCESSOR_VERSION_ID}'
+      - 'project_number=${_PROJECT_NUMBER}'
+      - 'processor_id=${_PROCESSOR_ID}'
+    args:
+      - '-c'
+      - |
+        cd src/mlops_model_deploy 
+        ./model_deploy.sh
+    entrypoint: bash
+timeout: 800s
+options:
+  workerPool: projects/ibank-docai-devops/locations/asia-south1/workerPools/ibsi-docai-devops-cb-wp01
+  logging: CLOUD_LOGGING_ONLY

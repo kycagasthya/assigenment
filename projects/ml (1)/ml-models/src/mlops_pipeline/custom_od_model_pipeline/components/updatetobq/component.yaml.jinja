@@ -1,0 +1,55 @@
+name: Write Metrics to BQ
+inputs:
+- {name: model_name, type: String}
+- {name: job_id, type: String}
+- {name: ref_code_file_version, type: String}
+- {name: doc_type, type: String}
+- {name: project_id, type: String}
+- {name: model_region, type: String}
+- {name: timestamp, type: String}
+- {name: dataset_model, type: String}
+- {name: table_name_model, type: String}
+- {name: dataset_class, type: String}                       
+- {name: table_name_class, type: String}
+- {name: configuration, type: String}
+- {name: model_id, type: String}
+- {name: version_name, type: String}
+- {name: is_deployed, type: String}
+- {name: data_pipeline_root, type: String}
+- {name: overall_metrics, type: Metrics}
+- {name: classwise_metrics, type: Metrics}
+- {name: overall_metrics_model, type: Metrics}
+- {name: pipeline_name, type: String}
+- {name: processor_version_id, type: String}
+- {name: gcs_ref_training_data, type: String}
+outputs:
+implementation:
+  container:
+    image: asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/custom-od/updatetobq:latest
+    command: [python, /app/update_to_bq_od.py]
+    args: [
+      --executor_input, {executorInput: null},
+      --function_to_execute, write_metrics_to_bq,
+      --model-name, {inputValue: model_name},
+      --job-id, {inputValue: job_id},
+      --ref-code-file-version, {inputValue: ref_code_file_version},
+      --doc-type, {inputValue: doc_type},
+      --project-id, {inputValue: project_id},
+      --model-region, {inputValue: model_region},
+      --timestamp, {inputValue: timestamp},
+      --dataset-model, {inputValue: dataset_model},
+      --table-name-model, {inputValue: table_name_model},
+      --dataset-class, {inputValue: dataset_class},
+      --table-name-class, {inputValue: table_name_class},
+      --configuration, {inputValue: configuration},
+      --model-id, {inputValue: model_id},
+      --version-name, {inputValue: version_name},
+      --is-deployed, {inputValue: is_deployed},
+      --data-pipeline-root, {inputValue: data_pipeline_root},
+      --overall-metrics, {inputPath: overall_metrics},
+      --classwise-metrics, {inputPath: classwise_metrics},
+      --overall-metrics-model, {inputPath: overall_metrics_model},
+      --pipeline-name, {inputValue: pipeline_name},
+      --processor-version-id, {inputValue: processor_version_id},
+      --gcs-ref-training-data, {inputValue: gcs_ref_training_data},
+   ]

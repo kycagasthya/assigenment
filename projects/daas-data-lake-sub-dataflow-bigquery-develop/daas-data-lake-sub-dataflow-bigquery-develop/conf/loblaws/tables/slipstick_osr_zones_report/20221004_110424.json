@@ -1,0 +1,92 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "The time when current values of capacity were received.",
+    "mode": "REQUIRED",
+    "name": "created",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Number of positions in the zone occupied by empty totes.",
+    "mode": "REQUIRED",
+    "name": "empty_positions",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Number of positions in the zone not occupied by totes.",
+    "mode": "REQUIRED",
+    "name": "free_positions",
+    "type": "INTEGER"
+  },
+  {
+    "description": "A unique auto-generated number.",
+    "mode": "REQUIRED",
+    "name": "id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "MFC location identifier.",
+    "mode": "REQUIRED",
+    "name": "location_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Maximum number of totes the zone can contain for given MFC.",
+    "mode": "REQUIRED",
+    "name": "total_positions",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Name of zone inside OSR. Possible values: raw, refrigerated, ambient.",
+    "mode": "REQUIRED",
+    "name": "zone_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Retailer ID",
+    "mode": "NULLABLE",
+    "name": "retailer_id",
+    "type": "STRING"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "BigQuery ingestion timestamp"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "PubSub publish timestamp"
+  },
+  {
+    "name": "__pubsub_message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "ID of the message assigned by PubSub"
+  }
+]

@@ -1,0 +1,3 @@
+snowflake-connector-python
+google-api-python-client
+google-cloud-bigquery

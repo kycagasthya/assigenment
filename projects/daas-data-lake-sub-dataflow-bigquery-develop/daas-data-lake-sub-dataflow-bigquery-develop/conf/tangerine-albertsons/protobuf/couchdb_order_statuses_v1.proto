@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  optional string __publish_timestamp = 5;
+  optional string __ingestion_timestamp = 6;
+  required string _id = 7;
+  required string _rev = 8;
+  repeated string change_fields = 9;
+  optional string changes = 10;
+  required string status_from = 11;
+  required string status_to = 12;
+  required string created = 13;
+  required string instance_id = 14;
+  optional string model = 15;
+  optional string worker_id = 16;
+  optional string user_id = 17;
+}

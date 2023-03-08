@@ -1,0 +1,21 @@
+,name,fathers_name,dob,pan_id,gcs_uri
+0,HEER SAVANT,TANYA DADA,01/06/2017,IGBPL9183R,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/Pan_4_528c0b63-1b34-547e-b41e-3cc4d305a60d.png
+1,ZARA SHENOY,DHANUK SARRAF,25/05/2010,VJKOC5581D,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/Pan_4_6426d647-b5eb-5543-ae87-03eb7a758a3d.png
+2,SUHANA SHAN,PRISHA SHAN,26/07/2017,BMXYR8357N,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/Pan_4_9b048dca-c0eb-57b7-bd83-4704d8dcbc77.png
+3,REYANSH BHATTACHARYYA,JAYAN KAPUR,20/11/1965,DGIQG3035K,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/Pan_4_a1b26dcc-4225-59ae-8a77-5d382c1abded.png
+4,AARYAHI MANDA,SAHIL RAJ,23/05/1954,AWWAI8333F,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/Pan_4_c714c27c-73d4-57f5-8925-ef99ac4bddf3.png
+5,SHANAYA VENKATESH,GOKUL CHAD,22/07/1971,NLYTR6882I,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/Pan_4_c8905eef-7768-544e-8425-20f35e2e1734.png
+6,MISHA WADHWA,ABRAM KHARE,28/05/1966,TWRWQ3904L,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/Pan_4_fd040913-ffe3-51e1-9980-881e429b7da0.png
+7,BADAL ANIKA BASU,,27/09/1952,EKNRK6700G,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/pan5_11945eab-dd00-526e-bb6b-b13422018bdd_1.png
+8,BADAL ANIKA BASU,,27/09/1952,EKNRK6700G,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/pan5_11945eab-dd00-526e-bb6b-b13422018bdd_2.png
+9,BADAL ANIKA BASU,,27/09/1952,EKNRK6700G,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/pan5_11945eab-dd00-526e-bb6b-b13422018bdd_3.png
+10,SAMAR TEJAS SOM,,12/09/2013,DWIXY1631T,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/pan5_1b545f4c-0020-5c5c-b311-6836b686ae19_1.png
+11,SAMAR TEJAS SOM,,12/09/2013,DWIXY1631T,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/pan5_1b545f4c-0020-5c5c-b311-6836b686ae19_7.png
+12,EHSAAN VARDANIYA SOM,,08/10/1953,XPUPD2392G,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/pan5_4786edd8-6d9d-5b77-9eb7-079492dcac98_0.png
+13,EHSAAN VARDANIYA SOM,,08/10/1953,XPUPD2392G,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/pan5_4786edd8-6d9d-5b77-9eb7-079492dcac98_2.png
+14,EHSAAN VARDANIYA SOM,,08/10/1953,XPUPD2392G,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/pan5_4786edd8-6d9d-5b77-9eb7-079492dcac98_6.png
+15,DEVANSH MADHAV HARI,,26/01/1972,ERZES8391Z,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/pan5_746a01c3-c711-5bbe-ac58-ebbc477638a6_5.png
+16,YASHVI ANAHI CHADA,,31/05/2009,MKHQA6351Z,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/pan5_7a19923b-4daa-5f46-a2b9-2695bd6ea1bc_8.png
+17,DARSHIT AARUSH KALE,,03/04/1956,MNZAD7087O,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/pan5_8d6f6cd4-023f-5b09-b4b2-be24c686969b_9.png
+18,TIYA DHANUK THAKUR,,30/05/2018,LJLKF9722U,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/pan5_980d0588-2999-5388-9c68-b24da420210c_6.png
+19,ABRAM SUMER SAINI,,13/02/1961,EUNTK8729E,gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/image/pan5_d82a0dbe-b3ce-596b-ae53-5c799e900e55_3.png

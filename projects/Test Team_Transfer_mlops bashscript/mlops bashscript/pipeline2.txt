@@ -1,0 +1,281 @@
+steps:
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/pythonimage:pycov
+    args:
+      - '-c'
+      - >
+        pip install -r requirements.txt --extra-index-url
+        https://asia-south1-python.pkg.dev/ibank-development/ml-packages/simple
+        && source /app/variables.env &&  pip install -r requirements.txt && pytest -n auto tests/unit --cov=src 
+    id: pycoverage
+    entrypoint: bash
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker build --network=cloudbuild -t
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} -f ./Dockerfile . && 
+
+        docker image inspect ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} --format
+        '{{index .RepoTags 0}}@{{.Id}}' > /workspace/image-digest.txt
+    id: Build container image
+    entrypoint: /bin/bash
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - >
+        gcloud artifacts docker images scan
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+        --format='value(response.scan)' > /workspace/scan_id.txt &&
+
+        gcloud artifacts docker images list-vulnerabilities $(cat
+        /workspace/scan_id.txt)
+        --format='value(vulnerability.effectiveSeverity)' > severity.txt
+    id: Scan container image
+    entrypoint: /bin/bash
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - |
+        COUNT=$(grep -o $_SEVERITY severity.txt | wc -l ) 
+        echo "$$COUNT"
+        if (("$$COUNT" >= "$_SEVERITY_COUNT"));
+        then echo 'Failed vulnerability check' && exit 1; else exit 0; fi
+    id: Severity check
+    entrypoint: /bin/bash
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker tag ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+        ${_REPOSITORY_URL}/${_IMAGE}:latest && docker push
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+    id: Tag Container image
+    entrypoint: /bin/bash
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/pythonimage:binauthz
+    args:
+      - '--artifact-url'
+      - '${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}'
+      - '--attestor'
+      - projects/ibank-docai-devops/attestors/vulnz-attestor
+      - '--keyversion'
+      - >-
+        projects/ibank-docai-devops/locations/asia-south1/keyRings/binauthz/cryptoKeys/vulnz-signer/cryptoKeyVersions/1
+    id: Attestation
+timeout: 800s
+options:
+  workerPool: >-
+    projects/ibank-docai-devops/locations/asia-south1/workerPools/ibsi-docai-devops-cb-wp01
+  logging: CLOUD_LOGGING_ONLY
+----------------------------------------------------------------------------------
+steps:
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/pythonimage:pycov
+    args:
+      - '-c'
+      - >
+        pip install -r requirements.txt --extra-index-url
+        https://asia-south1-python.pkg.dev/ibank-development/ml-packages/simple
+        && source /app/variables.env && pytest -n auto tests/unit --cov=src 
+    id: pycoverage
+    entrypoint: bash
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker build --network=cloudbuild -t
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} -f ./Dockerfile . && 
+
+        docker image inspect ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} --format
+        '{{index .RepoTags 0}}@{{.Id}}' > /workspace/image-digest.txt
+    id: Build container image
+    entrypoint: /bin/bash
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - >
+        gcloud artifacts docker images scan
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+        --format='value(response.scan)' > /workspace/scan_id.txt &&
+
+        gcloud artifacts docker images list-vulnerabilities $(cat
+        /workspace/scan_id.txt)
+        --format='value(vulnerability.effectiveSeverity)' > severity.txt
+    id: Scan container image
+    entrypoint: /bin/bash
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - |
+        COUNT=$(grep -o $_SEVERITY severity.txt | wc -l ) 
+        echo "$$COUNT"
+        if (("$$COUNT" >= "$_SEVERITY_COUNT"));
+        then echo 'Failed vulnerability check' && exit 1; else exit 0; fi
+    id: Severity check
+    entrypoint: /bin/bash
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker tag ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+        ${_REPOSITORY_URL}/${_IMAGE}:latest && docker push
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+    id: Tag Container image
+    entrypoint: /bin/bash
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/pythonimage:binauthz
+    args:
+      - '--artifact-url'
+      - '${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}'
+      - '--attestor'
+      - projects/ibank-docai-devops/attestors/vulnz-attestor
+      - '--keyversion'
+      - >-
+        projects/ibank-docai-devops/locations/asia-south1/keyRings/binauthz/cryptoKeys/vulnz-signer/cryptoKeyVersions/1
+    id: Attestation
+timeout: 800s
+options:
+  workerPool: >-
+    projects/ibank-docai-devops/locations/asia-south1/workerPools/ibsi-docai-devops-cb-wp01
+  logging: CLOUD_LOGGING_ONLY
+------------------------------------------------------------------
+steps:
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/pythonimage:pycov
+    args:
+      - '-c'
+      - >
+        pip install -r requirements.txt --extra-index-url
+        https://asia-south1-python.pkg.dev/ibank-development/ml-packages/simple
+        && source /app/variables.env && pytest -n auto test/unit --cov=src 
+    id: pycoverage
+    entrypoint: bash
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker build --network=cloudbuild -t
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} -f ./Dockerfile . && 
+
+        docker image inspect ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} --format
+        '{{index .RepoTags 0}}@{{.Id}}' > /workspace/image-digest.txt
+    id: Build container image
+    entrypoint: /bin/bash
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - >
+        gcloud artifacts docker images scan
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+        --format='value(response.scan)' > /workspace/scan_id.txt &&
+
+        gcloud artifacts docker images list-vulnerabilities $(cat
+        /workspace/scan_id.txt)
+        --format='value(vulnerability.effectiveSeverity)' > severity.txt
+    id: Scan container image
+    entrypoint: /bin/bash
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - |
+        COUNT=$(grep -o $_SEVERITY severity.txt | wc -l ) 
+        echo "$$COUNT"
+        if (("$$COUNT" >= "$_SEVERITY_COUNT"));
+        then echo 'Failed vulnerability check' && exit 1; else exit 0; fi
+    id: Severity check
+    entrypoint: /bin/bash
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker tag ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+        ${_REPOSITORY_URL}/${_IMAGE}:latest && docker push
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+    id: Tag Container image
+    entrypoint: /bin/bash
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/pythonimage:binauthz
+    args:
+      - '--artifact-url'
+      - '${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}'
+      - '--attestor'
+      - projects/ibank-docai-devops/attestors/vulnz-attestor
+      - '--keyversion'
+      - >-
+        projects/ibank-docai-devops/locations/asia-south1/keyRings/binauthz/cryptoKeys/vulnz-signer/cryptoKeyVersions/1
+    id: Attestation
+timeout: 800s
+options:
+  workerPool: >-
+    projects/ibank-docai-devops/locations/asia-south1/workerPools/ibsi-docai-devops-cb-wp01
+  logging: CLOUD_LOGGING_ONLY
+-------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker build --network=cloudbuild -t
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA} -f 
+        ./src/mlops_pipeline/cdc_pipeline/components/evaluation/Dockerfile .  
+        && docker image inspect ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+        --format '{{index .RepoTags 0}}@{{.Id}}' > /workspace/image-digest.txt
+    id: Build container image
+    entrypoint: /bin/bash
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - >
+        gcloud artifacts docker images scan
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+        --format='value(response.scan)' > /workspace/scan_id.txt &&
+
+        gcloud artifacts docker images list-vulnerabilities $(cat
+        /workspace/scan_id.txt)
+        --format='value(vulnerability.effectiveSeverity)' > severity.txt
+    id: Scan container image
+    entrypoint: /bin/bash
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - |
+        COUNT=$(grep -o $_SEVERITY severity.txt | wc -l ) 
+        echo "$$COUNT"
+        if (("$$COUNT" >= "$_SEVERITY_COUNT"));
+        then echo 'Failed vulnerability check' && exit 1; else exit 0; fi
+    id: Severity check
+    entrypoint: /bin/bash
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker tag ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+        ${_REPOSITORY_URL}/${_IMAGE}:latest && docker push
+        ${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}
+    id: Tag Container image
+    entrypoint: /bin/bash
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/pythonimage:binauthz
+    args:
+      - '--artifact-url'
+      - '${_REPOSITORY_URL}/${_IMAGE}:${SHORT_SHA}'
+      - '--attestor'
+      - projects/ibank-docai-devops/attestors/vulnz-attestor
+      - '--keyversion'
+      - >-
+        projects/ibank-docai-devops/locations/asia-south1/keyRings/binauthz/cryptoKeys/vulnz-signer/cryptoKeyVersions/1
+    id: Attestation

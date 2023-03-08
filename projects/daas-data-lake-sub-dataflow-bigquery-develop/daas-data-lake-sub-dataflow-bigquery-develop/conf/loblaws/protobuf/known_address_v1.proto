@@ -1,0 +1,24 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required string attributes = 5;
+  required string address = 6;
+  required string area = 7;
+  required string temp_zone = 8;
+  required string aisle = 9;
+  required string bay = 10;
+  required string stack = 11;
+  required string shelf = 12;
+  required bool overstock = 13;
+  required bool dynamic = 14;
+  required bool pickable = 15;
+  required bool active = 16;
+  optional string pick_zone = 17;
+  optional string pubsub_message_id = 18;
+  optional string pubsub_publish_time = 19;
+  optional string mfc_id = 20;
+}

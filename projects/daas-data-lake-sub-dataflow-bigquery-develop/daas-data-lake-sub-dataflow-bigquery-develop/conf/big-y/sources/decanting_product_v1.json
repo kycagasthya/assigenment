@@ -1,0 +1,116 @@
+{
+  "schema_name": "decanting_product",
+  "schema_description": "Contains all products to process by decanting task.",
+  "schema_version": "v1",
+  "labels": {},
+  "fields": [
+    {
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "A unique auto-generated number.",
+      "mode": "REQUIRED",
+      "name": "id",
+      "type": "INTEGER"
+    },
+    {
+      "description": "A link to the parent task.",
+      "mode": "REQUIRED",
+      "name": "task_id",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Original ID of the product.",
+      "mode": "REQUIRED",
+      "name": "product",
+      "type": "STRING"
+    },
+    {
+      "description": "Description/name of the product.",
+      "mode": "REQUIRED",
+      "name": "description",
+      "type": "STRING"
+    },
+    {
+      "description": "An expected receiving date.",
+      "mode": "REQUIRED",
+      "name": "date_received",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "A pos-int number of products for receiving.",
+      "mode": "REQUIRED",
+      "name": "qty",
+      "type": "INTEGER"
+    },
+    {
+      "description": "An actual pos-int number of received products.",
+      "mode": "REQUIRED",
+      "name": "qty_decanted",
+      "type": "INTEGER"
+    },
+    {
+      "description": "An actual pos-int number of received products.",
+      "mode": "REQUIRED",
+      "name": "units",
+      "type": "INTEGER"
+    },
+    {
+      "description": "The last update date time.",
+      "mode": "NULLABLE",
+      "name": "last_modified",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Product ID in the retailer's system.",
+      "mode": "NULLABLE",
+      "name": "corp_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Additional field, barcode of the product without check digit. EAN-8/UPC-E should be expanded into UPC-A format. 020-029 prefixed UPCs should be ending with \"00000\" (do not contain any price/weight information). \n\nUPC is usually set when \"supplier type=Orderable DSD\" or \"supplier type=DSD\"",
+      "mode": "NULLABLE",
+      "name": "upc",
+      "type": "STRING"
+    },
+    {
+      "description": "Description of shipment unit (EACH , PACK, BOX etc).",
+      "mode": "NULLABLE",
+      "name": "ship_unit_description",
+      "type": "STRING"
+    },
+    {
+      "description": "Quantity of product units in shipment unit.",
+      "mode": "NULLABLE",
+      "name": "quantity_in_ship_unit",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Price of product unit or of ship unit.",
+      "mode": "NULLABLE",
+      "name": "purchase_price",
+      "type": "INTEGER"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "schema_name": "isps_pick_list_item",
+  "schema_description": "ISPS Pick List Item. Source: Postgres extract",
+  "schema_version": "v1",
+  "labels": {},
+  "fields": [
+    {
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "ID of the Picking List Item",
+      "mode": "REQUIRED",
+      "name": "pick_list_item_id",
+      "type": "INTEGER"
+    },
+    {
+      "description": "ID of connected Picking List",
+      "mode": "REQUIRED",
+      "name": "pick_list_id",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Business Code of the Picking List Item",
+      "mode": "REQUIRED",
+      "name": "pick_list_item_number",
+      "type": "STRING"
+    },
+    {
+      "description": "ID of asked product (tom-id)",
+      "mode": "REQUIRED",
+      "name": "prod_pick_list_item",
+      "type": "STRING"
+    },
+    {
+      "description": "Quantity to be picked in the store",
+      "mode": "REQUIRED",
+      "name": "pick_list_item_qnty",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Weight to be picked in the store",
+      "mode": "NULLABLE",
+      "name": "pick_list_item_weight",
+      "type": "NUMERIC"
+    },
+    {
+      "description": "Unit of measure of item to pick",
+      "mode": "NULLABLE",
+      "name": "pick_list_item_weight_unit_of_measure",
+      "type": "STRING"
+    },
+    {
+      "description": "Time when item was created (UTC)",
+      "mode": "NULLABLE",
+      "name": "pick_list_item_created_at",
+      "type": "TIMESTAMP"
+    }
+  ]
+}

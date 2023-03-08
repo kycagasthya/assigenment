@@ -1,0 +1,22 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required int64 pick_list_id = 5;
+  required int64 pick_list_status_id = 6;
+  required int64 pick_list_type_id = 7;
+  required int64 pick_zone_id = 8;
+  required string pick_list_number = 9;
+  required string pick_list_begin_at = 10;
+  required string pick_list_complete_at = 11;
+  required string pick_list_created_at = 12;
+  required string pick_list_created_by = 13;
+  required string pick_list_last_modified_at = 14;
+  required string pick_list_last_modified_by = 15;
+  required string pick_list_mfc = 16;
+  repeated string pick_list_cutoffs = 17;
+  optional string pick_list_closed_at = 18;
+}

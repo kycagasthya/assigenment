@@ -1,0 +1,117 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "User creation timestamp.",
+    "mode": "REQUIRED",
+    "name": "created",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Flag indicates if user is disabled.",
+    "mode": "REQUIRED",
+    "name": "is_disabled",
+    "type": "BOOLEAN"
+  },
+  {
+    "description": "Flag indicates if user email is verified.",
+    "mode": "REQUIRED",
+    "name": "is_email_verified",
+    "type": "BOOLEAN"
+  },
+  {
+    "description": "User last refresh timestamp.",
+    "mode": "NULLABLE",
+    "name": "last_refresh",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Timestamp when user signed in for the last time.",
+    "mode": "NULLABLE",
+    "name": "last_sign_in",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "User id in Kisoft system.",
+    "mode": "NULLABLE",
+    "name": "pin",
+    "type": "STRING"
+  },
+  {
+    "fields": [
+      {
+        "description": "Locations where user role applied.",
+        "mode": "REPEATED",
+        "name": "locations",
+        "type": "STRING"
+      },
+      {
+        "description": "User role.",
+        "mode": "NULLABLE",
+        "name": "role",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "roles",
+    "type": "RECORD"
+  },
+  {
+    "description": "User email address.",
+    "mode": "NULLABLE",
+    "name": "user_email",
+    "type": "STRING"
+  },
+  {
+    "description": "User id.",
+    "mode": "REQUIRED",
+    "name": "user_id",
+    "type": "STRING"
+  },
+  {
+    "description": "User name.",
+    "mode": "NULLABLE",
+    "name": "user_name",
+    "type": "STRING"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "BigQuery ingestion timestamp"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "PubSub publish timestamp"
+  },
+  {
+    "name": "__pubsub_message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "ID of the message assigned by PubSub"
+  }
+]

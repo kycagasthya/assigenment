@@ -1,0 +1,11 @@
+[
+  {"name":"transaction_id","type":"INTEGER","mode":"NULLABLE"},
+  {"name":"document_uuid","type":"INTEGER","mode":"NULLABLE"},
+  {"name":"page_uuid","type":"INTEGER","mode":"NULLABLE"},
+  {"name":"start_time","type":"DATETIME","mode":"NULLABLE"},
+  {"name":"end_time","type":"DATETIME","mode":"NULLABLE"},
+  {"name":"total_processing_time","type":"DATETIME","mode":"NULLABLE"},
+  {"name":"confidence_of_page","type":"FLOAT","mode":"NULLABLE"},
+  {"name":"intelligent_splitting","type":"BOOLEAN","mode":"NULLABLE"},
+  {"name":"class_of_page","type":"STRING","mode":"NULLABLE"}
+]

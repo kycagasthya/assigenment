@@ -1,0 +1,143 @@
+{
+  "schema_name": "tom_picking_session_items_decisions",
+  "schema_description": "",
+  "schema_version": "v1",
+  "labels": {
+    "owner": "outbound",
+    "primary_key": "_id"
+  },
+  "fields": [
+    {
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Id of picking session.",
+      "mode": "REQUIRED",
+      "name": "_id",
+      "type": "STRING"
+    },
+    {
+      "description": "",
+      "mode": "NULLABLE",
+      "name": "_rev",
+      "type": "STRING"
+    },
+    {
+      "description": "Quantity that was picked during the session. 0 if session type is `not-picked`.",
+      "mode": "REQUIRED",
+      "name": "amount",
+      "type": "INTEGER"
+    },
+    {
+      "description": "List of actual barcodes that was scanned during picking session.",
+      "mode": "REPEATED",
+      "name": "barcodes",
+      "type": "STRING"
+    },
+    {
+      "description": "Creation timestamp of picking session.",
+      "mode": "REQUIRED",
+      "name": "created_time",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "",
+      "mode": "NULLABLE",
+      "name": "done_with_address",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "Product id that was picked.",
+      "mode": "REQUIRED",
+      "name": "item_id",
+      "type": "STRING"
+    },
+    {
+      "description": "",
+      "mode": "NULLABLE",
+      "name": "line_number",
+      "type": "INTEGER"
+    },
+    {
+      "description": "",
+      "mode": "NULLABLE",
+      "name": "lot_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Address inside MFC from where item was picked. Null if session type is `not-picked`.",
+      "mode": "NULLABLE",
+      "name": "picking_address",
+      "type": "STRING"
+    },
+    {
+      "description": "",
+      "mode": "NULLABLE",
+      "name": "released_from_inventory",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "",
+      "mode": "NULLABLE",
+      "name": "serial",
+      "type": "STRING"
+    },
+    {
+      "description": "",
+      "mode": "NULLABLE",
+      "name": "session_id",
+      "type": "STRING"
+    },
+    {
+      "description": "",
+      "mode": "REPEATED",
+      "name": "tote_ids",
+      "type": "STRING"
+    },
+    {
+      "description": "Session type. Could be one of `picked`, `not-picked`.",
+      "mode": "REQUIRED",
+      "name": "type",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Id of the user who performed picking session.",
+      "mode": "NULLABLE",
+      "name": "user_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Actual weight for variable weight items that was piked during the session.",
+      "mode": "REPEATED",
+      "name": "weights",
+      "type": "FLOAT"
+    },
+    {
+      "description": "",
+      "mode": "NULLABLE",
+      "name": "ws_number",
+      "type": "STRING"
+    }
+  ]
+}

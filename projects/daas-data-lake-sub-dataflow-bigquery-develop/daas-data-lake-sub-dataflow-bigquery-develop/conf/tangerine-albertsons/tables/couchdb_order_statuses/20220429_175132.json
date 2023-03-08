@@ -1,0 +1,109 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Publish timestamp.",
+    "mode": "NULLABLE",
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Ingestion timestamp.",
+    "mode": "NULLABLE",
+    "name": "__ingestion_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Id of order changes in source system.",
+    "mode": "REQUIRED",
+    "name": "_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Revision of changes.",
+    "mode": "REQUIRED",
+    "name": "_rev",
+    "type": "STRING"
+  },
+  {
+    "description": "Fields that were changed.",
+    "mode": "REPEATED",
+    "name": "change_fields",
+    "type": "STRING"
+  },
+  {
+    "description": "Field to store additional or service information about order status changes.",
+    "mode": "NULLABLE",
+    "name": "changes",
+    "type": "STRING"
+  },
+  {
+    "description": "Status of order before changes.",
+    "mode": "REQUIRED",
+    "name": "status_from",
+    "type": "STRING"
+  },
+  {
+    "description": "Status of order after changes.",
+    "mode": "REQUIRED",
+    "name": "status_to",
+    "type": "STRING"
+  },
+  {
+    "description": "Created date and time.",
+    "mode": "REQUIRED",
+    "name": "created",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Customer order id.",
+    "mode": "REQUIRED",
+    "name": "instance_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Model.",
+    "mode": "NULLABLE",
+    "name": "model",
+    "type": "STRING"
+  },
+  {
+    "description": "Worker id.",
+    "mode": "NULLABLE",
+    "name": "worker_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Id of the user who changed order status.",
+    "mode": "NULLABLE",
+    "name": "user_id",
+    "type": "STRING"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  }
+]

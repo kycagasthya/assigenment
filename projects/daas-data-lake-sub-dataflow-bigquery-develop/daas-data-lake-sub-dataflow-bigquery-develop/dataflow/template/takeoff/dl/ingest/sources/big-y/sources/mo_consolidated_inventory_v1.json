@@ -1,0 +1,566 @@
+{
+  "schema_name": "mo_consolidated_inventory",
+  "schema_description": "Consolidated Inventory table",
+  "schema_version": "v1",
+  "labels": {},
+  "fields":[
+    {
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Publish timestamp.",
+      "mode": "NULLABLE",
+      "name": "__publish_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "The actual length for physical storage object in Manual Area (racks, refrigerators, freezers) AFTER Assignment step.",
+      "mode": "NULLABLE",
+      "name": "actual_assets_in_manual_linear_ft",
+      "type": "FLOAT"
+    },
+    {
+      "description": "(Optional)Earliest date that any product (excluding products in DYNAMIC area) associated with the given ECOM_ID was first seen with a non-zero quantity of units in Inventory Snapshot for the given mfc_id.",
+      "mode": "NULLABLE",
+      "name": "first_seen_in_inventory_snapshot",
+      "type": "STRING"
+    },
+    {
+      "description": "The length for physical storage object in Manual Area (racks, refrigerators, freezers) based on Cell Capacity Estimation BEFORE Assignment step.",
+      "mode": "NULLABLE",
+      "name": "assets_in_manual_linear_ft",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Also storage_type. This is a physical object in which the products are assigned/placed. Available assets types: totes, racks, refrigerators, freezers.",
+      "mode": "NULLABLE",
+      "name": "assets_type",
+      "type": "STRING"
+    },
+    {
+      "description": "Weekly forecasted frequency of the SKU.",
+      "mode": "NULLABLE",
+      "name": "average_lines_fc",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Weekly forecasted demand of the SKU (in units).",
+      "mode": "NULLABLE",
+      "name": "average_qty_fc",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Case Height (inches).",
+      "mode": "NULLABLE",
+      "name": "case_height",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Case Length (inches).",
+      "mode": "NULLABLE",
+      "name": "case_length",
+      "type": "FLOAT"
+    },
+    {
+      "description": "TRUE denotes that the item has to be stored by cases only. If this is not specified, then FALSE by default.",
+      "mode": "NULLABLE",
+      "name": "case_storage",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "Case Width (inches).",
+      "mode": "NULLABLE",
+      "name": "case_width",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Category Hierarchy 1/ Department Name. Will be assigned no_info if the value is missing.",
+      "mode": "NULLABLE",
+      "name": "category_level_1",
+      "type": "STRING"
+    },
+    {
+      "description": "Category Hierarchy 2/ Category Name. Will be assigned no_info if the value is missing.",
+      "mode": "NULLABLE",
+      "name": "category_level_2",
+      "type": "STRING"
+    },
+    {
+      "description": "Category Hierarchy 3/ Subcategory Name. Will be assigned no_info if the value is missing.",
+      "mode": "NULLABLE",
+      "name": "category_level_3",
+      "type": "STRING"
+    },
+    {
+      "description": "Category Hierarchy 4. Will be assigned no_info if the value is missing.",
+      "mode": "NULLABLE",
+      "name": "category_level_4",
+      "type": "STRING"
+    },
+    {
+      "description": "Category Hierarchy 5. Will be assigned no_info if the value is missing.",
+      "mode": "NULLABLE",
+      "name": "category_level_5",
+      "type": "STRING"
+    },
+    {
+      "description": "Designation should be used on anything that should not be stored in a tote with a food item because of risk of odor or flavor contamination.  Chem items can be decanted to the OSR.",
+      "mode": "NULLABLE",
+      "name": "chemical",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "Stock to be held over a period of time depending on the average demand and the performance cycle.",
+      "mode": "NULLABLE",
+      "name": "cycle_stock",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Arithmetic mean. Time increment equal to one day. The last 90 days are considered to be the observed period. It is recommended to use all days from the observed period to calculate this value.",
+      "mode": "NULLABLE",
+      "name": "daily_average_qty_90_days",
+      "type": "FLOAT"
+    },
+    {
+      "description": "(Optional)Average Quantity sold each week over the past 90 days/3 months.",
+      "mode": "NULLABLE",
+      "name": "weekly_qty_90_days",
+      "type": "FLOAT"
+    },
+    {
+      "description": "(Optional)Quantity sold in the past 60 days/2 months.",
+      "mode": "NULLABLE",
+      "name": "qty_total_60_days",
+      "type": "INTEGER"
+    },
+    {
+      "description": "(Optional)Average Quantity sold each day over the past 60 days/2 months.",
+      "mode": "NULLABLE",
+      "name": "daily_average_qty_60_days",
+      "type": "FLOAT"
+    },
+    {
+      "description": "(Optional)Average Quantity sold each week over the past 60 days/2 months.",
+      "mode": "NULLABLE",
+      "name": "weekly_qty_60_days",
+      "type": "FLOAT"
+    },
+    {
+      "description": "(Optional)Quantity sold in the past 30 days/1 month.",
+      "mode": "NULLABLE",
+      "name": "qty_total_30_days",
+      "type": "INTEGER"
+    },
+    {
+      "description": "(Optional)Average Quantity sold each day over the past 30 days/1 month.",
+      "mode": "NULLABLE",
+      "name": "daily_average_qty_30_days",
+      "type": "FLOAT"
+    },
+    {
+      "description": "(Optional)Average Quantity sold each week over the past 30 days/1 month.",
+      "mode": "NULLABLE",
+      "name": "weekly_qty_30_days",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Product sales for the observed period.",
+      "mode": "NULLABLE",
+      "name": "dollars_sold",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Direct Store Delivery vs Delivery From Warehouse. If missing from original Item Master, then FALSE as default.",
+      "mode": "NULLABLE",
+      "name": "dsd",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "Ecom Id is used by the retailer to identify a product entity selectable by customers in shopping applications. The primary key for all sources.",
+      "mode": "REQUIRED",
+      "name": "ecom_item_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Number of either UNITS or CASES used in Slotting exercises. If storage_case is true for a specific product, then final_stock this is number of cases.",
+      "mode": "NULLABLE",
+      "name": "final_stock",
+      "type": "INTEGER"
+    },
+    {
+      "description": "final_stock in UNITS.",
+      "mode": "NULLABLE",
+      "name": "final_stock_in_units",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Timestamp when results were generated from SDIA. UTC time.",
+      "mode": "NULLABLE",
+      "name": "finish_ts",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Hazardous are items that can become an operations or safety risk if stored in the OSR, hence they should not be loaded into the OSR.",
+      "mode": "NULLABLE",
+      "name": "hazard",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "Temperature zone input.",
+      "mode": "NULLABLE",
+      "name": "init_t_zone",
+      "type": "STRING"
+    },
+    {
+      "description": "Indicates if the product is sold from the shop by weight or by piece (each).",
+      "mode": "NULLABLE",
+      "name": "is_weight_variable_on_receipt",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "Indicates if the product is sold on the website by weight or by piece (each).",
+      "mode": "NULLABLE",
+      "name": "is_weight_variable_on_webcart",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "Product storage.",
+      "mode": "NULLABLE",
+      "name": "item_type",
+      "type": "STRING"
+    },
+    {
+      "description": "How many product lines were placed in orders for the observed period.",
+      "mode": "NULLABLE",
+      "name": "lines_total",
+      "type": "INTEGER"
+    },
+    {
+      "description": "The lower limit from the 95% confidence interval for the average_lines_fc.",
+      "mode": "NULLABLE",
+      "name": "lower_95_lines_fc",
+      "type": "INTEGER"
+    },
+    {
+      "description": "The lower limit from the 95% confidence interval for the average_qty_fc.",
+      "mode": "NULLABLE",
+      "name": "lower_95_qty_fc",
+      "type": "INTEGER"
+    },
+    {
+      "description": "The max quantity of units that can be placed into the specific cell.",
+      "mode": "NULLABLE",
+      "name": "max_qty_in_cell",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Recommended allocation.",
+      "mode": "NULLABLE",
+      "name": "mfc_area",
+      "type": "STRING"
+    },
+    {
+      "description": "MFC ID.",
+      "mode": "REQUIRED",
+      "name": "mfc_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Identify if the product can be purchased for MFC.",
+      "mode": "NULLABLE",
+      "name": "mfc_stop_buy",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "Product Name.",
+      "mode": "NULLABLE",
+      "name": "name",
+      "type": "STRING"
+    },
+    {
+      "description": "How many cells is this product placed in. For products placed in the Manual Area only.",
+      "mode": "NULLABLE",
+      "name": "num_of_cells",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Current location SKU is placed in. When slotting service is executed daily, it will extract point-in-time Inventory Snapshot data from IMS, and look at where the item is currently stored.",
+      "mode": "NULLABLE",
+      "name": "original_location",
+      "type": "STRING"
+    },
+    {
+      "description": "Quantity on site available at time the inventory snapshot was taken.",
+      "mode": "NULLABLE",
+      "name": "original_qty",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Replenishment lead time for a SKU.",
+      "mode": "NULLABLE",
+      "name": "performance_cycle",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Forced allocation.",
+      "mode": "NULLABLE",
+      "name": "preset_mfc_area",
+      "type": "STRING"
+    },
+    {
+      "description": "Product Height (inches).",
+      "mode": "NULLABLE",
+      "name": "product_height",
+      "type": "FLOAT"
+    },
+    {
+      "description": "TOM ID/IDs associated with considered ecom_item_id. Multiple product_ids can associate with the same ecom_item_id.",
+      "mode": "NULLABLE",
+      "name": "product_ids",
+      "type": "STRING"
+    },
+    {
+      "description": "Product Length (inches).",
+      "mode": "NULLABLE",
+      "name": "product_length",
+      "type": "FLOAT"
+    },
+    {
+      "description": "A numeric qualifier that reflects priority of a product in considered assortment. It is the demand of a SKU per space occupied by the recommended stock to have on hand. Higher the number, higher the priority.",
+      "mode": "NULLABLE",
+      "name": "product_priority",
+      "type": "FLOAT"
+    },
+    {
+      "description": "The product’s priority value for the Manual and Shop Floor area grouped by temp_zone.",
+      "mode": "NULLABLE",
+      "name": "product_priority_manual",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Product Weight (lbs).",
+      "mode": "NULLABLE",
+      "name": "product_weight",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Product Width (inches).",
+      "mode": "NULLABLE",
+      "name": "product_width",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Quantity sold in units over the last 90 days.",
+      "mode": "NULLABLE",
+      "name": "qty_total_90_days",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Rank for products assigned into Manual and Shop Floor area aggregated by temp_zone.",
+      "mode": "NULLABLE",
+      "name": "rank_in_manual",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Raw is used for items that should be stored at the lowest level of the OSR chilled section.",
+      "mode": "NULLABLE",
+      "name": "raw",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "Retailer name",
+      "mode": "NULLABLE",
+      "name": "retailer",
+      "type": "STRING"
+    },
+    {
+      "description": "Buffer stock depending on the customer service level desired (95% CSL is default).",
+      "mode": "NULLABLE",
+      "name": "safety_stock",
+      "type": "FLOAT"
+    },
+    {
+      "description": "The standard deviation of historical demand for the observed period. Time increment equal to one day. The last 90 days are considered to be the observed period. It is recommended to use all days from the observed period to calculate sd.",
+      "mode": "NULLABLE",
+      "name": "sd",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Session name.",
+      "mode": "NULLABLE",
+      "name": "session_name",
+      "type": "STRING"
+    },
+    {
+      "description": "(Optional)Populated from Item Master; possible values are A, D, T, R, O or NULL.",
+      "mode": "NULLABLE",
+      "name": "item_status_code",
+      "type": "STRING"
+    },
+    {
+      "description": "Informative column. Currently Product Priority doesn't take into account Shelf Life, but sometimes we need to decide if it makes sense to move the item into OSR based on its shelf life and sales velocity.",
+      "mode": "NULLABLE",
+      "name": "shelf_life",
+      "type": "STRING"
+    },
+    {
+      "description": "Use to identify current location of an item if it doesn't exist in the Inventory Snapshot. Possible values: osr, manual, shop_floor.",
+      "mode": "NULLABLE",
+      "name": "sleeping_areas",
+      "type": "STRING"
+    },
+    {
+      "description": "TRUE denotes that the item can be placed on the top of another item in the tote or shelf. If this is not specified, then FALSE by default.",
+      "mode": "NULLABLE",
+      "name": "stackable",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "This is a sum of cycle_stock and safety_stock. Also known as Theoretical Inventory. Rounded to the case.",
+      "mode": "NULLABLE",
+      "name": "sum_stock",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Temperature Zone.",
+      "mode": "NULLABLE",
+      "name": "temp_zone",
+      "type": "STRING"
+    },
+    {
+      "description": "Number of totes required to fit the recommended quantity = final_stock_in_units.",
+      "mode": "NULLABLE",
+      "name": "totes",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Number of totes required to fit the original_qty.",
+      "mode": "NULLABLE",
+      "name": "totes_for_current_stock",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Unit of measure.",
+      "mode": "NULLABLE",
+      "name": "unit_of_measure",
+      "type": "STRING"
+    },
+    {
+      "description": "Case pack quantity.",
+      "mode": "NULLABLE",
+      "name": "units_per_case",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Optimistic weekly forecast of the SKU.",
+      "mode": "NULLABLE",
+      "name": "upper_95_lines_fc",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Optimistic weekly forecasted demand of the SKU (in units).",
+      "mode": "NULLABLE",
+      "name": "upper_95_qty_fc",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Vendor ID.",
+      "mode": "NULLABLE",
+      "name": "vendor_id",
+      "type": "STRING"
+    },
+    {
+      "description": "Comma separated field with all supplier-keep-buy s populated, ordered in the order provided in the supplier-info json object.",
+      "mode": "NULLABLE",
+      "name": "vendor_keep_buy",
+      "type": "STRING"
+    },
+    {
+      "description": "Vendor Name.",
+      "mode": "NULLABLE",
+      "name": "vendor_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Business Rule around DSD is important and this field helps us apply that.",
+      "mode": "NULLABLE",
+      "name": "vendor_type",
+      "type": "STRING"
+    },
+    {
+      "description": "TRUE denotes that the item requires strictly vertical storage. If this is not specified, then FALSE by default.",
+      "mode": "NULLABLE",
+      "name": "vertical_storage",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "(Optional)Contains an explanation why we are allocating a product to a specific location.",
+      "mode": "NULLABLE",
+      "name": "reason",
+      "type": "STRING"
+    },
+    {
+      "description": "(Optional)Contains an explanation about customer decision.",
+      "mode": "NULLABLE",
+      "name": "customer_decision",
+      "type": "STRING"
+    },
+    {
+      "description": "Optional field.",
+      "mode": "NULLABLE",
+      "name": "average_qty",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Optional field.",
+      "mode": "NULLABLE",
+      "name": "qty_sold",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Optional field.",
+      "mode": "NULLABLE",
+      "name": "category",
+      "type": "STRING"
+    },
+    {
+      "description": "Optional field.",
+      "mode": "NULLABLE",
+      "name": "daily_average_qty",
+      "type": "FLOAT"
+    },
+    {
+      "description": "Optional field.",
+      "mode": "NULLABLE",
+      "name": "department",
+      "type": "STRING"
+    },
+    {
+      "description": "Optional field.",
+      "mode": "NULLABLE",
+      "name": "subcategory",
+      "type": "STRING"
+    }
+  ]
+  }

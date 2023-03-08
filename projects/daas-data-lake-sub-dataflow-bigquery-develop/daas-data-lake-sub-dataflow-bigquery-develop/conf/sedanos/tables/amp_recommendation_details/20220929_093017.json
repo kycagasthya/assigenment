@@ -1,0 +1,364 @@
+[
+  {
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "id",
+    "type": "INTEGER",
+    "description": "Primary Key from recommendation on item movement table."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "consolidated_inventory_id",
+    "type": "INTEGER",
+    "description": "Primary key from snowflake table consolidated inventory."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "retailer",
+    "type": "STRING",
+    "description": "retailer alias"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "mfc_id",
+    "type": "STRING",
+    "description": "mfc id"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "ecomm_id",
+    "type": "STRING",
+    "description": "e-commerce identifier"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "upc",
+    "type": "STRING",
+    "description": "UPC"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "case_count",
+    "type": "INTEGER",
+    "description": "Case count"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "corp_id",
+    "type": "STRING",
+    "description": "Corperate Identifier"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "current_location",
+    "type": "STRING",
+    "description": "Current Location"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "days_of_supply",
+    "type": "INTEGER",
+    "description": "Days of supply"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "recommendation_priority",
+    "type": "INTEGER",
+    "description": "Recommendation Priority"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "product_category_level1",
+    "type": "STRING",
+    "description": "Product Category Level 1"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "product_category_level2",
+    "type": "STRING",
+    "description": "Product Category Level 2"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "product_demand_last_30_days",
+    "type": "INTEGER",
+    "description": "Product Demand for the last 30 days."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "product_demand_last_60_days",
+    "type": "INTEGER",
+    "description": "Product Demand for the last 60 days."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "product_demand_last_90_days",
+    "type": "INTEGER",
+    "description": "Product Demand for the last 90 days."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "product_demand_next_7_days",
+    "type": "INTEGER",
+    "description": "Product Demand for the next 7 days."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "product_name",
+    "type": "STRING",
+    "description": "Product name"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "recommendation",
+    "type": "STRING",
+    "description": "The recommendation that was made."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "shelf_life",
+    "type": "INTEGER",
+    "description": "Shelf Life"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "temp_zone",
+    "type": "STRING",
+    "description": "Temp Zone"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "tom_id",
+    "type": "STRING",
+    "description": "Product identifier used in TOM"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "totes_free",
+    "type": "INTEGER",
+    "description": "Totes free"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "totes_required",
+    "type": "INTEGER",
+    "description": "Totes required"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "units_on_site_as_of_recommendation",
+    "type": "INTEGER",
+    "description": "The number of units on site at the time recommendation was made."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "units_on_site_current",
+    "type": "INTEGER",
+    "description": "The current number of units on site."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "units_recommended",
+    "type": "INTEGER",
+    "description": "The recommended number of units."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "destination",
+    "type": "STRING",
+    "description": "The recommended desitination of item."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "finish_ts",
+    "type": "TIMESTAMP",
+    "description": "The time the recommendation was made."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "category_level_1",
+    "type": "STRING",
+    "description": "Level 1 category text"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "category_level_2",
+    "type": "STRING",
+    "description": "Level 2 category text"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "category_level_3",
+    "type": "STRING",
+    "description": "Level 3 category text"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "category_level_4",
+    "type": "STRING",
+    "description": "Level 4 category text"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "category_level_5",
+    "type": "STRING",
+    "description": "Level 5 category text"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "product_length",
+    "type": "FLOAT",
+    "description": "Product Length"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "product_width",
+    "type": "FLOAT",
+    "description": "Product Width"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "product_height",
+    "type": "FLOAT",
+    "description": "Product Height"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "product_weight",
+    "type": "FLOAT",
+    "description": "Product Weight"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "unit_of_measure",
+    "type": "STRING",
+    "description": "Unit of measure"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "mfc_stop_buy",
+    "type": "BOOLEAN",
+    "description": "Flag to signal mfc to stop buying and item."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "mfc_stop_fulfill",
+    "type": "BOOLEAN",
+    "description": "Flag to signal mfc to stop fulfilling orders for an item."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "item_type",
+    "type": "STRING",
+    "description": "Item type."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "percent_in_assortment",
+    "type": "FLOAT",
+    "description": "Percentage of the assortment."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "current_unit_demand_for_mfc",
+    "type": "INTEGER",
+    "description": "Current unit demand for mfc"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "new_unit_demand_for_mfc",
+    "type": "INTEGER",
+    "description": "New unit demand for mfc"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "totes_freed",
+    "type": "FLOAT",
+    "description": "Number of totes freed"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "total_units_removed",
+    "type": "INTEGER",
+    "description": "Total units removed"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "unique_products_removed",
+    "type": "INTEGER",
+    "description": "Number of unique products removed."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "unit_of_measure_dim",
+    "type": "STRING",
+    "description": "Unit of measure for dimension."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "is_discontinued",
+    "type": "BOOLEAN",
+    "description": "Is discontinued."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "is_seasonal",
+    "type": "BOOLEAN",
+    "description": "Is seasonal."
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "movement_key",
+    "type": "STRING",
+    "description": "Movement key"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "square_feet_freed",
+    "type": "FLOAT",
+    "description": "Square feet freed"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "square_feet_required",
+    "type": "FLOAT",
+    "description": "Square feet required"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "BigQuery ingestion timestamp"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "PubSub publish timestamp"
+  },
+  {
+    "name": "__pubsub_message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "ID of the message assigned by PubSub"
+  }
+]

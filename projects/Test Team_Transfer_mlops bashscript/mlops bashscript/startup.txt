@@ -1,0 +1,11 @@
+#!/bin/bash
+mkdir /etc/nginx/ssl \
+&& mkdir -p /etc/nginx/logs/ \
+&& gcloud secrets versions access 1 --project=ibank-docai-uat --secret="sm-docai-uat-nginx-cert" >> /etc/nginx/ssl/docai-nginx.cer \
+&& gcloud secrets versions access 1 --project=ibank-docai-uat --secret="sm-docai-uat-nginx-key" >> /etc/nginx/ssl/docai-nginx.key \
+&& rm -rf /etc/nginx/nginx.conf \
+&& gsutil -m cp -r gs://icici-docai-ia-gcs-uat-transfer/nginx.conf /etc/nginx/nginx.conf \
+&& setsebool httpd_can_network_connect on -P \
+&& systemctl restart nginx \
+&& echo "startup script finished" \
+&& systemctl status nginx

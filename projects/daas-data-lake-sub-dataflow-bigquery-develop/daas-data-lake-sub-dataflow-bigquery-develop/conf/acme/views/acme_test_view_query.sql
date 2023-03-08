@@ -1,0 +1,1 @@
+SELECT * FROM `datalake_acme.acme_products_table`

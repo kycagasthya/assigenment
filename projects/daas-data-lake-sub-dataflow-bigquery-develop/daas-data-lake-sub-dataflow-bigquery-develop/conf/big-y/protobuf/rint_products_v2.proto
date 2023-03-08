@@ -1,0 +1,116 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  repeated string barcodes = 5;
+  optional _case_item_record case_item = 6;
+  message _case_item_record {
+    optional _case_item_weight_record weight = 1;
+    message _case_item_weight_record {
+      optional double weight = 1;
+      optional string unit_of_measure = 2;
+    }
+    optional _case_item_dimensions_record dimensions = 2;
+    message _case_item_dimensions_record {
+      optional double height = 1;
+      optional double width = 2;
+      optional double length = 3;
+      optional string unit_of_measure = 4;
+    }
+    optional int64 case_count = 3;
+  }
+  repeated _categories_hierarchy_record categories_hierarchy = 7;
+  message _categories_hierarchy_record {
+    optional string name = 1;
+    optional string id = 2;
+  }
+  repeated string corp_ids = 8;
+  optional string created_ts = 9;
+  optional string description = 10;
+  repeated string ecom_ids = 11;
+  optional string extra = 12;
+  optional _feature_attributes_record feature_attributes = 13;
+  message _feature_attributes_record {
+    optional bool is_bulk = 1;
+    optional bool is_crushable = 2;
+    optional bool is_hazardous = 3;
+    optional bool is_heavy = 4;
+    optional bool is_raw = 5;
+    optional bool is_chemical = 6;
+    optional bool is_specific_chilled = 7;
+    optional bool is_glass_packaged = 8;
+    optional bool is_vertical = 9;
+    optional bool is_stackable = 10;
+    optional bool is_case_storage = 11;
+    optional bool is_requires_plastic_bag = 12;
+  }
+  optional string image = 14;
+  optional bool is_weight_variable_on_po = 15;
+  optional bool is_weight_variable_on_receipt = 16;
+  optional bool is_weight_variable_on_webcart = 17;
+  required string last_modified_ts = 18;
+  repeated string linked_tom_ids = 19;
+  repeated _location_info_record location_info = 20;
+  message _location_info_record {
+    optional _location_info_item_address_record item_address = 1;
+    message _location_info_item_address_record {
+      optional string area = 1;
+      optional string aisle = 2;
+      optional string bay = 3;
+      optional string shelf = 4;
+      optional string position = 5;
+    }
+    optional _location_info_department_record department = 2;
+    message _location_info_department_record {
+      optional string id = 1;
+      optional string name = 2;
+    }
+    optional string item_type = 3;
+    optional string preset_area = 4;
+    optional bool ecom_only_item = 5;
+    optional bool mfc_stop_buy = 6;
+    optional bool mfc_stop_fulfill = 7;
+    optional string primary_corp_id = 8;
+    optional string store_id = 9;
+    optional string sleeping_area = 10;
+    repeated _location_info_supplier_info_record supplier_info = 11;
+    message _location_info_supplier_info_record {
+      optional string supplier_id = 1;
+      optional string supplier_name = 2;
+      optional string supplier_sub_account = 3;
+      optional string supplier_type = 4;
+      optional string supplier_product_id = 5;
+      optional bool supplier_keep_buy = 6;
+      optional int64 supplier_perform_cycle = 7;
+    }
+  }
+  repeated _media_record media = 21;
+  message _media_record {
+    optional string view = 1;
+    optional string url = 2;
+  }
+  optional string name = 22;
+  optional bool requires_expiration_date = 23;
+  optional _retail_item_record retail_item = 24;
+  message _retail_item_record {
+    optional _retail_item_weight_record weight = 1;
+    message _retail_item_weight_record {
+      optional double weight = 1;
+      optional string unit_of_measure = 2;
+    }
+    optional _retail_item_dimensions_record dimensions = 2;
+    message _retail_item_dimensions_record {
+      optional double height = 1;
+      optional double width = 2;
+      optional double length = 3;
+      optional string unit_of_measure = 4;
+    }
+  }
+  optional int64 revision = 25;
+  optional int64 shelf_life = 26;
+  repeated string temperature_zone = 27;
+  required string tom_id = 28;
+}

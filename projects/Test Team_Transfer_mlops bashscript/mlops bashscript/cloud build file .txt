@@ -1,0 +1,101 @@
+steps:
+
+
+- id: Build container image
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:${SHORT_SHA}', '.' ]
+  
+
+- id: Tag Image
+  name: "gcr.io/cloud-builders/docker"
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+    docker tag asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:${SHORT_SHA} asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:latest 
+    docker tag asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:${SHORT_SHA} asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:${TAG_NAME} 
+    docker push asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:latest 
+    docker push asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:${TAG_NAME} 
+
+
+- id: Push new tagged container image to registry
+  name: gcr.io/cloud-builders/docker
+  args: ['push', 'asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:${SHORT_SHA}']
+
+
+- id: 'Generate Manifest files for dev environment'
+  name: "alpine"
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - |
+    export CONTAINER_IMG=asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:${SHORT_SHA}
+    apk add gettext && envsubst < "./release/kubernetes-manifest.template.yaml" > "./release/kubernetes-manifest.yaml"
+  env:
+  - LIMIT_MEMORY=${_LIMIT_MEMORY}
+  - REQUEST_MEMORY=${_REQUEST_MEMORY}
+  - LIMIT_CPU=${_LIMIT_CPU}
+  - REQUEST_CPU=${_REQUEST_CPU}
+  - APP_NAME=${_APP_NAME}
+  - WORKLOAD_IDENTITY_SA=${_WORKLOAD_IDENTITY_SA}
+  - NAMESPACE=${_NAMESPACE}
+
+# Apply Kubernetes configuration files
+- name: gcr.io/cloud-builders/kubectl
+  id: Apply all the manifest files
+  args: ['apply', '-f', './release/kubernetes-manifest.yaml']
+  env:
+  - 'CLOUDSDK_COMPUTE_REGION=${_CLUSTER_ZONE}'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER_NAME}'
+  - 'CLOUDSDK_CORE_PROJECT=${_PROJECT}'
+options:
+  pool:
+    name: 
+      "projects/india-dai-parsers/locations/asia-south1/workerPools/cloud-build-private-pool"
+	  
+	  
+--------------------------------------------------------------
+steps:
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - '-c'
+      - |
+        gcloud secrets versions access 1 --secret="Vertex-AI-JSON" >> key.json
+        echo $key.json
+        cat key.json
+        gcloud auth activate-service-account --key-file=key.json
+    entrypoint: bash
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - '-t'
+      - >-
+        asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cdcelll
+      - '-f'
+      - vertexai/testd
+      - .
+    entrypoint: bash
+options:
+  logging: CLOUD_LOGGING_ONLY
+  
+  
+  
+  
+steps:
+  - name: >-
+      asia-south1-docker.pkg.dev/ibank-docai-devops/ibci-docai-docker-ar/cloudbuild/pycov/mlops:latest
+    args:
+      - '-c'
+      - >
+
+        pip install -r requirements.txt --extra-index-url
+        https://asia-south1-python.pkg.dev/ibank-docai-devops/ibci-docai-python-ar/simple
+        && source /app/variables.env &&  pytest tests/unit/src/mlops_pipeline
+        --cov=src/mlops_pipeline
+    id: Code Coverage
+    entrypoint: bash
+timeout: 800s
+options:
+  workerPool: >-
+    projects/ibank-docai-devops/locations/asia-south1/workerPools/ibsi-docai-devops-cb-wp01
+  logging: CLOUD_LOGGING_ONLY

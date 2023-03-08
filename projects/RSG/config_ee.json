@@ -1,0 +1,10 @@
+{
+    "project_id": "q-gcp-6508-rsg-docai-22-01", 
+    "location": "us", 
+    "processor_id": "be7def467ebf6dbf",
+    "bg_data_set" : "RSG_follow_up_docs",
+    "table_rsg": "RSG_follow_up_docs.Acord125_trial",
+    "table_binder_rsg": "RSG_follow_up_docs.Binder",
+    "table_policy_rsg":"RSG_follow_up_docs.Policy",
+    "table":"RSG_follow_up_docs.Sov"
+}

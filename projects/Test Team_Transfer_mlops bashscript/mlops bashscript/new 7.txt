@@ -1,0 +1,37 @@
+steps:
+  - name: alpine
+    env:
+      - 'BASE_IMAGE=${_BASE_IMAGE}'
+    args:
+      - '-c'
+      - |
+        apk add gettext && envsubst < "./Dockerfile.tmp.yaml" > "./Dockerfile"
+    id: Change base image in Dockerfile
+    entrypoint: sh
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - '--network=cloudbuild'
+      - '-t'
+      - >-
+        asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:${SHORT_SHA}
+      - .
+    id: Build container image
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker tag
+        asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:${SHORT_SHA}
+        asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:latest
+
+        docker push
+        asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:latest
+    id: Tag Image
+    entrypoint: /bin/sh
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - >-
+        asia-south1-docker.pkg.dev/${_PROJECT}/${_REPOSITORY}/${_IMAGE}:${SHORT_SHA}
+    id: Push new tagged container image to registry

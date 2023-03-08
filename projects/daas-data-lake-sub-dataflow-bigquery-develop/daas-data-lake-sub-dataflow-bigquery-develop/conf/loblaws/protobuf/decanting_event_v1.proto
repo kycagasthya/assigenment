@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required int64 id = 5;
+  required int64 operator_id = 6;
+  required string created = 7;
+  required int64 mfc = 8;
+  required string licenceplate = 9;
+  optional string last_modified = 10;
+  required string status = 11;
+  optional string sent_timestamp = 12;
+  optional string container_type = 13;
+}

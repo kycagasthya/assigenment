@@ -1,0 +1,114 @@
+{
+  "spark_conf.spark.databricks.cluster.profile": {
+    "type": "fixed",
+    "value": "singleNode",
+    "hidden": false
+  },
+  "spark_version": {
+    "type": "regex",
+    "pattern": "([8-9]|1[0-1])\\.[0-9](.*)"
+  },
+  "autotermination_minutes": {
+    "type": "fixed",
+    "value": 60
+  },
+  "cluster_type": {
+    "type": "fixed",
+    "value": "all-purpose"
+  },
+  "instance_pool_id": {
+    "type": "forbidden",
+    "hidden": true
+  },
+  "node_type_id": {
+    "type": "allowlist",
+    "values": [
+      "n1-standard-4",
+      "n1-highmem-4",
+      "n1-standard-8",
+      "n1-highmem-8"
+    ],
+    "defaultValue": "n1-standard-4"
+  },
+  "driver_node_type_id": {
+    "type": "allowlist",
+    "values": [
+      "n1-standard-4",
+      "n1-highmem-4",
+      "n1-standard-8",
+      "n1-highmem-8"
+    ],
+    "defaultValue": "n1-standard-4"
+  },
+   "custom_tags.bu_owner_technical": {
+    "type": "fixed",
+    "value": "PersonA"
+  },
+   "custom_tags.bu_owner_manager": {
+    "type": "fixed",
+    "value": "PersonB"
+  },
+   "custom_tags.organization": {
+    "type": "fixed",
+    "value": "zebra"
+  },
+   "custom_tags.project_or_product": {
+    "type": "fixed",
+    "value": "project"
+  },
+   "custom_tags.cost_center": {
+    "type": "fixed",
+    "value": "1234"
+  },
+  "spark_conf.spark.databricks.service.server.enabled": {
+    "type": "fixed",
+    "value": "true"
+  },
+  "spark_conf.spark.databricks.service.port": {
+    "type": "fixed",
+    "value": "8787",
+    "hidden": true
+  },
+  "gcp_attributes.google_service_account": {
+    "type": "fixed",
+    "value": "sa-gke-gcs-object-admin@its-managed-dbx-zap-d.iam.gserviceaccount.com"
+  },
+  "init_scripts.0.dbfs.destination": {
+    "type": "fixed",
+    "value": "dbfs:/mnt/metastore-initialization/ext_hive_metastore.sh"
+  },
+  "init_scripts.*.gcs.destination": {
+    "type": "forbidden"
+  },
+  "init_scripts.*.dbfs.destination": {
+    "type": "forbidden"
+  },
+  "init_scripts.*.file.destination": {
+    "type": "forbidden"
+  },
+  "spark_conf.spark.hadoop.javax.jdo.option.ConnectionURL": {
+    "type": "fixed",
+    "value": "jdbc:mysql://10.176.11.88:3306/zap_dbx_dev",
+    "hidden": true
+  },
+  "spark_conf.spark.hadoop.javax.jdo.option.ConnectionUserName": {
+    "type": "fixed",
+    "value": "{{secrets/hive-metastore-dev/username}}"
+  },
+  "spark_conf.spark.hadoop.javax.jdo.option.ConnectionPassword": {
+    "type": "fixed",
+    "value": "{{secrets/hive-metastore-dev/password}}"
+  },
+  "spark_conf.spark.sql.hive.metastore.version": {
+    "type": "fixed",
+    "value": "3.1.0"
+  },
+  "spark_conf.spark.sql.hive.metastore.jars": {
+    "type": "fixed",
+    "value": "/hive_jars/cluster-jars/*"
+  },
+  "spark_conf.spark.hadoop.javax.jdo.option.ConnectionDriverName": {
+    "type": "fixed",
+    "value": "com.mysql.jdbc.Driver"
+  }
+}

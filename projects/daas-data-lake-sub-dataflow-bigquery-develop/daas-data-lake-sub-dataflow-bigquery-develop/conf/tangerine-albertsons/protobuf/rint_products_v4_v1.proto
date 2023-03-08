@@ -1,0 +1,98 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  repeated string barcodes = 5;
+  optional int64 boxcase = 6;
+  optional _case_dimensions_record case_dimensions = 7;
+  message _case_dimensions_record {
+    optional double height = 1;
+    optional double length = 2;
+    optional string unit_of_measure = 3;
+    optional double width = 4;
+  }
+  optional _case_weight_record case_weight = 8;
+  message _case_weight_record {
+    optional string unit_of_measure = 1;
+    optional double weight = 2;
+  }
+  repeated string corp_ids = 9;
+  repeated string ecom_ids = 10;
+  optional string extra = 11;
+  optional _feature_attributes_record feature_attributes = 12;
+  message _feature_attributes_record {
+    optional bool is_bulk = 1;
+    optional bool is_chemical = 2;
+    optional bool is_crushable = 3;
+    optional bool is_glass_packaged = 4;
+    optional bool is_heavy = 5;
+    optional bool is_hazardous = 6;
+    optional bool is_raw = 7;
+    optional bool is_specific_chilled = 8;
+  }
+  required string id = 13;
+  optional bool is_chemical = 14;
+  optional bool is_crushable = 15;
+  optional bool is_raw = 16;
+  optional bool is_scalable = 17;
+  optional string last_modified_ts = 18;
+  repeated _location_info_record location_info = 19;
+  message _location_info_record {
+    optional double average_weight_measure = 1;
+    optional string average_weight_unit = 2;
+    optional bool ecom_only_item = 3;
+    optional bool is_weight_variable = 4;
+    optional _location_info_item_address_record item_address = 5;
+    message _location_info_item_address_record {
+      optional string aisle = 1;
+      optional string bay = 2;
+      optional string shelf = 3;
+    }
+    optional string item_type = 6;
+    optional bool mfc_stop_buy = 7;
+    optional bool mfc_stop_fulfill = 8;
+    optional string primary_corp_id = 9;
+    optional string store_id = 10;
+    repeated _location_info_supplier_info_record supplier_info = 11;
+    message _location_info_supplier_info_record {
+      optional int64 purchase_price_amount = 1;
+      optional int64 purchase_price_cents = 2;
+      optional string purchase_price_unit = 3;
+      optional string supplier_id = 4;
+      optional bool supplier_keep_buy = 5;
+      optional string supplier_name = 6;
+      optional string supplier_product_id = 7;
+      optional string supplier_sub_account = 8;
+      optional string supplier_type = 9;
+    }
+  }
+  optional string main_image = 20;
+  optional string name = 21;
+  optional bool require_expiration_date = 22;
+  repeated _retailer_categories_path_record retailer_categories_path = 23;
+  message _retailer_categories_path_record {
+    optional string name = 1;
+    optional string retailer_id = 2;
+  }
+  optional int64 revision = 24;
+  optional int64 shelf_life = 25;
+  optional string slot_params = 26;
+  optional string source = 27;
+  repeated string temperature_zone = 28;
+  optional _unit_dimensions_record unit_dimensions = 29;
+  message _unit_dimensions_record {
+    optional double height = 1;
+    optional double length = 2;
+    optional string unit_of_measure = 3;
+    optional double width = 4;
+  }
+  optional _unit_weight_record unit_weight = 30;
+  message _unit_weight_record {
+    optional string unit_of_measure = 1;
+    optional double weight = 2;
+  }
+  repeated int64 upcs = 31;
+}

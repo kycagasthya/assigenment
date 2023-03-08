@@ -1,0 +1,23 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required int64 pick_work_order_item_id = 5;
+  optional int64 pick_work_item_reason_code_id = 6;
+  required string pick_prod_work_order_item = 7;
+  optional string pick_work_order_item_location = 8;
+  optional string pick_work_order_item_performed_at = 9;
+  required int64 pick_work_order_id = 10;
+  required string pick_work_order_item_number = 11;
+  required int64 pick_list_item_id = 12;
+  required int64 pick_work_order_item_asked_qnty = 13;
+  optional int64 pick_work_order_item_picked_qnty = 14;
+  optional double pick_work_order_item_asked_weight = 15;
+  optional double pick_work_order_item_picked_weight = 16;
+  optional string pick_work_order_item_asked_weight_unit_of_measure = 17;
+  optional string pick_work_order_item_created_at = 18;
+  optional string pick_work_order_item_last_modified_at = 19;
+}

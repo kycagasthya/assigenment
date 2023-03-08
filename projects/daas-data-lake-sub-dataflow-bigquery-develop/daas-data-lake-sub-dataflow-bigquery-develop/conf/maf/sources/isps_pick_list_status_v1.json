@@ -1,0 +1,80 @@
+{
+  "schema_name": "isps_pick_list_status",
+  "schema_description": "ISPS Picking list status. Source: Postgres extract",
+  "schema_version": "v1",
+  "labels": {},
+  "fields": [
+    {
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "ID of Pick List Status",
+      "name": "pick_list_status_id",
+      "type": "INTEGER",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Short name of Pick List Status",
+      "name": "pick_list_status_code",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Name of Pick List Status",
+      "name": "pick_list_status_name",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Description of Pick List Status",
+      "name": "pick_list_status_desc",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "description": "Time when Pick List Status was created (UTC)",
+      "name": "pick_list_status_created_at",
+      "type": "TIMESTAMP",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "User, created Pick List Status",
+      "name": "pick_list_status_created_by",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "Time when Pick List Status was updated (UTC)",
+      "name": "pick_list_status_last_modified_at",
+      "type": "TIMESTAMP",
+      "mode": "REQUIRED"
+    },
+    {
+      "description": "User, updated Pick List Status",
+      "name": "pick_list_status_last_modified_by",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    }
+  ]
+}

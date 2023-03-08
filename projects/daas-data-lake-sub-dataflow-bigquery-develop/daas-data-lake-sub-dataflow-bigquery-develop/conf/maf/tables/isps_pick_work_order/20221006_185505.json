@@ -1,0 +1,122 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "ID of Work Order",
+    "mode": "REQUIRED",
+    "name": "pick_work_order_id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "ID of current Work Order Status",
+    "mode": "REQUIRED",
+    "name": "pick_work_order_status_id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "ID of Work Order Type",
+    "mode": "REQUIRED",
+    "name": "pick_work_order_type_id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Business Code of the Work Order",
+    "mode": "REQUIRED",
+    "name": "pick_work_order_number",
+    "type": "STRING"
+  },
+  {
+    "description": "ID of connected Pick List",
+    "mode": "REQUIRED",
+    "name": "pick_list_id",
+    "type": "INTEGER"
+  },
+  {
+    "description": "Date-time, when picking was started (UTC)",
+    "mode": "NULLABLE",
+    "name": "pick_work_order_begin_at",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Date-time, when picking was finished (UTC)",
+    "mode": "NULLABLE",
+    "name": "pick_work_order_complete_at",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Time when Work Order was created (UTC)",
+    "mode": "REQUIRED",
+    "name": "pick_work_order_created_at",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "User, created Work Order",
+    "mode": "REQUIRED",
+    "name": "pick_work_order_created_by",
+    "type": "STRING"
+  },
+  {
+    "description": "User, assigned to Work Order",
+    "mode": "NULLABLE",
+    "name": "pick_work_order_performed_by",
+    "type": "STRING"
+  },
+  {
+    "description": "Time when Work Order was updated (UTC)",
+    "mode": "REQUIRED",
+    "name": "pick_work_order_last_modified_at",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "User, updated Work Order",
+    "mode": "REQUIRED",
+    "name": "pick_work_order_last_modified_by",
+    "type": "STRING"
+  },
+  {
+    "description": "Session ID",
+    "mode": "NULLABLE",
+    "name": "pick_work_order_session_id",
+    "type": "STRING"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "BigQuery ingestion timestamp"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "PubSub publish timestamp"
+  },
+  {
+    "name": "__pubsub_message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "ID of the message assigned by PubSub"
+  }
+]

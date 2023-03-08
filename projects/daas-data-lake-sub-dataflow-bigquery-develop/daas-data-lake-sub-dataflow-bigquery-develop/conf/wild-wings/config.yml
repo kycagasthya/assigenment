@@ -1,0 +1,93 @@
+client_id: wild-wings # Only hyphens allowed
+enabled: false
+dataset_id: datalake_wild_wings
+sources:
+  amp_recommendation_decisions_v1:
+    source_name: amp_recommendation_decisions
+    schema_version: v1
+    configuration: amp_recommendation_decisions_v1.json
+    owner: team-waltz@takeoff.com
+  amp_recommendation_details_v1:
+    source_name: amp_recommendation_details
+    schema_version: v1
+    configuration: amp_recommendation_details_v1.json
+    owner: team-waltz@takeoff.com
+  sc_op_locations_v1:
+    source_name: sc_op_locations
+    schema_version: v1
+    configuration: sc_op_locations_v1.json
+    owner: team-luigi@takeoff.com
+  distiller_products_v1:
+    source_name: distiller_products
+    schema_version: v1
+    configuration: distiller_products_v1.json
+    owner: team-luigi@takeoff.com
+  ims_balances_v1:
+    source_name: ims_balances
+    schema_version: v1
+    configuration: ims_balances_v1.json
+    owner: team-luigi@takeoff.com
+  ims_adjustment_history_v1:
+    source_name: ims_adjustment_history
+    schema_version: v1
+    configuration: ims_adjustment_history_v1.json
+    owner: team-luigi@takeoff.com
+  oms_items_v1:
+    source_name: oms_items
+    schema_version: v1
+    configuration: oms_items_v1.json
+    owner: team-luigi@takeoff.com
+  oms_lines_v1:
+    source_name: oms_lines
+    schema_version: v1
+    configuration: oms_lines_v1.json
+    owner: team-luigi@takeoff.com
+  oms_orders_v1:
+    source_name: oms_orders
+    schema_version: v1
+    configuration: oms_orders_v1.json
+    owner: team-luigi@takeoff.com
+  product_catalog_predictions_v1:
+    source_name: product_catalog_predictions
+    schema_version: v1
+    configuration: product_catalog_predictions_v1.json
+    owner: team-mario@takeoff.com
+  product_catalog_rejections_v1:
+    source_name: product_catalog_rejections
+    schema_version: v1
+    configuration: product_catalog_rejections_v1.json
+    owner: team-mario@takeoff.com
+tables:
+  product_catalog_rejections:
+    table_id: product_catalog_rejections
+    protected: false
+  product_catalog_predictions:
+    table_id: product_catalog_predictions
+    protected: false
+  amp_recommendation_decisions:
+    table_id: amp_recommendation_decisions
+    protected: true
+  amp_recommendation_details:
+    table_id: amp_recommendation_details
+    protected: true
+  sc_op_locations:
+    table_id: sc_op_locations
+    protected: true
+  distiller_products:
+    table_id: distiller_products
+    protected: true
+  ims_balances:
+    table_id: ims_balances
+    protected: true
+  ims_adjustment_history:
+    table_id: ims_adjustment_history
+    protected: true
+  oms_items:
+    table_id: oms_items
+    protected: true
+  oms_lines:
+    table_id: oms_lines
+    protected: true
+  oms_orders:
+    table_id: oms_orders
+    protected: true

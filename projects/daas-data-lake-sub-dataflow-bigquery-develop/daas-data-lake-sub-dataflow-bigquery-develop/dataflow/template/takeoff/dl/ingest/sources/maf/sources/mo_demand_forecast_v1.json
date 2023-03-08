@@ -1,0 +1,110 @@
+{
+  "schema_name": "mo_demand_forecast",
+  "schema_description": "Demand Forecast Table",
+  "schema_version": "v1",
+  "labels": {},
+  "fields":[
+    {
+      "description": "Client name.",
+      "mode": "REQUIRED",
+      "name": "__client_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Source name.",
+      "mode": "REQUIRED",
+      "name": "__source_name",
+      "type": "STRING"
+    },
+    {
+      "description": "Schema version.",
+      "mode": "REQUIRED",
+      "name": "__schema_version",
+      "type": "STRING"
+    },
+    {
+      "description": "Event timestamp.",
+      "mode": "REQUIRED",
+      "name": "__event_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Publish timestamp.",
+      "mode": "NULLABLE",
+      "name": "__publish_timestamp",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Demand forecast (mean value) for lines.",
+      "mode": "NULLABLE",
+      "name": "average_lines_fc",
+      "type": "INTEGER"
+    },
+    {
+      "description": "Demand forecast (mean value) for units.",
+      "mode": "NULLABLE",
+      "name": "average_qty_fc",
+      "type": "INTEGER"
+    },
+    {
+      "description": "The delivery date for which a forecast was made.",
+      "mode": "NULLABLE",
+      "name": "delivery_date_fc",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "Product Ecommerce ID.",
+      "mode": "REQUIRED",
+      "name": "ecom_item_id",
+      "type": "STRING"
+    },
+    {
+      "description": "The time when the forecast was performed.",
+      "mode": "NULLABLE",
+      "name": "forecast_ts",
+      "type": "TIMESTAMP"
+    },
+    {
+      "description": "The lower limit from the 95% confidence interval for the average_lines_fc.",
+      "mode": "NULLABLE",
+      "name": "lower_95_lines_fc",
+      "type": "INTEGER"
+    },
+    {
+      "description": "The lower limit from the 95% confidence interval for the average_qty_fc.",
+      "mode": "NULLABLE",
+      "name": "lower_95_qty_fc",
+      "type": "INTEGER"
+    },
+    {
+      "description": "A JSON string with additional meta information that is consumed by Demand Forecaster, SDIA and AMT services.",
+      "mode": "NULLABLE",
+      "name": "metadata",
+      "type": "STRING"
+    },
+    {
+      "description": "MFC ID.",
+      "mode": "REQUIRED",
+      "name": "mfc_id",
+      "type": "STRING"
+    },
+    {
+      "description": "The upper limit from the 95% confidence interval for the average_lines_fc.",
+      "mode": "NULLABLE",
+      "name": "upper_95_lines_fc",
+      "type": "INTEGER"
+    },
+    {
+      "description": "The upper limit from the 95% confidence interval for the average_qty_fc.",
+      "mode": "NULLABLE",
+      "name": "upper_95_qty_fc",
+      "type": "INTEGER"
+    },
+    {
+      "description": "(Optional)Forecast Period.",
+      "mode": "NULLABLE",
+      "name": "forecast_period",
+      "type": "STRING"
+    }
+]
+}

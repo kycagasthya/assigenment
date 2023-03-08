@@ -1,0 +1,7 @@
+project_id           = "s80-vpp-dev-di-ocr"
+network              = "uwm-sharedvpc"
+subnetwork           = ""
+ip_range_pods        = "" 
+ip_range_services    = ""
+nodepool_service_account = ""
+host-project-id      = "pr-sharedvpc"

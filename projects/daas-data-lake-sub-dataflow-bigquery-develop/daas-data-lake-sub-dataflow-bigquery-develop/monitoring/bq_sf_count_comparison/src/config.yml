@@ -1,0 +1,114 @@
+clients:
+  albertsons:
+    bq: albertsons
+    snowflake: ABS
+  ahold:
+    bq: ahold
+    snowflake: ALPHA
+  big-y:
+    bq: big-y
+    snowflake: BLUEBERRY
+  kroger:
+    bq: kroger
+    snowflake: EIGHTYONE
+  loblaws:
+    bq: loblaws
+    snowflake: LOBSTER
+  maf:
+    bq: maf
+    snowflake: MAF
+  sedanos:
+    bq: sedanos
+    snowflake: SUNBIRD
+  woolworths:
+    bq: woolworths
+    snowflake: WINGS
+  wakefern:
+    bq: wakefern
+    snowflake: WINTER
+  tangerine_albertsons:
+    bq: tangerine_albertsons
+    snowflake: TANGERINE
+
+sources:
+  as_users:
+    bq:
+      table_name: as_users
+      time_column_to_filter: __ingest_timestamp
+    snowflake:
+      table_name: AS_USERS
+      time_column_to_filter: CREATED
+    omitted_clients:
+      - "sedanos"
+
+  decanting_product:
+    bq:
+      table_name: decanting_product
+      time_column_to_filter: __ingest_timestamp
+    snowflake:
+      table_name: DECANTING_PRODUCT
+      time_column_to_filter: CREATED
+
+  decanting_task:
+    bq:
+      table_name: decanting_task
+      time_column_to_filter: __ingest_timestamp
+    snowflake:
+      table_name: DECANTING_TASK
+      time_column_to_filter: CREATED
+
+  distiller_products:
+    bq:
+      table_name: distiller_products
+      time_column_to_filter: __ingest_timestamp
+    snowflake:
+      table_name: DISTILLER_PRODUCTS
+      time_column_to_filter: CREATED
+
+  ims_adjustment_history:
+    bq:
+      table_name: ims_adjustment_history
+      time_column_to_filter: __ingest_timestamp
+    snowflake:
+      table_name: IMS_ADJUSTMENT_HISTORY
+      time_column_to_filter: CREATED
+
+  ims_balances:
+    bq:
+      table_name: ims_balances
+      time_column_to_filter: __ingest_timestamp
+    snowflake:
+      table_name: IMS_BALANCES
+      time_column_to_filter: CREATED
+
+  oms_items:
+    bq:
+      table_name: oms_items
+      time_column_to_filter: __ingest_timestamp
+    snowflake:
+      table_name: OMS_ITEMS
+      time_column_to_filter: CREATED
+
+  oms_lines:
+    bq:
+      table_name: oms_lines
+      time_column_to_filter: __ingest_timestamp
+    snowflake:
+      table_name: OMS_LINES
+      time_column_to_filter: CREATED
+
+  oms_orders:
+    bq:
+      table_name: oms_orders
+      time_column_to_filter: __ingest_timestamp
+    snowflake:
+      table_name: OMS_ORDERS
+      time_column_to_filter: CREATED
+
+  sc_op_locations:
+    bq:
+      table_name: sc_op_locations
+      time_column_to_filter: __ingest_timestamp
+    snowflake:
+      table_name: SC_OP_LOCATIONS
+      time_column_to_filter: CREATED

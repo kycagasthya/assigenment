@@ -1,0 +1,84 @@
+{
+    "schema_name": "ims_snapshot_with_zero_products",
+    "schema_description": "Contains connections between product_ids and the addresses they belong to. (Inventory)",
+    "schema_version": "v1",
+    "labels": {
+      "owner": "inbound",
+      "primary_key": "address--location_id--product_id"
+    },
+    "fields": [
+      {
+        "description": "Client name",
+        "mode": "REQUIRED",
+        "name": "__client_name",
+        "type": "STRING"
+      },
+      {
+        "description": "Source name",
+        "mode": "REQUIRED",
+        "name": "__source_name",
+        "type": "STRING"
+      },
+      {
+        "description": "Schema version",
+        "mode": "REQUIRED",
+        "name": "__schema_version",
+        "type": "STRING"
+      },
+      {
+        "description": "Event timestamp",
+        "mode": "REQUIRED",
+        "name": "__event_timestamp",
+        "type": "TIMESTAMP"
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "address",
+        "type": "STRING",
+        "description": "Id of shelf that product is assigned to. OSR can be regarded as one single shelf (01K)"
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "last_update_date",
+        "type": "TIMESTAMP",
+        "description": "The last time at which quantity was changed"
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "location_id",
+        "type": "STRING",
+        "description": "Location-id of the mfc"
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "product_id",
+        "type": "STRING",
+        "description": "TOM product id"
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "qty_allocated",
+        "type": "INTEGER",
+        "description": ""
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "qty_available",
+        "type": "INTEGER",
+        "description": ""
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "qty_reserved",
+        "type": "INTEGER",
+        "description": ""
+      },
+      {
+        "mode": "REQUIRED",
+        "name": "qty_total",
+        "type": "INTEGER",
+        "description": "The amount of the product assigned to an address"
+      }
+    ]
+  }
+  

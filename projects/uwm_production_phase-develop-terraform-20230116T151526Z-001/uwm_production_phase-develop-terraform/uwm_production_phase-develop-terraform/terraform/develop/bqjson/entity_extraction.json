@@ -1,0 +1,12 @@
+[
+    {"name":"transaction_id","type":"INTEGER","mode":"NULLABLE"},
+    {"name":"document_uuid","type":"INTEGER","mode":"NULLABLE"},
+    {"name":"page_uuid","type":"INTEGER","mode":"NULLABLE"},
+    {"name":"start_time","type":"DATETIME","mode":"NULLABLE"},
+    {"name":"end_time","type":"DATETIME","mode":"NULLABLE"},
+    {"name":"total_processing_time","type":"DATETIME","mode":"NULLABLE"},
+    {"name":"no_of_values_extracted","type":"INTEGER","mode":"NULLABLE"},
+    {"name":"no_of_keys_extracted","type":"INTEGER","mode":"NULLABLE"},
+    {"name":"no_of_keys_to_be_extracted","type":"INTEGER","mode":"NULLABLE"},
+    {"name":"confidence","type":"FLOAT","mode":"NULLABLE"}
+  ]

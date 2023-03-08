@@ -1,0 +1,30 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  optional string __publish_timestamp = 5;
+  optional string __ingest_timestamp = 6;
+  optional int64 index = 7;
+  optional bool is_enabled = 8;
+  required string location_city = 9;
+  optional string location_code_gold = 10;
+  required string location_code_retailer = 11;
+  required string location_code_tom = 12;
+  required string location_contact_phone = 13;
+  required int64 location_id = 14;
+  required string location_name = 15;
+  optional double location_pickup_lat = 16;
+  optional double location_pickup_lon = 17;
+  optional string location_service_info_desctext = 18;
+  optional string location_service_info_email = 19;
+  optional string location_service_info_phone = 20;
+  optional string location_street = 21;
+  required int64 location_type_id = 22;
+  required string location_zip_code = 23;
+  optional string mfc_ref_code = 24;
+  required string state_iso_code = 25;
+  required string timezone = 26;
+}

@@ -1,0 +1,7 @@
+{
+"version": "latest",
+"doc_type":"cde_pan",
+"parser_keys": ["name","fathers_name", "dob","pan_id"],
+"processor_id": "60b530fb3aa7e18",
+"ground_truth_csv": "gs://ibank-development-transfer-bucket/ML/Data/data-buckets/for_parser_q/for_eval/ground_truth.csv"
+}

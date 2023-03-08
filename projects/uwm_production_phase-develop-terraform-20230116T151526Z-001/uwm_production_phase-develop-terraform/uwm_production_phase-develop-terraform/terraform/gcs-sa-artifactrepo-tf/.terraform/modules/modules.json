@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"docker_artifact_registry","Source":"./modules/artifact-registry","Dir":"modules/artifact-registry"},{"Key":"bucket","Source":"./modules/gcs","Dir":"modules/gcs"},{"Key":"service-account1","Source":"./modules/iam-service-account","Dir":"modules/iam-service-account"},{"Key":"","Source":"","Dir":"."}]}

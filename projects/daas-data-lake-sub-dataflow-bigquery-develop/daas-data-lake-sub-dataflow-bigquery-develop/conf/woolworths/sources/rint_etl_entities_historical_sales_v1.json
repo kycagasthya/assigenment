@@ -1,0 +1,111 @@
+{
+    "schema_name": "rint_etl_entities_historical_sales",
+    "schema_description": "Historical Table for etl entities.",
+    "schema_version": "v1",
+    "labels": {},
+    "fields": [
+      {
+        "description": "Client name.",
+        "mode": "REQUIRED",
+        "name": "__client_name",
+        "type": "STRING"
+      },
+      {
+        "description": "Source name.",
+        "mode": "REQUIRED",
+        "name": "__source_name",
+        "type": "STRING"
+      },
+      {
+        "description": "Schema version.",
+        "mode": "REQUIRED",
+        "name": "__schema_version",
+        "type": "STRING"
+      },
+      {
+        "description": "Event timestamp.",
+        "mode": "REQUIRED",
+        "name": "__event_timestamp",
+        "type": "TIMESTAMP"
+      },
+      {
+        "description": "Attributes data",
+        "mode": "NULLABLE",
+        "name": "attributes",
+        "type": "STRING"
+      },
+      {
+        "description": "An id uniquely pointing to MFC.",
+        "mode": "NULLABLE",
+        "name": "created_ts",
+        "type": "TIMESTAMP"
+      },
+      {
+        "description": "Customer id.",
+        "mode": "NULLABLE",
+        "name": "customer_id",
+        "type": "STRING"
+      },
+      {
+        "description": "Customer Order Id.",
+        "mode": "NULLABLE",
+        "name": "customer_order_id",
+        "type": "STRING"
+      },
+      {
+        "description": "Delivered Timestamp",
+        "mode": "NULLABLE",
+        "name": "delivered_ts",
+        "type": "TIMESTAMP"
+      },
+      {
+        "description": "A 10 digit-string contains a tote ID (first 8 digits), tote orientation (9th digit) and a checksum (10th digit).",
+        "mode": "NULLABLE",
+        "name": "ecom_id",
+        "type": "STRING"
+      },
+      {
+        "description": "Item total.",
+        "mode": "NULLABLE",
+        "name": "item_total",
+        "type": "FLOAT"
+      },
+      {
+        "description": "PubSub Message id.",
+        "mode": "NULLABLE",
+        "name": "pubsub_message_id",
+        "type": "STRING"
+      },
+      {
+        "description": "PubSub Publish Time.",
+        "mode": "NULLABLE",
+        "name": "pubsub_publish_time",
+        "type": "TIMESTAMP"
+      },
+      {
+        "description": "Total Quantity",
+        "mode": "NULLABLE",
+        "name": "qty_total",
+        "type": "FLOAT"
+      },
+      {
+        "description": "Store Id.",
+        "mode": "NULLABLE",
+        "name": "store_id",
+        "type": "STRING"
+      },
+      {
+        "description": "Takeoff Mobile id.",
+        "mode": "NULLABLE",
+        "name": "tom_id",
+        "type": "STRING"
+      },
+      {
+        "description": "Unit of Sale",
+        "mode": "NULLABLE",
+        "name": "unit_of_sale",
+        "type": "STRING"
+      }
+    ]
+  }
+  

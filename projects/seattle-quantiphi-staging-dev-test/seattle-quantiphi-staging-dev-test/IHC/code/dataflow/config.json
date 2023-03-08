@@ -1,0 +1,43 @@
+{
+    "pipeline_config":{
+        "job_name": "process-10slides-bq",
+        "input_path": "gs://seagen_dataflow/input_csvs/input_paths.csv",
+        "output_path": "gs://seagen-quantiphi/temp",
+        "num_workers": 1,
+        "max_num_workers": 10,
+        "run_local": false,
+        "project_id": "ihc-qc-sandbox",
+        "region": "us-west1",
+        "store_tiled_img": false,
+		"automl_mode": "online"
+    },
+    
+    "function_config":{
+        "tiling_transform":{
+            "tile_size": [1024,1024],
+			"batch_size": 8
+        },
+        "automl_prediction":{
+			"edge":{
+				"endpoint": "http://192.168.2.6:8501/v1/models/default:predict",
+				"confidence_threshold": 0.01
+			},
+			"online":{
+				"project_id": "ihc-qc-sandbox",
+				"model_id": "ICN2690384006888816640",
+				"confidence_threshold": 0.01,
+				"test": true
+			}
+        },
+		"store_on_bigquery":{
+			"store_tile_preds": true,
+			"tile_level_preds": "seagen_quantiphi.tile_preds",
+			"store_slide_preds": true,
+			"slide_level_preds": "seagen_quantiphi.slide_preds"
+		},
+		"visualization":{
+			"image_size": 3000,
+			"cmap_name": "bright"
+	}
+    }
+}

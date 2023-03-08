@@ -1,0 +1,45 @@
+syntax = "proto2";
+
+message protocol_buffer {
+  required string __client_name = 1;
+  required string __source_name = 2;
+  required string __schema_version = 3;
+  required string __event_timestamp = 4;
+  required string order_id = 5;
+  required string store_id = 6;
+  optional string ecom_order_id = 7;
+  required string service_type = 8;
+  required string spoke_id = 9;
+  optional string creation_datetime = 10;
+  required string ecom_status = 11;
+  optional string ecom_payment_status = 12;
+  optional int64 shift_number = 13;
+  required string route_number = 14;
+  optional int64 stop_number = 15;
+  optional int64 total_shift_orders = 16;
+  optional int64 total_route_orders = 17;
+  optional string fulfillment_datetime = 18;
+  optional string stage_by_datetime = 19;
+  repeated string shipping_label = 20;
+  required bool splitted = 21;
+  optional string cutoff_datetime = 22;
+  optional string corp_order_id = 23;
+  optional bool empty_tom_items = 24;
+  required bool cancelled_by_client = 25;
+  required bool splitted_by_client = 26;
+  required bool batch_created = 27;
+  optional _tote_estimate_record tote_estimate = 28;
+  message _tote_estimate_record {
+    optional int64 ambient = 1;
+    optional int64 chilled = 2;
+    optional int64 frozen = 3;
+  }
+  optional string service_window_start = 29;
+  optional string preliminary_batch_id = 30;
+  optional string order_note = 31;
+  optional bool bypassed = 32;
+  optional string last_modified = 33;
+  optional string status = 34;
+  optional string stage_location = 35;
+  optional bool is_express = 36;
+}

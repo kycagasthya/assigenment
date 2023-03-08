@@ -1,0 +1,42 @@
+{
+  "ahold" : {
+    "project_id" : "takeoff-alpha",
+    "namespace" : "prod"
+  },
+  "albertsons" : {
+    "project_id" : "tkf-abs-prod-d5c0",
+    "namespace" : "prod"
+  },
+  "big_y" : {
+    "project_id" : "takeoff-blueberry",
+    "namespace" : "prod"
+  },
+  "kroger" : {
+    "project_id" : "takeoff-eightyone",
+    "namespace" : "prod"
+  },
+  "loblaws" : {
+    "project_id" : "takeoff-lobster",
+    "namespace" : "prod"
+  },
+  "maf" : {
+    "project_id" : "takeoff-maf",
+    "namespace" : "prod"
+  },
+  "sedanos" : {
+    "project_id" : "takeoff-sunbird-237921",
+    "namespace" : "prod"
+  },
+  "smu" : {
+    "project_id" : "tkf-smu-prod-f72b",
+    "namespace" : "prod"
+  },
+  "wakefern" : {
+    "project_id" : "takeoff-winter",
+    "namespace" : "prod"
+  },
+  "woolworths" : {
+    "project_id" : "takeoff-wings",
+    "namespace" : "prod"
+  }
+}

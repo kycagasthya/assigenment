@@ -1,0 +1,38 @@
+[
+  {
+    "description" : "ID of the message assigned by PubSub",
+    "mode" : "REQUIRED",
+    "name" : "pubsub_message_id",
+    "type" : "STRING"
+  },
+  {
+    "description" : "Indicates if missed records where reprocessed",
+    "mode" : "REQUIRED",
+    "name" : "reprocessed",
+    "type" : "BOOLEAN"
+  },
+  {
+    "description" : "Reprocess timestamp",
+    "mode" : "NULLABLE",
+    "name" : "reprocess_timestamp",
+    "type" : "TIMESTAMP"
+  },
+  {
+    "description" : "Client name.",
+    "mode" : "REQUIRED",
+    "name" : "__client_name",
+    "type" : "STRING"
+  },
+  {
+    "description" : "Source name.",
+    "mode" : "REQUIRED",
+    "name" : "__source_name",
+    "type" : "STRING"
+  },
+  {
+    "description" : "Record ingest timestamp",
+    "mode" : "REQUIRED",
+    "name" : "__ingest_timestamp",
+    "type" : "TIMESTAMP"
+  }
+]

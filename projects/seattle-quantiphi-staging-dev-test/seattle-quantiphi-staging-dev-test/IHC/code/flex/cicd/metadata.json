@@ -1,0 +1,21 @@
+{
+    "name": "Streaming beam Python flex template",
+    "description": "Streaming beam example for python flex template.",
+    "parameters": [
+      {
+        "name": "config_file",
+        "label": "GCS path where config_file is located",
+        "helpText": "GCS path where config_file is located"
+      },
+      {
+        "name": "input_path",
+        "label": "Input GCS path of the csv file containing paths",
+        "helpText": "Input GCS path of the csv file containing paths"
+      },
+      {
+        "name": "output_path",
+        "label": "GCS destination location to write the results to",
+        "helpText": "GCS destination location to write the results to"
+      }
+    ]
+}

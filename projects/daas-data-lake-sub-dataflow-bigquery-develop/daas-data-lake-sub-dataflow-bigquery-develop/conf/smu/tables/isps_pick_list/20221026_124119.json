@@ -1,0 +1,128 @@
+[
+  {
+    "description": "Client name.",
+    "mode": "REQUIRED",
+    "name": "__client_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Source name.",
+    "mode": "REQUIRED",
+    "name": "__source_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Schema version.",
+    "mode": "REQUIRED",
+    "name": "__schema_version",
+    "type": "STRING"
+  },
+  {
+    "description": "Event timestamp.",
+    "mode": "REQUIRED",
+    "name": "__event_timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "ID of the Picking List",
+    "name": "pick_list_id",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "Link to current Picking List Status",
+    "name": "pick_list_status_id",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "Link to Picking List Type",
+    "name": "pick_list_type_id",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "Link to Picking List Zone",
+    "name": "pick_zone_id",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "Business Code of the Picking List",
+    "name": "pick_list_number",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "Time when picking should be started (UTC)",
+    "name": "pick_list_begin_at",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "Time when picking should be completed (UTC)",
+    "name": "pick_list_complete_at",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "Time when Picking List was created (UTC)",
+    "name": "pick_list_created_at",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "User, created Picking List",
+    "name": "pick_list_created_by",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "Time when Picking List was updated (UTC)",
+    "name": "pick_list_last_modified_at",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "User, updated Picking List",
+    "name": "pick_list_last_modified_by",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "MFC Pick List belongs to",
+    "name": "pick_list_mfc",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "List of cutoffs for Pick List (UTC)",
+    "name": "pick_list_cutoffs",
+    "type": "TIMESTAMP",
+    "mode": "REPEATED"
+  },
+  {
+    "description": "Time when Pick List was closed",
+    "name": "pick_list_closed_at",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "__ingest_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "BigQuery ingestion timestamp"
+  },
+  {
+    "name": "__publish_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "PubSub publish timestamp"
+  },
+  {
+    "name": "__pubsub_message_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "ID of the message assigned by PubSub"
+  }
+]
